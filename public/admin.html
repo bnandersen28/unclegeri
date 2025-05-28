@@ -16,8 +16,8 @@
             </div>
         </div>
         <nav class="navbar">
-            <button>Courses</button>
-            <button>Register</button>
+            <a href="courses.html"><button>Courses</button></a>
+            <a href= "register.html"><button>Register</button></a>
             <button>FAQs</button>
             <button>Connect</button>
         </nav>    
@@ -27,3 +27,55 @@
     </div>
 
 </head>
+<body>
+    <style>
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .student-card { padding: 10px; background: #f2f2f2; cursor: pointer; border: 1px solid #ccc; }
+        .details { margin-top: 20px; }
+      </style>
+    </head>
+    <body>
+      <h1>Student Registrations</h1>
+      <div class="grid" id="studentGrid"></div>
+      <div class="details" id="detailsContainer"></div>
+    
+      <script>
+        async function fetchRegistrations() {
+            const res = await fetch('http://localhost:3000/api/registrations');
+            console.log('Response status:', res.status);
+          
+          
+            const data = await res.json();
+            console.log('Data received:', data);
+            if (!Array.isArray(data)) {
+              console.error('Expected an array of registrations, but received:', data);
+              return;
+            }
+          const grid = document.getElementById('studentGrid');
+          const details = document.getElementById('detailsContainer');
+    
+          data.forEach(student => {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            card.innerText = student.student_name;
+            card.onclick = () => {
+              details.innerHTML = `
+                <h2>${student.student_name}</h2>
+                <p><strong>Course:</strong> ${student.course}</p>
+                <p><strong>Parent:</strong> ${student.parent_name}</p>
+                <p><strong>Phone:</strong> ${student.phone_number}</p>
+                <p><strong>Parent Phone:</strong> ${student.parent_phone}</p>
+                <p><strong>Email:</strong> ${student.email}</p>
+                <p><strong>Parent Email:</strong> ${student.parent_email}</p>
+                <p><strong>Address:</strong> ${student.address}</p>
+                <p><strong>Permit Number:</strong> ${student.permit_number}</p>
+              `;
+            };
+            grid.appendChild(card);
+          });
+        }
+    
+        fetchRegistrations();
+      </script>
+    </body>
+    </html>

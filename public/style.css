@@ -5,18 +5,18 @@ body {
     margin: 0;
     height: auto;
     overflow-y: auto;
-    padding-top: 300px;
     
 }
 
 .header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     background-color: #424bac;
     color: white;
     width: 100%;
     z-index: 1000;
+    height: 260px;
 }
 
 .header-content {
@@ -80,6 +80,28 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
     height: auto;
     width: 90%;
+}
+
+.courses-sidebar{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #424bac;
+    color: white;
+    padding: 20px;
+    font-size: 16px;
+    height: calc(100vh - 260px);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 500;
+}
+
+.courses-sidebar a{
+    color:white;
 }
