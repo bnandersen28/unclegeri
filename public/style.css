@@ -99,7 +99,7 @@ body {
     background-color: #d32f2f;
     color: white;
     padding: 20px;
-    font-size: 16px;
+    font-size: 25px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     
 }
@@ -112,15 +112,18 @@ body {
 
 .courses-sidebar li {
     margin: 10px 0;
+    color: white;
 }
 
 .courses-sidebar button {
     width: 100%;
-    background-color: #ddd;
+    background-color: #d32f2f;
     border: none;
+    color: white;
     padding: 10px;
     cursor: pointer;
     text-align: left;
+    font-weight: bold;
 }
 
 .courses-sidebar button:hover {
@@ -130,13 +133,20 @@ body {
 .course-description {
     width: 75%;
     padding: 20px;
+    text-align: center;
+    background-color: #aaaaaa;
 }
 
 .course-description h2 {
     margin-top: 0;
+    margin-left: 20px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .course-description p {
     font-size: 16px;
     line-height: 1.5;
+    text-align: center;
+    margin: 20px 0;
 }
