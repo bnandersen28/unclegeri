@@ -49,14 +49,14 @@ body {
 }
 
 .navbar{
-    background-color: #d32f2f;
+    background-color: #000000;
     display:flex;
     justify-content: center;
     padding: 10px 0;
 }
 
 .navbar button {
-    background-color: #d32f2f;
+    background-color: #000000;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -84,24 +84,59 @@ body {
     height: auto;
     width: 90%;
 }
+.main-courses{
+    display: flex;
+    height: 100%;
+}
 
 .courses-sidebar{
     position: relative;
     display:flex;
     flex-direction: column;
-    top: 0;
-    left: 0;
-    width: 200px;
+    
+    width: 25%;
     height: 100%;
-    background-color: #424bac;
+    background-color: #d32f2f;
     color: white;
     padding: 20px;
     font-size: 16px;
-    height: calc(100vh - 260px);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 500;
+    
 }
 
-.courses-sidebar a{
-    color:white;
+.courses-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.courses-sidebar li {
+    margin: 10px 0;
+}
+
+.courses-sidebar button {
+    width: 100%;
+    background-color: #ddd;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.courses-sidebar button:hover {
+    background-color: #ccc;
+}
+
+.course-description {
+    width: 75%;
+    padding: 20px;
+}
+
+.course-description h2 {
+    margin-top: 0;
+}
+
+.course-description p {
+    font-size: 16px;
+    line-height: 1.5;
 }

@@ -28,12 +28,57 @@
     </div>
     </head>
 <body>
+    <div class ="main-courses">
     <div class="courses-sidebar">
         <ul>
-            <li>Behind the Wheel</li>
-            <li><a href="#classroom-only">Classroom Only</a></li>
-            <li><a href="#full-package">Full Package</a></li>
+            <li><button onclick="showDescription('behind-the-wheel')">Behind the Wheel</button></li>
+            <li><button onclick="showDescription('driver-improvement')">Driver Improvement and Defensive Driving</button></button></li>
+            <li><button onclick="showDescription('online')">Online Driver's Education</button></li>
+            <li><button onclick="showDescription('rexam')">Re-Exam Course</button></li>
+            <li><button onclick="showDescription('adult')">Adult In Car Training</button></li>
         </ul>
     </div>
+    <div class="courses-description">
+        <h2 id="course-title">Behind the Wheel</h2>
+        <p id="course-details">This course provides comprehensive behind-the-wheel training for new drivers,
+             focusing on practical skills and road safety.</p>
+    </div>
+    </div>
+
+    <script>
+        const descriptions ={
+            'behind-the-wheel': {
+                title: 'Behind the Wheel',
+                details: 'This course provides comprehensive behind-the-wheel training for new drivers, focusing on practical skills and road safety.'
+            },
+            'driver-improvement': {
+                title: 'Driver Improvement and Defensive Driving',
+                details: 'This course is designed to improve driving skills and knowledge of defensive driving techniques.'
+            },
+            'online': {
+                title: 'Online Driver\'s Education',
+                details: 'An online course that covers all necessary topics for obtaining a driver\'s license.'
+            },
+            'rexam': {
+                title: 'Re-Exam Course',
+                details: 'A specialized course for those needing to retake their driving exam.'
+            },
+            'adult': {
+                title: 'Adult In Car Training',
+                details: 'In-car training specifically designed for adult learners, focusing on practical driving skills.'
+        }
+        };
+
+        function showDescription(courseKey){
+            const course = descriptions[courseKey];
+            document.getElementById('course-title').textContent = course.title;
+            document.getElementById('course-details').textContent = course.details;
+        }
+
+        //Set default course description
+        document.addEventListener('DOMContentLoaded', () => {
+            showDescription('behind-the-wheel');
+        });
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">   
     <title>Register</title>
     <script src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    </head>
     <div class = "header">
         <div class = "header-content">
             <div class = "header-text">
@@ -26,5 +27,158 @@
     </div>
     
     </div>
+    <body>
+        <script>
+            const appId = 'sandbox-sq0idb-k_7IL8xbgoZCAfSW0247oA';
+            const locationId = 'L9JQXZK3T95MB';
+      
+            async function initializeCard(payments) {
+              const card = await payments.card();
+              await card.attach('#card-container');
+      
+              return card;
+            }
+      
+            async function createPayment(token) {
+              const body = JSON.stringify({
+                locationId,
+                sourceId: token,
+                idempotencyKey: window.crypto.randomUUID(),
+              });
+      
+              const paymentResponse = await fetch('/payment', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body,
+              });
+      
+              if (paymentResponse.ok) {
+                return paymentResponse.json();
+              }
+      
+              const errorBody = await paymentResponse.text();
+              throw new Error(errorBody);
+            }
+      
+            // New payment flow
+            async function tokenize(paymentMethod) {
+              const verificationDetails = {
+                amount: '1.00',
+                billingContact: {
+                  givenName: 'John',
+                  familyName: 'Doe',
+                  email: 'john.doe@square.example',
+                  phone: '3214563987',
+                  addressLines: ['123 Main Street', 'Apartment 1'],
+                  city: 'London',
+                  state: 'LND',
+                  countryCode: 'GB',
+                },
+                currencyCode: 'GBP',
+                intent: 'CHARGE',
+                customerInitiated: true,
+                sellerKeyedIn: false,
+              };
+              const tokenResult = await paymentMethod.tokenize(verificationDetails);
+              if (tokenResult.status === 'OK') {
+                return tokenResult.token;
+              } else {
+                let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
+                if (tokenResult.errors) {
+                  errorMessage += ` and errors: ${JSON.stringify(
+                    tokenResult.errors,
+                  )}`;
+                }
+      
+                throw new Error(errorMessage);
+              }
+            }
+      
+            // status is either SUCCESS or FAILURE;
+            function displayPaymentResults(status) {
+              const statusContainer = document.getElementById(
+                'payment-status-container',
+              );
+              const successMessage = document.getElementById('success-message');
+              const failureMessage = document.getElementById('failure-message');
 
-</head>
+              statusContainer.style.visibility = 'visible';
+              if (status === 'SUCCESS') {
+                successMessage.style.display = 'block';
+                failureMessage.style.display = 'none';
+              } else {
+                successMessage.style.display = 'none';
+                failureMessage.style.display = 'block';
+              } 
+      
+        
+            }
+      
+            document.addEventListener('DOMContentLoaded', async function () {
+              if (!window.Square) {
+                throw new Error('Square.js failed to load properly');
+              }
+      
+              let payments;
+              try {
+                payments = window.Square.payments(appId, locationId);
+              } catch {
+                const statusContainer = document.getElementById(
+                  'payment-status-container',
+                );
+                statusContainer.className = 'missing-credentials';
+                statusContainer.style.visibility = 'visible';
+                return;
+              }
+      
+              let card;
+              try {
+                card = await initializeCard(payments);
+              } catch (e) {
+                console.error('Initializing Card failed', e);
+                return;
+              }
+      
+              async function handlePaymentMethodSubmission(event, card) {
+                event.preventDefault();
+      
+                try {
+                  // disable the submit button as we await tokenization and make a payment request.
+                  cardButton.disabled = true;
+                  const token = await tokenize(card);
+                  const paymentResults = await createPayment(token);
+                  displayPaymentResults('SUCCESS');
+      
+                  console.debug('Payment Success', paymentResults);
+                } catch (e) {
+                  cardButton.disabled = false;
+                  displayPaymentResults('FAILURE');
+                  console.error(e.message);
+                }
+              }
+      
+              const cardButton = document.getElementById('card-button');
+              cardButton.addEventListener('click', async function (event) {
+                await handlePaymentMethodSubmission(event, card);
+              });
+            });
+          </script>
+        </head>
+        <body>
+          <form id="payment-form">
+            <div id="card-container"></div>
+            <button id="card-button" type="button">Pay £1.00</button>
+          </form>
+          <div id="payment-status-container" style="visibility: hidden;">
+            <div id="success-message" style="display: none; color: green;">
+              ✅ Payment successful! Thank you.
+            </div>
+            <div id="failure-message" style="display: none; color: red;">
+              ❌ Payment failed. Please try again.
+            </div>
+          </div>
+        </body>
+</html>
+      
