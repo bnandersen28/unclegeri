@@ -1,0 +1,11 @@
+#Ignore env files
+.env
+.env.sandbox
+
+#Ignore node_modules
+node_modules
+
+#Ignore key file
+key.pem
+cert.pem
+
