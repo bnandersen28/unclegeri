@@ -41,7 +41,8 @@
     
       <script>
         async function fetchRegistrations() {
-            const res = await fetch('http://localhost:3000/api/registrations');
+            const backend = 'https://unclegeri-backend.onrender.com';
+            const res = await fetch(`${backend}/api/registrations`);
             console.log('Response status:', res.status);
           
           
