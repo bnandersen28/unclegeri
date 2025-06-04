@@ -29,6 +29,7 @@
     </div>
     <body>
         <script>
+            const backend = 'https://unclegeri-backend.onrender.com';
             const appId = 'sandbox-sq0idb-k_7IL8xbgoZCAfSW0247oA';
             const locationId = 'L9JQXZK3T95MB';
       
@@ -46,7 +47,7 @@
                 idempotencyKey: window.crypto.randomUUID(),
               });
       
-              const paymentResponse = await fetch('/payment', {
+              const paymentResponse = await fetch(`${backend}/payment`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
