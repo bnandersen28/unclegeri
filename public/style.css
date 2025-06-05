@@ -155,23 +155,24 @@ body {
 
 .index-container{
     display:flex;
-    height: calc(100vh- 260px);
+    flex-direction: column;
+    align-items: center;
 }
 
 .left-index{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
     align-items: center;
     justify-content: center;
     background-color: azure;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 .chris-image{
-    width: 95%;
-    height: 300px;
+    width: 50%;
+    height: auto;
     margin: 0;
     height: auto;;
     border-radius: 5px;
@@ -187,9 +188,9 @@ body {
 }
 
 .right-index{
-    width: 50%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #cccccc;
@@ -198,8 +199,9 @@ body {
 
 .car-image{
     
-    width: 95%;
-    height: 200px;
+    width: 33%;
+    height: auto;
+    margin: 0;
     object-fit: cover;
     border-radius: 2px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -226,23 +228,10 @@ body {
         font-size: 12px;
     }
 
-    /*Adjust index layout so that chris image and pic are on top*/
-    .index-container {
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .left-index {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-    }
     .chris-image {
         width: 50%;
         height: auto;
-        margin: 0 10px 0 0;
     }
 
     .index-description{
