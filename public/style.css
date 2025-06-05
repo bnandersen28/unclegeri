@@ -405,5 +405,18 @@ body {
         font-size: 12px;
     }
 
+    .main-courses {
+        flex-direction: column;
+    }
+
+    .courses-sidebar{
+        width: 100%;
+        height: 25vh;
+    }
+
+    .course-description{
+        width: 100;
+    }
+
 
 }
