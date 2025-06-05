@@ -131,7 +131,7 @@ body {
 .course-description {
     width: 75%;
     padding: 20px;
-    text-align: center;
+    text-align: left;
     background-color: #cccccc;
 }
 
