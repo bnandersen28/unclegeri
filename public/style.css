@@ -85,7 +85,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
-    width: 55%;
+    width: 50%;
 }
 
 .register-container{
@@ -96,7 +96,7 @@ body {
 
 .policy-section{
     flex-direction: column;
-    width: 45%;
+    width: 50%;
     padding-top: 50px;
     background-color: azure;
 
@@ -111,7 +111,7 @@ body {
 }
 .policy-section p{
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1;
     margin: 10px 0;
 }
 
