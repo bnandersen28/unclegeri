@@ -191,6 +191,12 @@ body {
     padding: 15px;
 }
 
+.index-description h2{
+    margin-top: 0;
+    font-weight: bold;
+    color:#d32f2f
+}
+
 .right-index{
     width: 100%;
     display: flex;
@@ -210,7 +216,17 @@ body {
     border-radius: 2px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
+.index-bottom{
+    background-color: azure;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.index-bottom button{
+    background-color: #424bac;
+    color: white;
+}
 
 /*Login screen*/ 
 .login-container{
@@ -336,14 +352,14 @@ body {
 
 
     .chris-image {
-        width: 50%;
+        width: 40%;
         height: auto;
     }
 
     .index-description{
-        width : 50%;
-        padding: 10px;
-        font-size: 12px;
+        width : 60%;
+        padding: 5px;
+        font-size: 10px;
     }
 
     .right-index{
