@@ -411,7 +411,8 @@ body {
 
     .courses-sidebar{
         width: 100%;
-        height: 25vh;
+        height: auto;
+        flex-direction: row;
     }
 
     .course-description{
