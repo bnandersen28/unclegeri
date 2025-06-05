@@ -100,7 +100,7 @@ body {
     
     width: 25%;
     height: 100%;
-    background-color: #d32f2f;
+    background-color: #f1f1f1;
     color: white;
     padding: 20px;
     font-size: 25px;
@@ -323,6 +323,10 @@ body {
     .header {
         height : 30vh;
     }
+    .header a{
+        text-decoration: none;
+        color: white;
+    }
     /*Make nav bar buttons smaller*/
     .navbar button{
         margin: 0 5px;
@@ -339,7 +343,7 @@ body {
     .index-description{
         width : 50%;
         padding: 10px;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .right-index{
