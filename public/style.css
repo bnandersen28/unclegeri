@@ -401,9 +401,7 @@ body {
         padding: 10px 10px 10px 10px;
     }
 
-    .course-description{
-        font-size: 12px;
-    }
+    
 
     .main-courses {
         flex-direction: column;
@@ -413,15 +411,17 @@ body {
         width: 100%;
         height: auto;
         flex-direction: row;
+        font-size: 14px;
     }
 
-    .courses-bar button{
+    .courses-sidebar button{
         width: auto;
     }
 
     .course-description{
         width: 100;
         text-align: center;
+        font-size: 12px;
     }
 
 
