@@ -161,22 +161,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: azure;
 }
 
 .chris-image{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .index-description{
     background-color: azure;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.5;
+    padding: 15px;
 }
 
 .right-index{
@@ -184,5 +184,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 20px;
     background-color: #cccccc;
+}
+
+.car-image{
+    width: 80%;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
