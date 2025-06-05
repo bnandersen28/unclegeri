@@ -224,6 +224,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .login-container h2{
@@ -235,7 +236,7 @@ body {
 #loginForm input {
     width: 95%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
