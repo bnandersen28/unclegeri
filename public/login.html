@@ -21,7 +21,7 @@
             <button>FAQs</button>
             <button>Connect</button>
         </nav>    
-        
+
     </div>
     
     </div>
@@ -51,6 +51,7 @@
       
         const data = await res.json();
         if (res.ok) {
+          localStorage.setItem('authenticated', 'true');
           window.location.href = '/admin.html'; // Only accessible after login
         } else {
           alert(data.message || 'Login failed');
