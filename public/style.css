@@ -221,11 +221,15 @@ body {
     display:flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: bold;
 }
 
 .index-bottom button{
     background-color: #424bac;
     color: white;
+    padding-left: 30px;
 }
 
 /*Login screen*/ 
