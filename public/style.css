@@ -295,13 +295,14 @@ body {
 .footer-icon{
     margin: 0 10px;
 }
-.footer-icon a{
+.footer-section a{
     text-decoration: none;
-    color: inherit; /* Inherit color from parent */
+    color: #000000; /* Inherit color from parent */
+    transition: color 0.3s ease;
 }
 
-.footer-icon a:hover {
-    color: #d32f2f; /* Change color on hover */
+.footer-section a:hover {
+    color: #ffffff; /* Change color on hover */
 }
 
 .footer-icon img{
