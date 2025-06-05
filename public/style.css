@@ -109,16 +109,7 @@ body {
     
 }
 
-.courses-sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
 
-
-.courses-sidebar li {
-    margin: 10px 0;
-    color: white;
-}
 
 .courses-sidebar button {
     width: 100%;
@@ -414,11 +405,13 @@ body {
         flex-direction: row;
         font-size: 14px;
         max-width: 100%;
+        padding: 0;
+        margin: 0;
     }
 
     .courses-sidebar button{
         width: auto;
-        padding: 0;
+        padding: 5px;
     }
 
     .course-description{
