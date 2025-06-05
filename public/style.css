@@ -80,6 +80,7 @@ body {
     align-items: center;
     background-color: #f0f0f0;
     padding: 20px;
+    padding-top: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -96,7 +97,16 @@ body {
 .policy-section{
     flex-direction: column;
     width: 35%;
+    padding-top: 50px;
+    background-color: azure;
 
+}
+.policy-section h2{
+    font-weight: bold;
+    font-size: 18px;
+}
+.policy-section h1{
+    color:#424bac;
 }
 
 /*Courses page*/
