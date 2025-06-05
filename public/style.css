@@ -232,8 +232,8 @@ body {
     background-color: #424bac;
     color: white;
     padding-left: 30px;
-    width: 40px;
-    height: 30px;
+    width: 120px;
+    height: 120px;
 }
 
 /*Login screen*/ 
@@ -383,7 +383,10 @@ body {
         height: auto;
         margin: 0;
     }
-
+    .index-bottom {
+        font-size: 16px;
+        max-width: 100%;
+    }
 
 
 }
