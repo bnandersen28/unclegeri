@@ -45,14 +45,32 @@
             <h1>Disclosure</h1>
             <p>The academy does not guarantee that after taking the in-car lessons, the student will pass the state examination or the student can secure a license, the student will be guaranteed employment upon completion of the course.
             </p>
+            <label for"acknowledgement">Do you understand and agree to the policies?</label>
+            <select name="acknowledgement" id="acknowledgement" required>
+                <option value=""disabled selected>Select an option</option>
+                <option value="yes">Yes, I understand</option>
+                <option value="no">No, I do not understand</option>
+            </select>
         </div>
     <div class ="register-form">
   <form id="registerForm" action="/register" method="POST">
+    
     <label for="course">Choose a course:</label>
     <select name="course" id="course" required>
       <option value="" disabled selected>Select a course</option>
       <option value="Behind the Wheel">Behind the Wheel</option>
+      <option value="1-1 4 days">1-1 4 days</option>
+      <option value="1-1 7 days">1-1 7 days</option>
+      <option value="Adult DMV exam">Adult DMV exam</option>
     </select><br><br>
+
+    <label for="start-date">Select a Start Date:</label>
+                <select id="start-date" name="start-date" required>
+                    <option value="" disabled selected>Select a start date</option>
+                    <option value="2023-09-01">September 1, 2023</option>
+                    <option value="2023-09-15">September 15, 2023</option>
+                    <option value="2023-10-01">October 1, 2023</option>
+                </select>
 
     <label for="studentName">Student Name:</label>
     <input type="text" id="studentName" name="studentName" required><br><br>
@@ -78,7 +96,7 @@
     <label for="permitNumber">Permit Number:</label>
     <input type="text" id="permitNumber" name="permitNumber" required><br><br>
 
-    <button type="submit">Pay</button>
+    <button type="submit">Payment method</button>
   </form>
   </div>
   </div>
