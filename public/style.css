@@ -262,8 +262,8 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #b5bbff;
-    color: white;
+    background-color: #d32f2f;
+    color: rgb(0, 0, 0);
     padding: 20px;
     font-size: 14px;
 }
@@ -281,13 +281,32 @@ body {
     font-size: 16px;
 }
 
+.footer-section button{
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
 .footer-icon{
     margin: 0 10px;
 }
+.footer-icon a{
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent */
+}
+
+.footer-icon a:hover {
+    color: #d32f2f; /* Change color on hover */
+}
 
 .footer-icon img{
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     transition: transform 0.3s ease;
 }
 .footer-icon img:hover {
