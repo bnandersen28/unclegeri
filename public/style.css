@@ -90,6 +90,7 @@ body {
 /*Courses page*/
 .main-courses{
     display: flex;
+    align-items: stretch;
     height: 100%;
 }
 
@@ -97,10 +98,9 @@ body {
     position: relative;
     display:flex;
     flex-direction: column;
-    min-height: 100%;
     justify-content: space-evenly;
     width: 25%;
-    height: 100%;
+    height: auto;
     background-color: #f1f1f1;
     color: white;
     padding: 20px;
@@ -129,6 +129,8 @@ body {
     cursor: pointer;
     text-align: left;
     font-weight: bold;
+    margin-top: 20px;
+    border-radius: 5px;
 }
 
 .courses-sidebar button:hover {
@@ -146,7 +148,7 @@ body {
     margin-top: 100px;
     margin-left: 20px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
 }
 
 .course-description p {
@@ -234,6 +236,9 @@ body {
     background-color: #424bac;
     color: white;
     padding-left: 30px;
+    padding-right:30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-size: 16px;
     text-align: center;
 }
@@ -392,8 +397,6 @@ body {
     }
 
     .index-bottom button {
-        width: 85px;
-        height: 65px;
         font-size: 14px;
     }
 
