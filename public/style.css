@@ -148,7 +148,7 @@ body {
     margin-top: 100px;
     margin-left: 20px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
 }
 
 .course-description p {
@@ -398,6 +398,11 @@ body {
 
     .index-bottom button {
         font-size: 14px;
+        padding: 10px 10px 10px 10px;
+    }
+
+    .course-description{
+        font-size: 12px;
     }
 
 
