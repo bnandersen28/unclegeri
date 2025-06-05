@@ -211,6 +211,10 @@ body {
 /*Adjustments for smaller screens */
 @media (max-width: 768px) {
 
+    /*Adjust header height*/
+    .header {
+        height : 30vh;
+    }
     /*Make nav bar buttons smaller*/
     .navbar button{
         margin: 0 5px;
