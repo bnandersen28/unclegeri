@@ -214,8 +214,9 @@ body {
 
 /*Login screen*/ 
 .login-container{
-    width: 100%;
-    margin: 100px auto;
+    width: 95%;
+    height: 50vh;
+    margin: 50px auto;
     padding: 20px;
     background-color: #cccccc;
     text-align: center;
