@@ -410,6 +410,7 @@ body {
     .courses-sidebar{
         width: 100%;
         height: auto;
+        display: flex;
         flex-direction: row;
         font-size: 14px;
     }
@@ -422,6 +423,12 @@ body {
         width: 100;
         text-align: center;
         font-size: 12px;
+        padding: 0;
+    }
+
+    .course-description h2 {
+        margin-top: 10px;
+        font-size: 14px;
     }
 
 
