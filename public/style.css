@@ -103,10 +103,16 @@ body {
 }
 .policy-section h2{
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
 }
 .policy-section h1{
     color:#424bac;
+    font-size:18px;
+}
+.policy-section p{
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
 }
 
 /*Courses page*/
