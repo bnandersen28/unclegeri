@@ -415,8 +415,13 @@ body {
         flex-direction: row;
     }
 
+    .courses-bar button{
+        width: auto;
+    }
+
     .course-description{
         width: 100;
+        text-align: center;
     }
 
 
