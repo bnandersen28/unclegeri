@@ -27,190 +27,10 @@
     </div>
     
     </div>
+    </head>
     <body>
-        <script>
-            const backend = 'https://unclegeri-backend.onrender.com';
-            const appId = 'sandbox-sq0idb-k_7IL8xbgoZCAfSW0247oA';
-            const locationId = 'L9JQXZK3T95MB';
-      
-            async function initializeCard(payments) {
-              const card = await payments.card();
-              await card.attach('#card-container');
-      
-              return card;
-            }
-      
-            async function createPayment(token) {
-              const body = JSON.stringify({
-                locationId,
-                sourceId: token,
-                idempotencyKey: window.crypto.randomUUID(),
-              });
-      
-              const paymentResponse = await fetch(`${backend}/payment`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body,
-              });
-      
-              if (paymentResponse.ok) {
-                return paymentResponse.json();
-              }
-      
-              const errorBody = await paymentResponse.text();
-              throw new Error(errorBody);
-            }
-      
-            // New payment flow
-            async function tokenize(paymentMethod) {
-              const verificationDetails = {
-                amount: '1.00',
-                billingContact: {
-                  givenName: 'John',
-                  familyName: 'Doe',
-                  email: 'john.doe@square.example',
-                  phone: '3214563987',
-                  addressLines: ['123 Main Street', 'Apartment 1'],
-                  city: 'London',
-                  state: 'LND',
-                  countryCode: 'GB',
-                },
-                currencyCode: 'GBP',
-                intent: 'CHARGE',
-                customerInitiated: true,
-                sellerKeyedIn: false,
-              };
-              const tokenResult = await paymentMethod.tokenize(verificationDetails);
-              if (tokenResult.status === 'OK') {
-                return tokenResult.token;
-              } else {
-                let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
-                if (tokenResult.errors) {
-                  errorMessage += ` and errors: ${JSON.stringify(
-                    tokenResult.errors,
-                  )}`;
-                }
-      
-                throw new Error(errorMessage);
-              }
-            }
 
-            
-            
-            // status is either SUCCESS or FAILURE;
-            function displayPaymentResults(status) {
-              const statusContainer = document.getElementById(
-                'payment-status-container',
-              );
-              const successMessage = document.getElementById('success-message');
-              const failureMessage = document.getElementById('failure-message');
-
-              statusContainer.style.visibility = 'visible';
-              if (status === 'SUCCESS') {
-                successMessage.style.display = 'block';
-                failureMessage.style.display = 'none';
-              } else {
-                successMessage.style.display = 'none';
-                failureMessage.style.display = 'block';
-              } 
-      
         
-            }
-      
-            document.addEventListener('DOMContentLoaded', async function () {
-              const course = localStorage.getItem('course');
-              const registrationId = localStorage.getItem('registration_id');
-              console.log('Course:', course);
-              console.log('Registration ID:', registrationId);
-
-                // Define course prices
-    const coursePrices = {
-        'Behind the Wheel': '300.00',
-        '1-1 4 days': '200.00',
-        '1-1 7 days': '350.00',
-        'Adult DMV exam': '150.00'
-    };
-
-    // Check if course exists in localStorage
-    if (!course || !registrationId) {
-        alert('No course or registration ID found. Please complete the registration first.');
-        window.location.href = '/register.html'; // Redirect back to registration
-        return;
-    }
-
-      // Get the price for the selected course
-      const price = coursePrices[course] || '0.00';
-       // Update the price container with course name and price
-    const priceContainer = document.getElementById('price-container');
-    priceContainer.innerHTML = `
-        <h2>Selected Course: ${course}</h2>
-        <h3>Course Price: $${price}</h3>
-    `;
-
-              if (!window.Square) {
-                throw new Error('Square.js failed to load properly');
-              }
-      
-              let payments;
-              try {
-                payments = window.Square.payments(appId, locationId);
-              } catch {
-                const statusContainer = document.getElementById(
-                  'payment-status-container',
-                );
-                statusContainer.className = 'missing-credentials';
-                statusContainer.style.visibility = 'visible';
-                return;
-              }
-      
-              let card;
-              try {
-                card = await initializeCard(payments);
-              } catch (e) {
-                console.error('Initializing Card failed', e);
-                return;
-              }
-      
-              async function handlePaymentMethodSubmission(event, card) {
-                event.preventDefault();
-      
-                try {
-                  // disable the submit button as we await tokenization and make a payment request.
-                  cardButton.disabled = true;
-                  const token = await tokenize(card);
-                  const paymentResults = await createPayment(token);
-                  displayPaymentResults('SUCCESS');
-      
-                  console.debug('Payment Success', paymentResults);
-                } catch (e) {
-                  cardButton.disabled = false;
-                  displayPaymentResults('FAILURE');
-                  console.error(e.message);
-                }
-              }
-      
-              const cardButton = document.getElementById('card-button');
-              cardButton.addEventListener('click', async function (event) {
-                await handlePaymentMethodSubmission(event, card);
-              });
-            });
-
-            //Display cash/check confirmation
-            document.getElementById('cash-button').addEventListener('click',  ()=> {
-              console.log('Cash payment selected');
-              document.getElementById('cash-check-container').style.display = 'block';
-              document.getElementById('payment-options').style.display = 'none';
-            });
-
-            document.getElementById('check-button').addEventListener('click',  ()=> {
-              document.getElementById('cash-check-container').style.display = 'block';
-              document.getElementById('payment-options').style.display = 'none';
-            });
-            
-          </script>
-        </head>
         <body>
           <div id="price-container"></div>
           <div class="payment-options">
@@ -258,5 +78,188 @@
           </div>
           </div>
       </footer>
+
+      <script>
+        const backend = 'https://unclegeri-backend.onrender.com';
+        const appId = 'sandbox-sq0idb-k_7IL8xbgoZCAfSW0247oA';
+        const locationId = 'L9JQXZK3T95MB';
+  
+        async function initializeCard(payments) {
+          const card = await payments.card();
+          await card.attach('#card-container');
+  
+          return card;
+        }
+  
+        async function createPayment(token) {
+          const body = JSON.stringify({
+            locationId,
+            sourceId: token,
+            idempotencyKey: window.crypto.randomUUID(),
+          });
+  
+          const paymentResponse = await fetch(`${backend}/payment`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body,
+          });
+  
+          if (paymentResponse.ok) {
+            return paymentResponse.json();
+          }
+  
+          const errorBody = await paymentResponse.text();
+          throw new Error(errorBody);
+        }
+  
+        // New payment flow
+        async function tokenize(paymentMethod) {
+          const verificationDetails = {
+            amount: '1.00',
+            billingContact: {
+              givenName: 'John',
+              familyName: 'Doe',
+              email: 'john.doe@square.example',
+              phone: '3214563987',
+              addressLines: ['123 Main Street', 'Apartment 1'],
+              city: 'London',
+              state: 'LND',
+              countryCode: 'GB',
+            },
+            currencyCode: 'GBP',
+            intent: 'CHARGE',
+            customerInitiated: true,
+            sellerKeyedIn: false,
+          };
+          const tokenResult = await paymentMethod.tokenize(verificationDetails);
+          if (tokenResult.status === 'OK') {
+            return tokenResult.token;
+          } else {
+            let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
+            if (tokenResult.errors) {
+              errorMessage += ` and errors: ${JSON.stringify(
+                tokenResult.errors,
+              )}`;
+            }
+  
+            throw new Error(errorMessage);
+          }
+        }
+
+        
+        
+        // status is either SUCCESS or FAILURE;
+        function displayPaymentResults(status) {
+          const statusContainer = document.getElementById(
+            'payment-status-container',
+          );
+          const successMessage = document.getElementById('success-message');
+          const failureMessage = document.getElementById('failure-message');
+
+          statusContainer.style.visibility = 'visible';
+          if (status === 'SUCCESS') {
+            successMessage.style.display = 'block';
+            failureMessage.style.display = 'none';
+          } else {
+            successMessage.style.display = 'none';
+            failureMessage.style.display = 'block';
+          } 
+  
+    
+        }
+  
+        document.addEventListener('DOMContentLoaded', async function () {
+          const course = localStorage.getItem('course');
+          const registrationId = localStorage.getItem('registration_id');
+          console.log('Course:', course);
+          console.log('Registration ID:', registrationId);
+
+            // Define course prices
+const coursePrices = {
+    'Behind the Wheel': '300.00',
+    '1-1 4 days': '200.00',
+    '1-1 7 days': '350.00',
+    'Adult DMV exam': '150.00'
+};
+
+// Check if course exists in localStorage
+if (!course || !registrationId) {
+    alert('No course or registration ID found. Please complete the registration first.');
+    window.location.href = '/register.html'; // Redirect back to registration
+    return;
+}
+
+  // Get the price for the selected course
+  const price = coursePrices[course] || '0.00';
+   // Update the price container with course name and price
+const priceContainer = document.getElementById('price-container');
+priceContainer.innerHTML = `
+    <h2>Selected Course: ${course}</h2>
+    <h3>Course Price: $${price}</h3>
+`;
+
+          if (!window.Square) {
+            throw new Error('Square.js failed to load properly');
+          }
+  
+          let payments;
+          try {
+            payments = window.Square.payments(appId, locationId);
+          } catch {
+            const statusContainer = document.getElementById(
+              'payment-status-container',
+            );
+            statusContainer.className = 'missing-credentials';
+            statusContainer.style.visibility = 'visible';
+            return;
+          }
+  
+          let card;
+          try {
+            card = await initializeCard(payments);
+          } catch (e) {
+            console.error('Initializing Card failed', e);
+            return;
+          }
+  
+          async function handlePaymentMethodSubmission(event, card) {
+            event.preventDefault();
+  
+            try {
+              // disable the submit button as we await tokenization and make a payment request.
+              cardButton.disabled = true;
+              const token = await tokenize(card);
+              const paymentResults = await createPayment(token);
+              displayPaymentResults('SUCCESS');
+  
+              console.debug('Payment Success', paymentResults);
+            } catch (e) {
+              cardButton.disabled = false;
+              displayPaymentResults('FAILURE');
+              console.error(e.message);
+            }
+          }
+  
+          const cardButton = document.getElementById('card-button');
+          cardButton.addEventListener('click', async function (event) {
+            await handlePaymentMethodSubmission(event, card);
+          });
+        });
+
+        //Display cash/check confirmation
+        document.getElementById('cash-button').addEventListener('click',  ()=> {
+          console.log('Cash payment selected');
+          document.getElementById('cash-check-container').style.display = 'block';
+          document.getElementById('payment-options').style.display = 'none';
+        });
+
+        document.getElementById('check-button').addEventListener('click',  ()=> {
+          document.getElementById('cash-check-container').style.display = 'block';
+          document.getElementById('payment-options').style.display = 'none';
+        });
+        
+      </script>
 </html>
       
