@@ -214,13 +214,13 @@ body {
 }
 
 #contactForm {
-    flex-direction: column;
+    flex-direction: row;
     width: 50%;
     padding: 20px;
 }
 
 .contact-info{
-    flex-direction: row;
+    flex-direction: column;
     width: 50%;
     padding: 20px;
 }
