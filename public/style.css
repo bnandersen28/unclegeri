@@ -211,13 +211,24 @@ body {
     flex-direction: row;
     background-color: #cccccc;
     padding: 20px;
-    height: auto;
+    height: 65vh;
 }
 
 #contactForm {
     flex-direction: column;
     padding: 20px;
+    padding-top: 50px;
 }
+
+#contactForm input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
 
 .connect-form{
     background-color: azue;
