@@ -70,7 +70,7 @@
                     <option value="2023-09-01">September 1, 2023</option>
                     <option value="2023-09-15">September 15, 2023</option>
                     <option value="2023-10-01">October 1, 2023</option>
-                </select>
+        </select>
 
     <label for="studentName">Student Name:</label>
     <input type="text" id="studentName" name="studentName" required><br><br>
@@ -107,8 +107,16 @@ const backend = 'https://unclegeri-backend.onrender.com';
 const form = document.getElementById('registerForm');
 form.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
+
+     // Check if the user acknowledged the policies
+     if (acknowledgement.value !== 'yes') {
+           alert('You must acknowledge the policies to proceed.');
+            return;
+    }
+
     const formData = new FormData(form);
 
+    formData.append('acknowledged_policies', acknowledgement.value === 'yes');
 
     // Convert FormData to JSON because your server expects JSON
     const object = {};
