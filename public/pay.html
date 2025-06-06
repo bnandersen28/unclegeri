@@ -43,13 +43,31 @@
             <h2>Do you agree to provide payment at the first session?</h2>
             <button id="confirm">Yes, I agree</button>
           </div>
-          <div id="confirmation-message" style="display: none; color: green;">
-            ✅ Thank you! Your payment method has been confirmed.
+
+          <div id="card-info" style="display: none;">
+            <form id="customer-info-form">
+              <label for="first-name">First Name:</label>
+              <input type="text" id="first-name" required><br>
+
+              <label for="last-name">Last Name:</label>
+              <input type="text" id="last-name" required><br>
+
+              <label for="email">Email:</label>
+              <input type="email" id="email"><br>
+
+              <label for="phone">Phone:</label>
+              <input type="tel" id="phone"><br>
+            </form>
+            <form id="payment-form" >
+              <div id="card-container"></div>
+              <button id="card-button" type="button">Pay $1.00</button>
+            </form>
           </div>
-          <form id="payment-form" style="display: none;">
-            <div id="card-container"></div>
-            <button id="card-button" type="button">Pay $1.00</button>
-          </form>
+
+          <div id="confirmation-message" style="display: none; ">
+            ✅ Thank you! Your registration has been confirmed.
+          </div>
+          
           <div id="payment-status-container" style="visibility: hidden;">
             <div id="success-message" style="display: none; color: green;">
               ✅ Payment successful! Thank you.
@@ -300,6 +318,11 @@ priceContainer.innerHTML = `
           alert(`Failed to submit payment method: ${errorData.message}`);
         }
       });
+
+      document.getElementById('card-button').addEventListener('click', async () => {
+        document.getElementById('card-info').style.display = 'block';
+        document.getElementById('payment-options').style.display = 'none';
+      })
   
       </script>
 </html>
