@@ -112,7 +112,7 @@
           return card;
         }
   
-        async function createPayment(token) {
+        async function createPayment(token, price) {
           const body = JSON.stringify({
             locationId,
             sourceId: token,
@@ -278,7 +278,7 @@ priceContainer.innerHTML = `
               // disable the submit button as we await tokenization and make a payment request.
               cardButton.disabled = true;
               const token = await tokenize(card, price);
-              const paymentResults = await createPayment(token);
+              const paymentResults = await createPayment(token, price);
               displayPaymentResults('SUCCESS');
   
               console.debug('Payment Success', paymentResults);
