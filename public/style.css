@@ -211,12 +211,18 @@ body {
     flex-direction: row;
     background-color: #cccccc;
     padding: 20px;
+    height: auto;
 }
 
 #contactForm {
-    flex-direction: row;
-    width: 50%;
+    flex-direction: column;
     padding: 20px;
+}
+
+.connect-form{
+    background-color: azue;
+    width: 50%;
+    flex-direction: column;
 }
 
 .contact-info{
