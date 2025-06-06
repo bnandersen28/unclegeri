@@ -118,6 +118,11 @@
             }
       
             document.addEventListener('DOMContentLoaded', async function () {
+              const course = localStorage.getItem('course');
+              const registrationId = localStorage.getItem('registration_id');
+              console.log('Course:', course);
+              console.log('Registration ID:', registrationId);
+
               if (!window.Square) {
                 throw new Error('Square.js failed to load properly');
               }

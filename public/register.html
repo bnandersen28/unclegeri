@@ -140,7 +140,10 @@ form.addEventListener('submit', function(event) {
     .then(response => {
         if (response.ok) {
             // Redirect to payment page
-            console.log('Redirecting to payment page...');
+            //Store selected course and reg id for use in payment page
+            localStorage.setItem('course', formData.course);
+            localStorage.setItem('registration_id',data.id);
+
             window.location.href = '/pay.html';
         } else {
             // Handle error

@@ -115,6 +115,20 @@ body {
     margin: 10px 0;
 }
 
+/*Payment page*/
+.price-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: azure;
+    padding: 20px;
+    padding-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: auto;
+}
+
 /*Courses page*/
 .main-courses{
     display: flex;
