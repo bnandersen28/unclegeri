@@ -136,20 +136,23 @@
         }
   
         // New payment flow
-        async function tokenize(paymentMethod) {
+        async function tokenize(paymentMethod, price) {
+          //Get details from the form 
+          const firstName = document.getElementById('first-name').value;
+          const lastName = document.getElementById('last-name').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+
           const verificationDetails = {
-            amount: '1.00',
+            amount: price,
             billingContact: {
-              givenName: 'John',
-              familyName: 'Doe',
-              email: 'john.doe@square.example',
-              phone: '3214563987',
-              addressLines: ['123 Main Street', 'Apartment 1'],
-              city: 'London',
-              state: 'LND',
-              countryCode: 'GB',
+              givenName: firstName,
+              familyName: lastName,
+              email: email,
+              phone: phone,
+              countryCode: 'US',
             },
-            currencyCode: 'GBP',
+            currencyCode: 'USD',
             intent: 'CHARGE',
             customerInitiated: true,
             sellerKeyedIn: false,
@@ -201,10 +204,10 @@
 
             // Define course prices
 const coursePrices = {
-    'Behind the Wheel': '300.00',
-    '1-1 4 days': '200.00',
-    '1-1 7 days': '350.00',
-    'Adult DMV exam': '150.00'
+    'Behind the Wheel': '1.00',
+    '1-1 4 days': '1.00',
+    '1-1 7 days': '1.00',
+    'Adult DMV exam': '1.00'
 };
 
 // Check if course exists in localStorage
@@ -253,7 +256,7 @@ priceContainer.innerHTML = `
             try {
               // disable the submit button as we await tokenization and make a payment request.
               cardButton.disabled = true;
-              const token = await tokenize(card);
+              const token = await tokenize(card, price);
               const paymentResults = await createPayment(token);
               displayPaymentResults('SUCCESS');
   
