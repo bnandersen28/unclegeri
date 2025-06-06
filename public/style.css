@@ -212,6 +212,9 @@ body {
     background-color: #cccccc;
     padding: 20px;
     height: 65vh;
+    color: #424bac;
+    justify-content: center;
+    align-items: center;
 }
 
 #contactForm {
@@ -236,13 +239,20 @@ body {
     flex-direction: column;
 }
 
+.connect-form h2{
+    font-weight: bold;
+    font-size: 20px;
+    color: #424bac;
+}
+
 .contact-info{
     flex-direction: column;
     width: 50%;
     padding: 20px;
     justify-content: center;
     align-items: center;
-    background-color: azure;
+    background-color: #cccccc;
+    text-align: center;
 }
 
 #contactForm button{
