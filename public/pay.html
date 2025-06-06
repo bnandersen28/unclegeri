@@ -36,7 +36,7 @@
           <div id="payment-options">
             <button id="cash-button">I'm Paying Cash</button>
             <button id="check-button">I'm Paying by Check</button>
-            <button id="card-button">Pay with Card</button> 
+            <button id="card-pay-button">Pay with Card</button> 
           </div>
 
           <div id="cash-check-container" style ="display: none;">
@@ -319,7 +319,7 @@ priceContainer.innerHTML = `
         }
       });
 
-      document.getElementById('card-button').addEventListener('click', async () => {
+      document.getElementById('card-pay-button').addEventListener('click', async () => {
         document.getElementById('card-info').style.display = 'block';
         document.getElementById('payment-options').style.display = 'none';
       })
