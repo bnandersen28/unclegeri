@@ -143,6 +143,14 @@
           const email = document.getElementById('email').value;
           const phone = document.getElementById('phone').value;
 
+          console.log('Tokenizing with details:', {
+            firstName,
+            lastName,
+            email,
+            phone,
+            price,
+          });
+
           const verificationDetails = {
             amount: price,
             billingContact: {
