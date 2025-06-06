@@ -123,6 +123,30 @@
               console.log('Course:', course);
               console.log('Registration ID:', registrationId);
 
+                // Define course prices
+    const coursePrices = {
+        'Behind the Wheel': '300.00',
+        '1-1 4 days': '200.00',
+        '1-1 7 days': '350.00',
+        'Adult DMV exam': '150.00'
+    };
+
+    // Check if course exists in localStorage
+    if (!course || !registrationId) {
+        alert('No course or registration ID found. Please complete the registration first.');
+        window.location.href = '/register.html'; // Redirect back to registration
+        return;
+    }
+
+      // Get the price for the selected course
+      const price = coursePrices[course] || '0.00';
+       // Update the price container with course name and price
+    const priceContainer = document.getElementById('price-container');
+    priceContainer.innerHTML = `
+        <h2>Selected Course: ${course}</h2>
+        <h3>Course Price: £${price}</h3>
+    `;
+
               if (!window.Square) {
                 throw new Error('Square.js failed to load properly');
               }
@@ -173,6 +197,9 @@
           </script>
         </head>
         <body>
+          <div id="price-container">
+        
+          </div>
           <form id="payment-form">
             <div id="card-container"></div>
             <button id="card-button" type="button">Pay £1.00</button>
