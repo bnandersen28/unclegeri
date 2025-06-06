@@ -226,6 +226,7 @@ if (!course || !registrationId) {
 }
 
   // Get the price for the selected course
+  const rawPrice = coursePrices[course];
   const price = parseFloat(coursePrices[course]) *100; //convert dollars to cents
   if (isNaN(price)){
     console.error('invalid course price',price);
@@ -236,7 +237,7 @@ if (!course || !registrationId) {
 const priceContainer = document.getElementById('price-container');
 priceContainer.innerHTML = `
     <h2>Selected Course: ${course}</h2>
-    <h3>Course Price: $${price}</h3>
+    <h3>Course Price: $${rawPrice}</h3>
 `;
 
           if (!window.Square) {
