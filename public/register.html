@@ -129,8 +129,6 @@ form.addEventListener('submit', function(event) {
     };
 
     // Convert FormData to JSON because your server expects JSON
-    const object = {};
-      formData.forEach((value, key) => { object[key] = value });
       const json = JSON.stringify(object);
 
 
