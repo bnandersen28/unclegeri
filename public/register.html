@@ -114,14 +114,24 @@ form.addEventListener('submit', function(event) {
             return;
     }
 
-    const formData = new FormData(form);
-
-    formData.append('acknowledged_policies', acknowledgement.value === 'yes');
+    const formData = {
+        course: document.getElementById('course').value,
+        start_date: document.getElementById('start-date').value,
+        studentName: document.getElementById('studentName').value,
+        parentName: document.getElementById('parentName').value,
+        phone: document.getElementById('phone').value,
+        parent_phone: document.getElementById('parentPhone').value,
+        email: document.getElementById('email').value,
+        parentEmail: document.getElementById('parentEmail').value,
+        home_address: document.getElementById('address').value,
+        permitNumber: document.getElementById('permitNumber').value,
+        acknowledged_policies: acknowledgement.value === 'yes'
+    };
 
     // Convert FormData to JSON because your server expects JSON
-    const object = {};
-      formData.forEach((value, key) => { object[key] = value });
-      const json = JSON.stringify(object);
+    // const object = {};
+    //   formData.forEach((value, key) => { object[key] = value });
+    //   const json = JSON.stringify(object);
 
 
     fetch(`${backend}/register`, {
