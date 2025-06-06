@@ -99,6 +99,7 @@
 
             //Display cash/check confirmation
             document.getElementById('cash-button').addEventListener('click',  ()=> {
+              console.log('Cash payment selected');
               document.getElementById('cash-check-container').style.display = 'block';
               document.getElementById('payment-options').style.display = 'none';
             });
@@ -107,6 +108,8 @@
               document.getElementById('cash-check-container').style.display = 'block';
               document.getElementById('payment-options').style.display = 'none';
             });
+            
+            
             // status is either SUCCESS or FAILURE;
             function displayPaymentResults(status) {
               const statusContainer = document.getElementById(
