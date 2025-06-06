@@ -96,7 +96,17 @@
                 throw new Error(errorMessage);
               }
             }
-      
+
+            //Display cash/check confirmation
+            document.getElementById('cash-button').addEventListener('click',  ()=> {
+              document.getElementById('cash-check-container').style.display = 'block';
+              document.getElementById('payment-options').style.display = 'none';
+            });
+
+            document.getElementById('check-button').addEventListener('click',  ()=> {
+              document.getElementById('cash-check-container').style.display = 'block';
+              document.getElementById('payment-options').style.display = 'none';
+            });
             // status is either SUCCESS or FAILURE;
             function displayPaymentResults(status) {
               const statusContainer = document.getElementById(
@@ -202,6 +212,11 @@
             <button id="cash-button">I'm Paying Cash</button>
             <button id="check-button">I'm Paying by Check</button>
             <button id="card-button">Pay with Card</button> 
+          </div>
+
+          <div id="cash-check-container" style ="display: none;">
+            <h2>Do you agree to provide payment at the first session?</h2>
+            <button id="confirm">Yes, I agree</button>
           </div>
           <form id="payment-form">
             <div id="card-container"></div>
