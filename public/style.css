@@ -208,9 +208,23 @@ body {
 /*Connect page*/
 .connect-container {
     display: flex; 
-    flex-direction: column;
+    flex-direction: row;
     background-color: #cccccc;
     padding: 20px;
+}
+
+#contactForm {
+    flex-direction: column;
+}
+
+#contactForm button{
+    background-color: #424bac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /*Courses page*/
