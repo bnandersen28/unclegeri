@@ -43,7 +43,10 @@
             <h2>Do you agree to provide payment at the first session?</h2>
             <button id="confirm">Yes, I agree</button>
           </div>
-          <form id="payment-form">
+          <div id="confirmation-message" style="display: none; color: green;">
+            ✅ Thank you! Your payment method has been confirmed.
+          </div>
+          <form id="payment-form" style:"display: none;">
             <div id="card-container"></div>
             <button id="card-button" type="button">Pay $1.00</button>
           </form>
@@ -251,6 +254,7 @@ priceContainer.innerHTML = `
         //Display cash/check confirmation
         document.getElementById('cash-button').addEventListener('click',  ()=> {
           console.log('Cash payment selected');
+          const payment_method = 'cash';
           document.getElementById('cash-check-container').style.display = 'block';
           document.getElementById('payment-options').style.display = 'none';
         });
@@ -260,6 +264,36 @@ priceContainer.innerHTML = `
           document.getElementById('payment-options').style.display = 'none';
         });
         
+
+      document.getElementById('confirm').addEventListener('click', async () => {
+        console.log('Cash/Check payment confirmed');
+        
+        //check if payment method is correctly set
+        console.log('Payment method: ' + payment_method);
+      
+        //send payment method to backend
+        const body = JSON.stringify({
+          id: localStorage.getItem('registration_id'),
+          payment_method: payment_method,
+        });
+      
+        const response = await fetch(`${backend}/payment-method`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body,
+        });
+      
+        if (response.ok) {
+          document.getElementById('confirmation-message').style.display = 'block';
+          document.getElementById('cash-check-container').style.display = 'none';
+        } else {
+          const errorData = await response.json();
+          alert(`Failed to submit payment method: ${errorData.message}`);
+        }
+      });
+  
       </script>
 </html>
       
