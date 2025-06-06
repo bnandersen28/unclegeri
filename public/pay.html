@@ -117,6 +117,7 @@
             locationId,
             sourceId: token,
             idempotencyKey: window.crypto.randomUUID(),
+            amount: parseInt(price),
           });
   
           const paymentResponse = await fetch(`${backend}/payment`, {
@@ -233,7 +234,7 @@ if (!course || !registrationId) {
   const price = Math.round(parseFloat(rawPrice) *100).toString(); //convert dollars to cents
   console.log('Price in cents:', price);
   console.log('price type:', typeof price);
-  
+
   if (isNaN(price)){
     console.error('invalid course price',price);
     alert('Invalid course selected. Please try again.');
