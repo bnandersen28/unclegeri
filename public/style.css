@@ -130,7 +130,7 @@ body {
     height: auto;
 }
 
-.payment-options{
+#payment-options{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,7 +139,20 @@ body {
     justify-content: space-evenly;
 }
 
-.payment-options button{
+#payment-options button{
+    padding: 10px 20px;
+    background-color: #424bac;
+    color: white;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#cash-check-container{
+    background-color: #cccccc;
+    text-align: center;
+    padding: 20px;
+}
+#cash-check-container button{
     padding: 10px 20px;
     background-color: #424bac;
     color: white;
