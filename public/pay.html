@@ -179,6 +179,8 @@
           console.log('Course:', course);
           console.log('Registration ID:', registrationId);
 
+          let payment_method = null;
+
             // Define course prices
 const coursePrices = {
     'Behind the Wheel': '300.00',
@@ -193,7 +195,7 @@ if (!course || !registrationId) {
     window.location.href = '/register.html'; // Redirect back to registration
     return;
 }
-let payment_method = null;
+
   // Get the price for the selected course
   const price = coursePrices[course] || '0.00';
    // Update the price container with course name and price
@@ -254,7 +256,7 @@ priceContainer.innerHTML = `
         //Display cash/check confirmation
         document.getElementById('cash-button').addEventListener('click',  ()=> {
           console.log('Cash payment selected');
-          const payment_method = 'cash';
+          payment_method = 'cash';
           document.getElementById('cash-check-container').style.display = 'block';
           document.getElementById('payment-options').style.display = 'none';
         });
@@ -269,6 +271,11 @@ priceContainer.innerHTML = `
         console.log('Cash/Check payment confirmed');
         
         //check if payment method is correctly set
+         // Check if payment method is correctly set
+         if (!payment_method) {
+            alert('Payment method not selected. Please choose Cash or Check.');
+            return;
+        }
         console.log('Payment method: ' + payment_method);
       
         //send payment method to backend
