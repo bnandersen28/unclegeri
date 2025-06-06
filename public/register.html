@@ -129,7 +129,7 @@ form.addEventListener('submit', function(event) {
     };
 
     // Convert FormData to JSON because your server expects JSON
-      const json = JSON.stringify(object);
+      const json = JSON.stringify(formData);
 
 
     fetch(`${backend}/register`, {
