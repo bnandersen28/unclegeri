@@ -76,6 +76,12 @@
     <script>
         const backend = 'https://unclegeri-backend.onrender.com';
         const form = document.getElementById('contactForm');
+        
+        const responseMessage = document.createElement('p');
+        responseMessage.style.marginTop = '10px';
+        form.appendChild(responseMessage); // Append it to the form
+
+        
         form.addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent the default form submission
             
