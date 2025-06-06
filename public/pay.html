@@ -151,6 +151,8 @@
             price,
           });
 
+          console.log("price variable type,", typeof price);
+
           const verificationDetails = {
             amount: price.toString(),
             billingContact: {
@@ -229,9 +231,6 @@ if (!course || !registrationId) {
   const rawPrice = coursePrices[course];
   console.log('Raw Price:', rawPrice);
   const price = Math.round(parseFloat(rawPrice) *100); //convert dollars to cents
-  console.log('Price in cents:', price);
-  console.log('Price variable type:', typeof price);
-  
   if (isNaN(price)){
     console.error('invalid course price',price);
     alert('Invalid course selected. Please try again.');
