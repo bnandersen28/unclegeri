@@ -226,7 +226,12 @@ if (!course || !registrationId) {
 }
 
   // Get the price for the selected course
-  const price = coursePrices[course] || '0.00';
+  const price = parseFloat(coursePrices[course]) *100; //convert dollars to cents
+  if (isNaN(price)){
+    console.error('invalid course price',price);
+    alert('Invalid course selected. Please try again.');
+  }
+
    // Update the price container with course name and price
 const priceContainer = document.getElementById('price-container');
 priceContainer.innerHTML = `
