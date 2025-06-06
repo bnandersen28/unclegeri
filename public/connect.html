@@ -36,6 +36,7 @@
             <p>Phone: 804-251-0102</p>
             </div>
             <div class="connect-form">
+            <h2>Leave Uncle Geri a message</h2>
             <form id="contactForm">
                 <input type="text" id="name" name="name" placeholder="Your Name" required>
                 <input type="email" id="email" name="email" placeholder="Your Email" required>
@@ -47,10 +48,6 @@
 
 
     </body>
-
-
-
-
 
 
 
@@ -76,4 +73,45 @@
         </div>
         </div>
     </footer>
+    <script>
+        const backend = 'https://unclegeri-backend.onrender.com';
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            //send message to backend
+            const body= JSON.stringify({
+                name: name,
+                email: email,
+                message: message
+            });
+
+            try{
+                const response = await fetch(`${backend}/send-message`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body,
+                });
+
+                if (response.ok) {
+                    responseMessage.style.color = 'green';
+                    responseMessage.textContent = 'Message sent successfully!';
+                    contactForm.reset(); // Clear the form
+                } else {
+                    const errorData = await response.json();
+                    responseMessage.style.color = 'red';
+                    responseMessage.textContent = `Error: ${errorData.message}`;
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                responseMessage.style.color = 'red';
+                responseMessage.textContent = 'An error occurred. Please try again.';
+            }
+        });
+        
+    </script>
 </html>
