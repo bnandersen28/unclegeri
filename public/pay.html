@@ -104,6 +104,7 @@
         const backend = 'https://unclegeri-backend.onrender.com';
         const appId = 'sandbox-sq0idb-k_7IL8xbgoZCAfSW0247oA';
         const locationId = 'L9JQXZK3T95MB';
+        let price;
   
         async function initializeCard(payments) {
           const card = await payments.card();
@@ -231,7 +232,7 @@ if (!course || !registrationId) {
   // Get the price for the selected course
   const rawPrice = coursePrices[course];
   console.log('Raw Price:', rawPrice);
-  const price = Math.round(parseFloat(rawPrice) *100).toString(); //convert dollars to cents
+  price = Math.round(parseFloat(rawPrice) *100).toString(); //convert dollars to cents
   console.log('Price in cents:', price);
   console.log('price type:', typeof price);
 
