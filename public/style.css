@@ -205,6 +205,14 @@ body {
     height: auto;
 }
 
+/*Connect page*/
+.connect-container {
+    display: flex; 
+    flex-direction: column;
+    background-color: #cccccc;
+    padding: 20px;
+}
+
 /*Courses page*/
 .main-courses{
     display: flex;
