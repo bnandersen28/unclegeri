@@ -74,7 +74,7 @@ body {
     color: #d32f2f;
 }
 /*Registration page*/
-#register-form {
+.register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +86,19 @@ body {
     position: relative;
     height: auto;
     width: 50%;
+}
+#registerForm button {
+    background-color: #424bac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+#registerForm button:hover {
+    background-color: #333; /* Darker color on hover */
 }
 
 .register-container{
@@ -99,19 +112,19 @@ body {
     flex-direction: column;
     width: 50%;
     padding-top: 50px;
-    background-color: azure;
+    background-color: #cccccc;
 
 }
 .policy-section h2{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 21px;
 }
 .policy-section h1{
     color:#424bac;
-    font-size:18px;
+    font-size:17px;
 }
 .policy-section p{
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1;
     margin: 10px 0;
 }
