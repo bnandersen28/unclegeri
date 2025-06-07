@@ -172,11 +172,11 @@ body {
     background-color: #d2d2d2d7;
     color: #424bac;
     text-align: center;
-    height: 65vh;
-    justify-content: stretch;
+    height: 100vh;
+    
 }
 .registrations h1{
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .student-grid{
