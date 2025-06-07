@@ -166,6 +166,7 @@ body {
     color: #424bac;
     text-align: center;
     height: 65vh;
+    justify-content: stretch;
 }
 .registrations h1{
     margin-top: 50px;
