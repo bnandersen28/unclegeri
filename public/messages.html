@@ -33,3 +33,49 @@
     </div>
 
 </head>
+<body>
+    <div class="messages-container">
+      <h1>Messages</h1>
+      <div class="message-grid" id="messageGrid"></div>
+      <div class="message-details" id="detailsContainer"></div>
+    </div>
+    <script>
+      async function fetchMessages() {
+        const backend = 'https://unclegeri-backend.onrender.com';
+        const res = await fetch(`${backend}/messages`);
+        console.log('Response status:', res.status);
+        
+        const data = await res.json();
+        console.log('Data received:', data);
+        if (!Array.isArray(data)) {
+          console.error('Expected an array of messages, but received:', data);
+          return;
+        }
+        const grid = document.getElementById('messageGrid');
+        const details = document.getElementById('detailsContainer');
+        
+        grid.innerHTML = '';
+        details.innerHTML = '';
+        
+        data.forEach(message => {
+          const messageDiv = document.createElement('div');
+          messageDiv.className = 'message-item';
+          messageDiv.textContent = `${message.name} - ${message.email}`;
+          messageDiv.onclick = () => showDetails(message);
+          grid.appendChild(messageDiv);
+        });
+      }
+      
+      function showDetails(message) {
+        const details = document.getElementById('detailsContainer');
+        details.innerHTML = `
+          <h2>Message Details</h2>
+          <p><strong>Name:</strong> ${message.name}</p>
+          <p><strong>Email:</strong> ${message.email}</p>
+          <p><strong>Message:</strong> ${message.message}</p>
+        `;
+      }
+      
+      fetchMessages();
+    </script>
+</body>
