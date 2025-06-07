@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+    if (localStorage.getItem('authenticated') !== 'true') {
+      alert('You must be logged in to access this page.');
+      window.location.href = 'login.html';
+    }
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">   
+    <title>Register</title>
+    <div class = "header">
+        <div class = "header-content">
+            <div class = "header-text">
+                <h1>Uncle Geri's Driving Academy</h1>
+                <p>  804-251-0102</p>
+            </div>
+            <div class ="header-logo">
+                <img src = "imgs/logo.png" alt="Logo">
+            </div>
+        </div>
+        <nav class="navbar">
+            <a href="courses.html"><button>Courses</button></a>
+            <a href= "register.html"><button>Register</button></a>
+            <a href="faq.html"><button>FAQs</button></a>
+            <a href="connect.html"><button>Connect</button></a>
+        </nav>    
+    
+    </div>
+    
+    </div>
+
+</head>
+<body>
+    <style>
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .student-card { padding: 10px; background: #f2f2f2; cursor: pointer; border: 1px solid #ccc; }
+        .details { margin-top: 20px; }
+      </style>
+    </head>
+    <body>
+      <h1>Student Registrations</h1>
+      <div class="grid" id="studentGrid"></div>
+      <div class="details" id="detailsContainer"></div>
+    
+      <script>
+        async function fetchRegistrations() {
+            const backend = 'https://unclegeri-backend.onrender.com';
+            const res = await fetch(`${backend}/api/registrations`);
+            console.log('Response status:', res.status);
+          
+          
+            const data = await res.json();
+            console.log('Data received:', data);
+            if (!Array.isArray(data)) {
+              console.error('Expected an array of registrations, but received:', data);
+              return;
+            }
+          const grid = document.getElementById('studentGrid');
+          const details = document.getElementById('detailsContainer');
+    
+          data.forEach(student => {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            card.innerText = student.student_name;
+            card.onclick = () => {
+              details.innerHTML = `
+                <h2>${student.student_name}</h2>
+                <p><strong>Start Date:</strong> ${student.start_date}</p>
+                <p><strong>Course:</strong> ${student.course}</p>
+                <p><strong>Parent:</strong> ${student.parent_name}</p>
+                <p><strong>Phone:</strong> ${student.phone}</p>
+                <p><strong>Parent Phone:</strong> ${student.parent_phone}</p>
+                <p><strong>Email:</strong> ${student.email}</p>
+                <p><strong>Parent Email:</strong> ${student.parent_email}</p>
+                <p><strong>Address:</strong> ${student.home_address}</p>
+                <p><strong>Permit Number:</strong> ${student.permit_number}</p>
+                <p><strong>Acknowledged Policies:</strong> ${student.acknowledged_policies ? 'Yes' : 'No'}</p>
+                <p><strong>Payment Method:</strong> ${student.payment_method || 'Not specified'}</p>
+              `;
+            };
+            grid.appendChild(card);
+          });
+        }
+    
+        fetchRegistrations();
+      </script>
+    </body>
+    <footer class="footer">
+      <div class="footer-section">
+          <h3>Learn More</h3>
+          <a href="courses.html">Courses</a>
+          <a href="faqs.html">FAQs</a>
+      </div>
+      <div class="footer-section">
+          <button onclick ="window.location.href='register.html'">Register Now!</button>
+      </div>
+      <div class="footer-section">
+          <a href="connect.html" class="footer-icon">
+              <img src="imgs/message.png" alt="Connect">
+          </a>
+      </div>
+      <div class="footer-section">
+          <a href="index.html" class="footer-icon">
+              <img src="imgs/home.png" alt="Home">
+          </a>
+      </div>
+      </div>
+  </footer>
+</html>
+
+
+
+
