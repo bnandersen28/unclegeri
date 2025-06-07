@@ -350,8 +350,8 @@ body {
     font-size: 20px;
     color: #424bac;
     text-align: center;
-    padding-top: 50px;
-    border-radius: 5px;
+    padding-top: 80px;
+    border-radius: 15px;
     border-color: #424bac;
 }
 
@@ -363,7 +363,7 @@ body {
     align-items: center;
     background-color: #d2d2d2d7;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 15px;
     border-color: #424bac;
 }
 
