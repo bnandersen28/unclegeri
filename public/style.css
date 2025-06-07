@@ -299,10 +299,16 @@ body {
 }
 
 /*Messages page*/
-.message-container{
+.messages-container{
     background-color: #d2d2d2d7;
     color: #424bac;
     text-align: center;
+}
+
+.messages-container h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 50px;
 }
 
 /*Connect page*/
