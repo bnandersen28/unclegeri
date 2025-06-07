@@ -34,16 +34,12 @@
 
 </head>
 <body>
-    <style>
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-        .student-card { padding: 10px; background: #f2f2f2; cursor: pointer; border: 1px solid #ccc; }
-        .details { margin-top: 20px; }
-      </style>
-    </head>
+    
+    
     <body>
       <h1>Student Registrations</h1>
-      <div class="grid" id="studentGrid"></div>
-      <div class="details" id="detailsContainer"></div>
+      <div class="student-grid" id="studentGrid"></div>
+      <div class="student-details" id="detailsContainer"></div>
     
       <script>
         async function fetchRegistrations() {
