@@ -306,6 +306,7 @@ priceContainer.innerHTML = `
 
         document.getElementById('check-button').addEventListener('click',  ()=> {
           document.getElementById('cash-check-container').style.display = 'block';
+          payment_method = 'check';
           document.getElementById('payment-options').style.display = 'none';
         });
         
@@ -347,6 +348,24 @@ priceContainer.innerHTML = `
       document.getElementById('card-pay-button').addEventListener('click', async () => {
         document.getElementById('card-info').style.display = 'block';
         document.getElementById('payment-options').style.display = 'none';
+        payment_method ='card';        //send payment method to backend
+        const body = JSON.stringify({
+          id: localStorage.getItem('registration_id'),
+          payment_method: payment_method,
+        });
+      
+        const response = await fetch(`${backend}/payment-method`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body,
+        });
+        if (!response.ok) {
+          const errorData = await response.json();
+          alert(`Failed to submit payment method: ${errorData.message}`);
+          return;
+        }
       })
   
       </script>
