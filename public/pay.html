@@ -170,6 +170,7 @@
             sellerKeyedIn: false,
           };
           const tokenResult = await paymentMethod.tokenize(verificationDetails);
+          console.log('Tokenization result:', tokenResult);
           if (tokenResult.status === 'OK') {
             return tokenResult.token;
           } else {
@@ -215,12 +216,12 @@
           let payment_method = null;
 
             // Define course prices
-const coursePrices = {
-    'Behind the Wheel': 1.00,
-    '1-1 4 days': 1.00,
-    '1-1 7 days': 1.00,
-    'Adult DMV exam': 1.00
-};
+          const coursePrices = {
+            'Behind the Wheel': 1.00,
+               '1-1 4 days': 1.00,
+             '1-1 7 days': 1.00,
+            'Adult DMV exam': 1.00
+        };
 
 // Check if course exists in localStorage
 if (!course || !registrationId) {
