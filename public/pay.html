@@ -347,7 +347,7 @@ priceContainer.innerHTML = `
       });
 
       document.getElementById('card-pay-button').addEventListener('click', async () => {
-        document.getElementById('card-info').style.display = 'block';
+        document.getElementById('card-info').style.display = 'flex';
         document.getElementById('payment-options').style.display = 'none';
         payment_method ='card';        //send payment method to backend
         const body = JSON.stringify({
