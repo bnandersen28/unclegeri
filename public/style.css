@@ -357,7 +357,6 @@ body {
     background-color: #d2d2d2d7;
     width: 50%;
     flex-direction: column;
-    border: 1px solid #d32f2f;
 }
 
 .connect-form h2{
@@ -376,7 +375,6 @@ body {
     align-items: center;
     background-color: #d2d2d2d7;
     text-align: center;
-    border: 1px solid #d32f2f;
 }
 
 #contactForm button{
