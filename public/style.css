@@ -344,7 +344,7 @@ body {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 10px solid #d32f2f;
     border-radius: 5px;
     font-size: 16px;
 }
@@ -362,8 +362,6 @@ body {
     color: #424bac;
     text-align: center;
     padding-top: 80px;
-    border-radius: 15px;
-    border-color: #424bac;
 }
 
 .contact-info{
@@ -375,7 +373,7 @@ body {
     background-color: #d2d2d2d7;
     text-align: center;
     border-radius: 15px;
-    border-color: #424bac;
+    border-color: #d32f2f;
 }
 
 #contactForm button{
