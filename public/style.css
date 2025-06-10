@@ -357,7 +357,7 @@ body {
     background-color: #d2d2d2d7;
     width: 50%;
     flex-direction: column;
-    border: 10px solid #d32f2f;
+    border: 2px solid #d32f2f;
 }
 
 .connect-form h2{
