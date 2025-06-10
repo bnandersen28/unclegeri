@@ -276,6 +276,7 @@ body {
     background-color: #d2d2d2d7;
     padding: 20px;
     justify-content: space-between;
+    width: 100%;
 }
 
 #customer-info-form{
@@ -290,6 +291,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
+    width: 48%;
 }
 
 #payment-form {
@@ -304,6 +306,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
+    width: 48%;
 }
 
 /*Messages page*/
