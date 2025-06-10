@@ -341,13 +341,14 @@ body {
     flex-direction: column;
     padding: 20px;
     padding-top: 50px;
+    border: 10px solid #d32f2f;
 }
 
 #contactForm input, textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 10px solid #d32f2f;
+    border: 1px solid #d32f2f;
     border-radius: 5px;
     font-size: 16px;
 }
