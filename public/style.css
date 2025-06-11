@@ -78,14 +78,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #d2d2d2d7;
     padding: 20px;
     padding-top: 50px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
-    width: 50%;
+    width: 40%;
 }
 #registerForm button {
     background-color: #424bac;
@@ -111,21 +110,22 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: #d2d2d2d7;
 
 }
 
 .policy-section{
     flex-direction: column;
-    width: 50%;
+    width: 60%;
     padding-top: 50px;
     padding-left: 20px;
-    background-color: #d2d2d2d7;
     border-radius: 15px;
     border-color: #424bac;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .policy-section h2{
     font-weight: bold;
+    color: #424bac;
     font-size: 21px;
 }
 .policy-section h1{
