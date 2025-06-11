@@ -248,11 +248,16 @@ body {
 }
 
 #payment-options button{
-    padding: 15px 25px;
+    padding: 12px 22px;
     background-color: #424bac;
     color: white;
     margin: 10px 0;
     font-weight: bold;
+    cursor: pointer;;
+    transition: background-color 0.3s ease;
+}
+#payment-options button:hover {
+    background-color: #333a8b; /* Darker background on hover */
 }
 
 #cash-check-container{
