@@ -286,6 +286,12 @@ body {
     height: 50vh;
 }
 
+#confirmation-message p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #424bac;
+}
+
 .card-info{
     display: flex;
     flex-direction: row;
