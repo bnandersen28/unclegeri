@@ -256,7 +256,7 @@ body {
     cursor: pointer;;
     transition: background-color 0.3s ease;
 }
-#payment-options button:hover {
+#payment-options, #cash-check-container button:hover {
     background-color: #333a8b; /* Darker background on hover */
 }
 
@@ -268,6 +268,8 @@ body {
 #cash-check-container button{
     padding: 10px 20px;
     background-color: #424bac;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     color: white;
     margin: 10px 0;
     font-weight: bold;
