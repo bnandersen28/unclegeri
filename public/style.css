@@ -231,7 +231,7 @@ body {
     color: #424bac;
     background-color: azure;
     padding: 20px;
-    padding-top: 120px;
+    padding-top: 80px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -248,7 +248,7 @@ body {
 }
 
 #payment-options button{
-    padding: 10px 20px;
+    padding: 20px 30px;
     background-color: #424bac;
     color: white;
     margin: 10px 0;
