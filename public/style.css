@@ -279,9 +279,9 @@ body {
     background-color: #cccccc;
     padding: 20px;
     text-align: center;
-    margin-top: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(255, 60, 60, 0.1);
+    height: 50vh;
 }
 
 .card-info{
