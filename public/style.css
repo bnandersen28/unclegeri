@@ -287,9 +287,8 @@ body {
 }
 
 #confirmation-message p {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #424bac;
+    font-size: 20px;
+    margin: 20px 0;
 }
 
 .card-info{
