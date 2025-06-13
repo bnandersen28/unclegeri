@@ -428,8 +428,8 @@ body {
 .faq-question {
     background-color: #424bac;
     color: white;
-    padding: 10px;
-    margin: 10px 0;
+    text-align: center;
+    font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
     border-radius: 5px;
