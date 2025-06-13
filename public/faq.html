@@ -30,6 +30,12 @@
 
     <div class="faq-container">
         <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <button class ="faq-question">What forms of payment do you accept?</button>
+            <div class ="faq-answer">
+                <p>We accept cash or check, due on the first day of instruction, or card payments through our website when registering.</p>
+            </div>
+        </div>
     </div>
 </body>
 <footer class="footer">
@@ -53,6 +59,18 @@
     </div>
     </div>
 </footer>
+<script>
+    //Add javascript to show answer when faq question is clicked on
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    });
+</script>
 </html>
 
 
