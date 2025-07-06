@@ -92,7 +92,7 @@ async function fetchCourses() {
         return;
     }
 
-    if (!course || !course.title || !course.description) {
+    if (!course || !course.title || !course.details) {
         titleEl.textContent = 'Course Not Found';
         detailsEl.innerHTML = '';
         return;
