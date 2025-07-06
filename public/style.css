@@ -655,6 +655,7 @@ body {
     justify-content: center;
     background-color: #cccccc;
     margin: 0;
+    position: relative;
 }
 
 .car-image{
