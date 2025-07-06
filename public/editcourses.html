@@ -70,14 +70,14 @@
 
 
         try{
-            const res= await fetch(`${backend}/courses`);
+            const res= await fetch(`${backend}/api/courses`);
             const data = await res.json();
 
             data.forEach(course => {
                 const option = document.createElement('option');
                 option.value = course.course_key;
                 option.textContent = course.course_key;
-                courseKeyDropdown.appendChild(option);
+                courseKeyDropdown.insertBefore(option, newOption);
             });
 
         }catch (err) {
