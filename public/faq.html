@@ -30,34 +30,54 @@
 
     <div class="faq-container">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <button class ="faq-question">What forms of payment do you accept?</button>
-            <div class ="faq-answer">
-                <p>We accept cash or check, due on the first day of instruction, or card payments through our website when registering.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class ="faq-question">What is your cancellation policy?</button>
-            <div class ="faq-answer">
-                <p>We require 24 hours notice for cancellations. If you cancel with less than 24 hours notice, you will be charged a $60 cancellation fee. 
-                    The Academy will inform the student of any cancellation or rescheduling at least 24 hours in advance. Lessons will be completed on the 
-                    next available business day.
-                </p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class ="faq-question">What is your refund policy?</button>
-            <div class ="faq-answer">
-                <p>Refund requests must be submitted in writing. If instructions are discontinued for any reason, tuition fees will be calculated for the past session and the balance will be paid within 4 weeks.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <button class ="faq-question">How long is Behind the Wheel?</button>
-            <div class ="faq-answer">
-                <p>As required by the DMV, 7 days, each day consisting of 50 minutes of driving and 50 minutes of observing. </p>
-            </div>
-            </div>
+        <div class="faq-list"></div>
     </div>
+    <script>
+        async function fetchFAQs(){
+            const backend = 'https://unclegeri-backend.onrender.com';
+            try {
+                const res = await fetch(`${backend}/api/faqs`);
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const faqs = await res.json();
+                const faqList = document.getElementById('faq-list');
+                faqList.innerHTML = '';
+                
+                faqs.forEach(faq => {
+                    const faqItem = document.createElement('div');
+                    faqItem.className = 'faq-item';
+                    
+                    
+                    const questionBtn= document.createElement('button');
+                    questionBtn.className = 'faq-question';
+                    questionBtn.textContent = faq.question;
+
+                    const answerDiv = document.createElement('div');
+                    answerDiv.className = 'faq-answer';
+                    answerDiv.style.display = 'none'; // Initially hidden
+
+                    const answerText = document.createElement('p');
+                    answerText.textContent = faq.answer;
+
+                    answerDiv.appendChild(answerText);
+                    faqItem.appendChild(questionBtn);
+                    faqItem.appendChild(answerDiv);
+                    faqList.appendChild(faqItem);
+
+                    //Toggle answer display on click
+                    questionBtn.addEventListener('click', () => {
+                       answerDiv.style.display = answerDiv.style.display === 'block' ? 'none' : 'block';
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching FAQs:', error);
+                document.getElementById('faq-list').innerHTML = '<p>Error loading FAQs. Please try again later.</p>';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', fetchFAQs);
+    </script>
+        
 </body>
 <footer class="footer">
     <div class="footer-section">
