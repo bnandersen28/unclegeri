@@ -83,7 +83,7 @@ async function fetchCourses() {
         function showDescription(courseKey){
             const course = descriptions[courseKey];
             document.getElementById('course-title').textContent = course.title;
-            document.getElementById('course-details').innerHTML = course.details.replace(/\n/g, '<br>');
+            document.getElementById('course-details').innerHTML = course.details.replace(/\\n/g, '<br>');
         }
 
         //Set default course description
