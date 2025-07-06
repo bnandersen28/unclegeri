@@ -30,10 +30,14 @@
 <body>
     <div class="edit-course-container">
     <h1>Edit or Add Course</h1>
+    <p>To add new lines in course details, use \n at the end of a sentence</p>
   
     <form id="courseForm">
-      <label for="courseKey">Course Key (unique)</label>
-      <input type="text" id="courseKey" required placeholder="e.g. behind-the-wheel"/>
+      <label for="courseKey">Course Key</label>
+      <select id="courseKeyDropdown" required>
+
+      </select>
+      <input type="text" id="newCourseKey" placeholder="Enter new course key" style="display: none;"/>
   
       <label for="courseTitle">Course Title</label>
       <input type="text" id="courseTitle" required/>
@@ -49,13 +53,56 @@
     <script>
       const backend = 'https://unclegeri-backend.onrender.com';
   
+    document.addEventListener('DOMContentLoaded', async ()=>{
+        const courseKeyDropdown = document.getElementById('courseKeyDropdown');
+        const newCourseKeyInput = document.getElementById('newCourseKey');
+
+        try{
+            const res= await fetch(`${backend}/courses`);
+            const data = await res.json();
+
+            data.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course.key;
+                option.textContent = course.key;
+                courseKeyDropdown.appendChild(option);
+            });
+
+            const newOption = document.createElement('option');
+            newOption.value = 'new';
+            newOption.textContent = 'Add New Course';
+            courseKeyDropdown.appendChild(newOption);
+        }catch (err) {
+            console.error('Failed to fetch courses:', err);
+            document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
+        }
+        courseKeyDropdown.addEventListener('change', ()=>{
+            if(courseKeyDropdown.value=='new'){
+                newCourseKeyInput.style.display='block';
+                newCourseKeyInput.required = true;
+            }else{
+                newCourseKeyInput.style.display='none';
+                newCourseKeyInput.required = false;
+            }
+        });
+    });
+
       document.getElementById('courseForm').addEventListener('submit', async (e) => {
         e.preventDefault();
   
-        const key = document.getElementById('courseKey').value.trim();
+        const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
+        const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
         const title = document.getElementById('courseTitle').value.trim();
         const details = document.getElementById('courseDetails').value.trim();
   
+        const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
+
+
+        if (!key || !title || !details) {
+          document.getElementById('message').textContent = 'Please fill in all fields.';
+          return;
+        }
+        
         const response = await fetch(`${backend}/courses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
