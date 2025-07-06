@@ -287,6 +287,20 @@ body {
     margin-right: 5px; /* Add spacing between the arrow and text */
 }
 
+/*Edit course page*/
+#courseForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    height: auto;
+    background-color: #cccccc;
+}
+
 /*Payment page*/
 #price-container {
     display: flex;
