@@ -62,6 +62,13 @@
         const courseKeyDropdown = document.getElementById('courseKeyDropdown');
         const newCourseKeyInput = document.getElementById('newCourseKey');
 
+
+        const newOption = document.createElement('option');
+        newOption.value = 'new';
+        newOption.textContent = 'Add New Course';
+        courseKeyDropdown.appendChild(newOption);
+
+
         try{
             const res= await fetch(`${backend}/courses`);
             const data = await res.json();
@@ -73,10 +80,6 @@
                 courseKeyDropdown.appendChild(option);
             });
 
-            const newOption = document.createElement('option');
-            newOption.value = 'new';
-            newOption.textContent = 'Add New Course';
-            courseKeyDropdown.appendChild(newOption);
         }catch (err) {
             console.error('Failed to fetch courses:', err);
             document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
@@ -108,7 +111,7 @@
           return;
         }
 
-        const response = await fetch(`${backend}/courses`, {
+        const response = await fetch(`${backend}/api/courses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ course_key: key, title, description:details })
