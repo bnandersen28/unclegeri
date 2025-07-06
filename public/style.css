@@ -191,7 +191,7 @@ body {
     
 }
 .registrations h1{
-    padding-top: 20px;
+    padding-top: 5px;
 }
 .row {
     display: flex;
@@ -401,6 +401,9 @@ body {
     background-color: #d2d2d2d7;
     color: #424bac;
     text-align: center;
+    padding: 20px;
+    height: auto;
+    margin-top: 20px;
 }
 
 .messages-container h1 {
