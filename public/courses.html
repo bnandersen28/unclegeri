@@ -99,7 +99,7 @@ async function fetchCourses() {
     }
 
     titleEl.textContent = course.title;
-    detailsEl.innerHTML = course.details.replace(/\n/g, '<br>');
+    detailsEl.innerHTML = course.details.replace(/\\n/g, '<br>');
 }
         //Set default course description
         document.addEventListener('DOMContentLoaded', fetchCourses);
