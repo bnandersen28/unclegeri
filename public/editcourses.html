@@ -61,7 +61,8 @@
     document.addEventListener('DOMContentLoaded', async ()=>{
         const courseKeyDropdown = document.getElementById('courseKeyDropdown');
         const newCourseKeyInput = document.getElementById('newCourseKey');
-
+        const courseTitleInput = document.getElementById('courseTitle');
+        const courseDetailsInput = document.getElementById('courseDetails');
 
         const newOption = document.createElement('option');
         newOption.value = 'new';
@@ -88,13 +89,23 @@
             document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
         }
         courseKeyDropdown.addEventListener('change', ()=>{
-            if(courseKeyDropdown.value=='new'){
-                newCourseKeyInput.style.display='block';
+            const selectedKey = courseKeyDropdown.value.trim();
+            if(selectedKey === 'new'){
+                newCourseKeyInput.style.display = 'block';
                 newCourseKeyInput.required = true;
+                courseTitleInput.value = '';
+                courseDetailsInput.value = '';
             }else{
-                newCourseKeyInput.style.display='none';
+                newCourseKeyInput.style.display = 'none';
                 newCourseKeyInput.required = false;
+
+                const selectedCourse = courses[selectedKey];
+                if(selectedCourse){
+                    courseTitleInput.value = selectedCourse.title || '';
+                    courseDetailsInput.value = selectedCourse.description || '';
+
             }
+        }
         });
     });
 
@@ -113,7 +124,7 @@
           document.getElementById('message').textContent = 'Please fill in all fields.';
           return;
         }
-
+        try{
         const response = await fetch(`${backend}/api/courses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -130,6 +141,10 @@
         const result = await response.json();
   
         document.getElementById('message').textContent = result.message || 'Something went wrong.';
+      }catch(err){
+        console.error('Error saving course:', err);
+        document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+      }
       });
     </script>
   
