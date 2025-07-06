@@ -63,15 +63,16 @@
           const grid = document.getElementById('studentGrid');
           const details = document.getElementById('detailsContainer');
     
-          grid.innerHTML = `
-             <p>${student.student_name}</p>
-             <button class="delete-button" data-id="${student.id}">Delete</button>
-             `; 
+          grid.innerHTML = '';
           details.innerHTML = '';
 
           data.forEach(student => {
             const card = document.createElement('div');
             card.className = 'student-card';
+            grid.innerHTML = `
+             <p>${student.student_name}</p>
+             <button class="delete-button" data-id="${student.id}">Delete</button>
+             `; 
             
 
             card.onclick = () => {
