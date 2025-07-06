@@ -190,8 +190,9 @@ body {
 }
 
 .student-grid{
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: left;
     gap: 10px;
     
 }
@@ -214,6 +215,9 @@ body {
         
 .student-details { 
     text-align: center; 
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #ccc;
 }
 
 .student-details h3 {
