@@ -184,14 +184,20 @@ body {
     text-align: center;
     height: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     
 }
 .registrations h1{
     padding-top: 80px;
 }
-
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 .student-grid{
     display: flex; 
     flex-direction: column; 
