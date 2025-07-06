@@ -253,6 +253,34 @@ body {
     background-color: #c0392b; /* Darker red on hover */
 }
 
+.back-button-container {
+    text-align: left; /* Align the button to the left */
+    margin: 20px; /* Add some spacing around the button */
+}
+
+.back-button {
+    background-color: #424bac; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    padding: 8px 16px; /* Smaller padding for a compact button */
+    font-size: 14px; /* Smaller font size */
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; /* Add spacing between the arrow and text */
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #333a8b; /* Darker blue on hover */
+}
+
+.back-button::before {
+    content: '←'; /* Unicode arrow character */
+    margin-right: 5px; /* Add spacing between the arrow and text */
+}
 
 /*Payment page*/
 #price-container {
