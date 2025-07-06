@@ -663,7 +663,7 @@ body {
 .car-image{
     
     width: 33%;
-    height: auto;
+    height: 100%;
     margin: 0;
     object-fit: cover;
     border-radius: 2px;
