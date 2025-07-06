@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script>
-    if (localStorage.getItem('authenticated') !== 'true') {
-      alert('You must be logged in to access this page.');
-      window.location.href = 'login.html';
-    </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +28,12 @@
 
 </head>
 <body>
+  <script>
+    if (localStorage.getItem('authenticated') !== 'true') {
+      alert('You must be logged in to access this page.');
+      window.location.href = 'login.html';
+    }
+    </script>
     <div class="registrations">
       <div class="back-button-container">
         <button class="back-button" onclick="window.location.href='admin.html'">
@@ -108,7 +109,7 @@
 
             if (res.ok) {
                 alert('Message deleted successfully.');
-                fetchRegistrations(); // Refresh the list after deletion
+                fetchMessages(); // Refresh the list after deletion
             } else {
                 const errorData = await res.json();
                 alert(`Failed to delete message: ${errorData.message}`);
@@ -119,7 +120,7 @@
         }
 }
       
-}
+
       fetchMessages();
     </script>
 </body>
