@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">   
+    <title>Register</title>
+    <div class = "header">
+        <div class = "header-content">
+            <div class = "header-text">
+                <h1>Uncle Geri's Driving Academy</h1>
+                <p>  804-251-0102</p>
+            </div>
+            <div class ="header-logo">
+                <img src = "imgs/logo.png" alt="Logo">
+            </div>
+        </div>
+        <nav class="navbar">
+            <a href="courses.html"><button>Courses</button></a>
+            <a href= "register.html"><button>Register</button></a>
+            <a href="faq.html"><button>FAQs</button></a>
+            <a href="connect.html"><button>Connect</button></a>
+        </nav>    
+    
+    </div>
+    
+    </div>
+
+</head>
+<body>
+    <div class="edit-course-container">
+        <div class="back-button-container">
+            <button class="back-button" onclick="window.location.href='admin.html'">
+                &#8592; Back to Admin Dashboard
+            </button>
+        </div>
+    <h1>Edit or Add FAQ</h1>
+  
+    <form id="courseForm">
+      <label for="courseKey">FAQ Key</label>
+      <select id="faqKeyDropdown" required>
+
+      </select>
+      <input type="text" id="newFaqKey" placeholder="Enter new faq key" style="display: none;"/>
+  
+      <label for="courseTitle">Question</label>
+      <input type="text" id="question" required/>
+  
+      <label for="courseDetails">Answer</label>
+      <textarea id="answer" required></textarea>
+  
+      <button type="submit">Save FAQ</button>
+    </form>
+  </div>
+    <div id="message"></div>
+  
+    <script>
+      const backend = 'https://unclegeri-backend.onrender.com';
+  
+    document.addEventListener('DOMContentLoaded', async ()=>{
+        const courseKeyDropdown = document.getElementById('faqKeyDropdown');
+        const newCourseKeyInput = document.getElementById('newFaqKey');
+
+        try{
+            const res= await fetch(`${backend}/faqs`);
+            const data = await res.json();
+
+            data.forEach(course => {
+                const option = document.createElement('option');
+                option.value = faq.key;
+                option.textContent = faq.key;
+                courseKeyDropdown.appendChild(option);
+            });
+
+            const newOption = document.createElement('option');
+            newOption.value = 'new';
+            newOption.textContent = 'Add New Question';
+            courseKeyDropdown.appendChild(newOption);
+        }catch (err) {
+            console.error('Failed to fetch faqs:', err);
+            document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
+        }
+        courseKeyDropdown.addEventListener('change', ()=>{
+            if(courseKeyDropdown.value=='new'){
+                newCourseKeyInput.style.display='block';
+                newCourseKeyInput.required = true;
+            }else{
+                newCourseKeyInput.style.display='none';
+                newCourseKeyInput.required = false;
+            }
+        });
+    });
+
+      document.getElementById('courseForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+  
+        const faqKeyDropdown = document.getElementById('faqKeyDropdown').value.trim();
+        const newFaqKeyInput = document.getElementById('newFaqKey').value.trim();
+        const question = document.getElementById('question').value.trim();
+        const answer = document.getElementById('answer').value.trim();
+  
+        const key = faqKeyDropdown === 'new' ? newFaqKeyInput : faqKeyDropdown;
+
+
+        if (!key || !question || !answer) {
+          document.getElementById('message').textContent = 'Please fill in all fields.';
+          return;
+        }
+
+        const response = await fetch(`${backend}/faqs`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, question, answer })
+        });
+
+        if (!response.ok) {
+    const errorText = await response.text(); // Read the error response as text
+    console.error('Error response:', errorText);
+    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+    return;
+  }
+  
+        const result = await response.json();
+  
+        document.getElementById('message').textContent = result.message || 'Something went wrong.';
+      });
+    </script>
+  
+  </body>
+  <footer class="footer">
+    <div class="footer-section">
+        <h3>Learn More</h3>
+        <a href="courses.html">Courses</a>
+        <a href="faqs.html">FAQs</a>
+    </div>
+    <div class="footer-section">
+        <button onclick ="window.location.href='register.html'">Register Now!</button>
+    </div>
+    <div class="footer-section">
+        <a href="connect.html" class="footer-icon">
+            <img src="imgs/message.png" alt="Connect">
+        </a>
+    </div>
+    <div class="footer-section">
+        <a href="index.html" class="footer-icon">
+            <img src="imgs/home.png" alt="Home">
+        </a>
+    </div>
+    </div>
+</footer>
+</html>
