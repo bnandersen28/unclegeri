@@ -61,6 +61,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key, title, details })
         });
+
+        if (!response.ok) {
+    const errorText = await response.text(); // Read the error response as text
+    console.error('Error response:', errorText);
+    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+    return;
+  }
   
         const result = await response.json();
   
@@ -90,4 +97,4 @@
     </div>
     </div>
 </footer>
-  </html>
+</html>
