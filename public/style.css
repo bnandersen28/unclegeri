@@ -194,7 +194,7 @@ body {
 .row {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }
@@ -204,6 +204,7 @@ body {
     align-items: left;
     gap: 10px;
     
+    width: 50%;
 }
 
 .student-card { 
