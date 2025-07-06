@@ -58,20 +58,20 @@ async function fetchCourses() {
     sidebar.innerHTML = ''; // Clear sidebar buttons
 
     data.forEach(course => {
-      descriptions[course.key] = {
+      descriptions[course.course_key] = {
         title: course.title,
         details: course.details
       };
 
       const button = document.createElement('button');
       button.textContent = course.title;
-      button.onclick = () => showDescription(course.key);
+      button.onclick = () => showDescription(course.course.key);
       sidebar.appendChild(button);
     });
 
     // Show first course by default
     if (data.length > 0) {
-      showDescription(data[0].key);
+      showDescription(data[0].course_key);
     }
   } catch (err) {
     console.error('Failed to fetch courses:', err);
