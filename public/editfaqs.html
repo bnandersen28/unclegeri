@@ -65,7 +65,7 @@
             const res= await fetch(`${backend}/faqs`);
             const data = await res.json();
 
-            data.forEach(course => {
+            data.forEach(faq => {
                 const option = document.createElement('option');
                 option.value = faq.key;
                 option.textContent = faq.key;
