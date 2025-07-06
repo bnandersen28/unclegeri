@@ -29,6 +29,11 @@
 </head>
 <body>
     <div class="edit-course-container">
+        <div class="back-button-container">
+            <button class="back-button" onclick="window.location.href='admin.html'">
+                &#8592; Back to Admin Dashboard
+            </button>
+        </div>
     <h1>Edit or Add Course</h1>
     <p>To add new lines in course details, use \n at the end of a sentence</p>
   
@@ -102,7 +107,7 @@
           document.getElementById('message').textContent = 'Please fill in all fields.';
           return;
         }
-        
+
         const response = await fetch(`${backend}/courses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
