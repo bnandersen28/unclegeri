@@ -60,7 +60,7 @@ async function fetchCourses() {
     data.forEach(course => {
       descriptions[course.course_key] = {
         title: course.title,
-        details: course.details
+        details: course.description
       };
 
       const button = document.createElement('button');
