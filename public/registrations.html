@@ -63,16 +63,16 @@
           const grid = document.getElementById('studentGrid');
           const details = document.getElementById('detailsContainer');
     
-          grid.innerHTML = '';
+          grid.innerHTML = `
+             <p>${student.student_name}</p>
+             <button class="delete-button" data-id="${student.id}">Delete</button>
+             `; 
           details.innerHTML = '';
 
           data.forEach(student => {
             const card = document.createElement('div');
             card.className = 'student-card';
-            card.innerHTML = `
-             <p>${student.student_name}</p>
-             <button class="delete-button" data-id="${student.id}">Delete</button>
-             `; 
+            
 
             card.onclick = () => {
               details.innerHTML = `
@@ -109,7 +109,9 @@
         if (!confirm('Are you sure you want to delete this registration?')) {
           return;
       }
-
+      console.log(`Deleting registration with ID: ${id}`);
+      
+        // Make a DELETE request to the backend
       try {
           const res = await fetch(`${backend}/api/registrations/${id}`, {
               method: 'DELETE',
