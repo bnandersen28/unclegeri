@@ -288,6 +288,16 @@ body {
 }
 
 /*Edit course page*/
+.edit-course-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #d2d2d2d7;
+    padding: 20px;
+    height: auto;
+    color: #424bac;
+}
+
 #courseForm{
     display: flex;
     flex-direction: column;
@@ -298,7 +308,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
-    background-color: #cccccc;
 }
 
 /*Payment page*/
