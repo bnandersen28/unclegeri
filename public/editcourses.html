@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">   
-    <title>Register</title>
+    <title>Edit Courses</title>
     <div class = "header">
         <div class = "header-content">
             <div class = "header-text">
@@ -68,8 +68,8 @@
 
             data.forEach(course => {
                 const option = document.createElement('option');
-                option.value = course.key;
-                option.textContent = course.key;
+                option.value = course.course_key;
+                option.textContent = course.course_key;
                 courseKeyDropdown.appendChild(option);
             });
 
@@ -111,7 +111,7 @@
         const response = await fetch(`${backend}/courses`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key, title, details })
+          body: JSON.stringify({ course_key: key, title, description:details })
         });
 
         if (!response.ok) {
