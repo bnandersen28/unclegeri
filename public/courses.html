@@ -81,17 +81,23 @@ async function fetchCourses() {
 }
 
         function showDescription(courseKey){
-            const course = descriptions[courseKey];
-            if(!course) {
-                document.getElementById('course-title').textContent = 'Course Not Found';
-                document.getElementById('course-details').innerHTML = '';
-                return;
-            }
+            const titleEl = document.getElementById('course-title');
+    const detailsEl = document.getElementById('course-details');
 
-            document.getElementById('course-title').textContent = course.title;
-            document.getElementById('course-details').innerHTML = course.details.replace(/\\n/g, '<br>');
-        }
+    if (!titleEl || !detailsEl) {
+        console.error('Elements not found in DOM');
+        return;
+    }
 
+    if (!course || !course.title || !course.description) {
+        titleEl.textContent = 'Course Not Found';
+        detailsEl.innerHTML = '';
+        return;
+    }
+
+    titleEl.textContent = course.title;
+    detailsEl.innerHTML = course.description.replace(/\\n/g, '<br>');
+}
         //Set default course description
         document.addEventListener('DOMContentLoaded', fetchCourses);
     </script>
