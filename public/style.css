@@ -648,7 +648,6 @@ body {
 
 .right-index{
     width: 100%;
-    height: 45vh;
     display: flex;
     flex-direction: row;
     align-items: center;
