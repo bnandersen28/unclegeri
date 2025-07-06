@@ -36,7 +36,7 @@
         async function fetchFAQs(){
             const backend = 'https://unclegeri-backend.onrender.com';
             try {
-                const res = await fetch(`${backend}/api/faqs`);
+                const res = await fetch(`${backend}/faqs`);
                 if (!res.ok) {
                     throw new Error('Network response was not ok');
                 }
