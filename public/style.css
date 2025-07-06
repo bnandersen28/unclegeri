@@ -186,6 +186,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px;
+    margin-top: 20px;
     
 }
 .registrations h1{
@@ -257,6 +259,8 @@ body {
 .back-button-container {
     text-align: left; /* Align the button to the left */
     margin: 20px; /* Add some spacing around the button */
+    position: relative;
+    z-index: 1;
 }
 
 .back-button {
