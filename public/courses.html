@@ -65,7 +65,7 @@ async function fetchCourses() {
 
       const button = document.createElement('button');
       button.textContent = course.title;
-      button.onclick = () => showDescription(course.course.key);
+      button.onclick = () => showDescription(course.course_key);
       sidebar.appendChild(button);
     });
 
