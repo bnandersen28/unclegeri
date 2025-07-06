@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">   
+    <title>Register</title>
+    <div class = "header">
+        <div class = "header-content">
+            <div class = "header-text">
+                <h1>Uncle Geri's Driving Academy</h1>
+                <p>  804-251-0102</p>
+            </div>
+            <div class ="header-logo">
+                <img src = "imgs/logo.png" alt="Logo">
+            </div>
+        </div>
+        <nav class="navbar">
+            <a href="courses.html"><button>Courses</button></a>
+            <a href= "register.html"><button>Register</button></a>
+            <a href="faq.html"><button>FAQs</button></a>
+            <a href="connect.html"><button>Connect</button></a>
+        </nav>    
+    
+    </div>
+    
+    </div>
+
+</head>
+<body>
+
+    <h1>Edit or Add Course</h1>
+  
+    <form id="courseForm">
+      <label for="courseKey">Course Key (unique)</label>
+      <input type="text" id="courseKey" required placeholder="e.g. behind-the-wheel"/>
+  
+      <label for="courseTitle">Course Title</label>
+      <input type="text" id="courseTitle" required/>
+  
+      <label for="courseDetails">Course Details</label>
+      <textarea id="courseDetails" required></textarea>
+  
+      <button type="submit">Save Course</button>
+    </form>
+  
+    <div id="message"></div>
+  
+    <script>
+      const backend = 'https://unclegeri-backend.onrender.com';
+  
+      document.getElementById('courseForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+  
+        const key = document.getElementById('courseKey').value.trim();
+        const title = document.getElementById('courseTitle').value.trim();
+        const details = document.getElementById('courseDetails').value.trim();
+  
+        const response = await fetch(`${backend}/courses`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, title, details })
+        });
+  
+        const result = await response.json();
+  
+        document.getElementById('message').textContent = result.message || 'Something went wrong.';
+      });
+    </script>
+  
+  </body>
+  <footer class="footer">
+    <div class="footer-section">
+        <h3>Learn More</h3>
+        <a href="courses.html">Courses</a>
+        <a href="faqs.html">FAQs</a>
+    </div>
+    <div class="footer-section">
+        <button onclick ="window.location.href='register.html'">Register Now!</button>
+    </div>
+    <div class="footer-section">
+        <a href="connect.html" class="footer-icon">
+            <img src="imgs/message.png" alt="Connect">
+        </a>
+    </div>
+    <div class="footer-section">
+        <a href="index.html" class="footer-icon">
+            <img src="imgs/home.png" alt="Home">
+        </a>
+    </div>
+    </div>
+</footer>
+  </html>
