@@ -78,6 +78,7 @@
             const data = await res.json();
 
             data.forEach(course => {
+                courses[course.course_key] = course;
                 const option = document.createElement('option');
                 option.value = course.course_key;
                 option.textContent = course.course_key;
