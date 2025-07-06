@@ -183,6 +183,9 @@ body {
     color: #424bac;
     text-align: center;
     height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     
 }
 .registrations h1{
