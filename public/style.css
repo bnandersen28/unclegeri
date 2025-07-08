@@ -896,6 +896,7 @@ body {
         flex-direction: column;
         align-items: center;
         height: auto;
+        text-align: center;
     }
 
 
