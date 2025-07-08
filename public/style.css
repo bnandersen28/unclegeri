@@ -862,7 +862,7 @@ body {
 
     .courses-sidebar{
         width: 100%;
-        height: auto;
+        height: 25vh;
         display: flex;
         flex-direction: row;
         font-size: 13px;
@@ -875,6 +875,7 @@ body {
     .courses-sidebar button{
         width: auto;
         padding: 5px;
+        margin: 5px 0;
     }
 
     .course-description{
