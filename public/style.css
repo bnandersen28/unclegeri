@@ -892,5 +892,11 @@ body {
         background-color: #d32f2f;
     }
 
+    .connect-container{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
 
 }
