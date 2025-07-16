@@ -9,6 +9,7 @@ body {
     overflow-x: hidden;
     padding: 0;
     width: 100%;
+    max-width: 100%;
     
 }
 
@@ -840,7 +841,7 @@ body {
     padding: 20px;
     font-weight: bold;
     width: 100%;
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
 }
 
@@ -1043,13 +1044,13 @@ body {
         margin: 0;
     }
     .index-bottom {
-        font-size: 16px;
+        font-size: 14px;
         max-width: 100%;
     }
 
     .index-bottom button {
         font-size: 14px;
-        padding: 8px 8px 8px 8px;
+        padding: 5px 5px 5px 5px;
     }
 
     .chris-image-container img{
