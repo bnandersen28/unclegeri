@@ -1051,6 +1051,7 @@ body {
     .index-bottom {
         font-size: 14px;
         max-width: 100%;
+        padding: 0;
     }
 
     .index-bottom button {
