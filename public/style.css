@@ -684,7 +684,7 @@ body {
     height: 70vh;
     background-color: #d2d2d2d7;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     justify-items: center;
     align-items: center;
 }
