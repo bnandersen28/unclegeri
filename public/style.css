@@ -9,10 +9,13 @@ body {
     overflow-x: hidden;
     padding: 0;
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     
 }
 
+* {
+    box-sizing: border-box;
+}
 .header {
     position: relative;
     display: flex;
@@ -836,6 +839,7 @@ body {
 .index-bottom{
     background-color: #d2d2d2d7;
     display:flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
