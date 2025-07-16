@@ -686,6 +686,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     justify-items: center;
+    align-items: center;
 }
 
 .hidden-content-container.show{
