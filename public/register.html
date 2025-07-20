@@ -185,12 +185,13 @@
             }
         });
 
-        cardPayButton.addEventListener('click', function () {
+        cardPayButton.addEventListener('click', async function () {
             cardInfo.style.display = 'inline-block';
             registerForm.style.display = 'none';
+            await initializeCard();
         });
 
-        async function initializeCard(payments) {
+        async function initializeCard() {
             if (!window.Square) return console.error('Square not loaded');
             payments = window.Square.payments(appId, locationId);
             const card = await payments.card();
