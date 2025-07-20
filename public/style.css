@@ -13,7 +13,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0;
-    width: 100%;
+    width: auto;
     max-width: 100%;
     
 }
@@ -52,32 +52,33 @@ body {
 .nav-left,
 .nav-right {
     display: flex;
+    width: 40%;
+    justify-content: space-evenly;
     gap: 40px; /* Add spacing between buttons */
 }
-.nav-left{
-    padding-right: 200px;
-}
 
-.nav-right{
-    padding-left: 200px;
-}
 
 
 
 
 .header-logo{
-    position: absolute;
-   left: 50%;
-    top: .3%;
-    transform: translateX(-50%);
+    display: flex;
+    width: 20%;
     z-index: 1;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    transform: translateY(55px);
+   
    
     
 }
 .header-logo img{
-    height: 290px;
-    width: 450px;
+    width: 100%;
     object-fit: contain;
+    bottom: 0;
+    position: relative;
+    height: auto;
     
 }
 
@@ -672,7 +673,7 @@ body {
 }
 
 .home-offerings img{
-    width: 200px;
+    width: 80%;
     height: 200px;
     object-fit: contain;
     margin: 20px;
@@ -684,6 +685,15 @@ body {
     color:#d32f2f;
     text-align: center;
     margin: 20px;
+   
+}
+
+.chris-item{
+    width: 80%;
+}
+
+.home-item{
+    width: 40%;
 }
 
 .hidden-content-container{
@@ -761,7 +771,7 @@ body {
 }
 
 .chris-image-container img{
-    width: 250px;
+    width: 75%;
     height: 250px;
     object-fit: contain;
     margin: 20px;
@@ -992,13 +1002,14 @@ body {
         color: white;
     }
     .header-logo{
-        top: 7%;
+        transform: translateY(125px);
+        
         
     }
 
     .header-logo img{
         width: 100px;
-        height: 300px;
+        height: 275px;
     }
 
     .header-top {
@@ -1008,11 +1019,12 @@ body {
     .header-content{
         height: 20%;
     }
-    .nav-right{
-        padding-left: 50px;
-    }
     .nav-left{
-        padding-right: 55px;
+        padding-right: 10px;
+    }
+
+    .nav-right{
+        padding-left: 10px;
     }
 
     .header-content button{
