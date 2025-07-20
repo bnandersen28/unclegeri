@@ -1,4 +1,4 @@
-html{
+html {
     overflow-x: hidden;
 }
 
@@ -15,24 +15,26 @@ body {
     padding: 0;
     width: auto;
     max-width: 100%;
-    
+
 }
 
 * {
     box-sizing: border-box;
 }
+
 .header {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-  
-    background-color:black;
+
+    background-color: black;
     color: white;
     width: 100%;
     height: 30vh;
 }
-.header-top{
+
+.header-top {
     height: 70%;
 }
 
@@ -42,26 +44,29 @@ body {
     height: 30%;
     justify-content: space-evenly;
     align-items: flex-end;
-    
+
     padding-bottom: 10px;
-    background: linear-gradient(135deg, #424bac, #333a8b);;
+    background: linear-gradient(135deg, #424bac, #333a8b);
+    ;
     width: 100%;
     font-size: 30px;
-    
+
 }
+
 .nav-left,
 .nav-right {
     display: flex;
     width: 40%;
     justify-content: space-evenly;
-    gap: 40px; /* Add spacing between buttons */
+    gap: 40px;
+    /* Add spacing between buttons */
 }
 
 
 
 
 
-.header-logo{
+.header-logo {
     display: flex;
     width: 20%;
     z-index: 1;
@@ -69,17 +74,18 @@ body {
     align-items: flex-end;
     position: relative;
     transform: translateY(55px);
-   
-   
-    
+
+
+
 }
-.header-logo img{
+
+.header-logo img {
     width: 100%;
     object-fit: contain;
     bottom: 0;
     position: relative;
     height: auto;
-    
+
 }
 
 
@@ -103,9 +109,10 @@ body {
     background-color: white;
     color: #d32f2f;
 }
+
 /*Registration page*/
 .register-form {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     padding: 20px;
@@ -117,11 +124,51 @@ body {
     width: 40%;
 }
 
+.fee-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 60%;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid #424bac;
+    
+}
+#card-pay-button{
+    background-color: #424bac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+#card-button{
+    background-color: #424bac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.fee-container h2 {
+    font-weight: bold;
+    color: #424bac;
+    font-size: 21px;
+}
+
+
 .register-form h2 {
     font-weight: bold;
     color: #424bac;
     font-size: 21px;
 }
+
 #registerForm button {
     background-color: #424bac;
     color: white;
@@ -133,8 +180,10 @@ body {
     margin-top: 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
 #registerForm button:hover {
-    background-color: #333; /* Darker color on hover */
+    background-color: #333;
+    /* Darker color on hover */
 }
 
 #registerForm {
@@ -143,37 +192,42 @@ body {
 }
 
 
-.register-container{
+.register-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #d2d2d2d7;
 
 }
 
-.policy-section{
+.policy-section {
     flex-direction: column;
     width: 60%;
-    padding-top: 50px;
+    padding-top: 30px;
     padding-left: 20px;
     border-radius: 15px;
-    border-color: #424bac;
+    border:2px solid #424bac;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.policy-section h2{
+
+.policy-section h2 {
     font-weight: bold;
     color: #424bac;
     font-size: 21px;
 }
-.policy-section h1{
-    color:#424bac;
-    font-size:17px;
+
+.policy-section h1 {
+    color: #424bac;
+    font-size: 17px;
 }
-.policy-section p{
+
+.policy-section p {
     font-size: 14px;
     line-height: 1;
     margin: 10px 0;
+    padding-bottom: 10px;
 }
 
 /*admin page*/
@@ -185,13 +239,14 @@ body {
     height: 65vh;
     color: black;
 }
+
 .admin-container h2 {
     font-weight: bold;
     font-size: 24px;
     margin-top: 50px;
 }
 
-.admin-container button{
+.admin-container button {
     background-color: #424bac;
     color: white;
     padding: 10px 20px;
@@ -203,13 +258,15 @@ body {
 }
 
 .admin-container button:hover {
-    background-color: #333; /* Darker color on hover */
+    background-color: #333;
+    /* Darker color on hover */
 }
-.admin-container h1{
+
+.admin-container h1 {
     padding-top: 50px;
 }
 
-.registrations{
+.registrations {
     background-color: #d2d2d2d7;
     color: #424bac;
     text-align: center;
@@ -219,11 +276,13 @@ body {
     justify-content: center;
     padding: 20px;
     margin-top: 20px;
-    
+
 }
-.registrations h1{
+
+.registrations h1 {
     padding-top: 5px;
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -231,22 +290,23 @@ body {
     align-items: center;
     width: 100%;
 }
-.student-grid{
-    display: flex; 
-    flex-direction: column; 
+
+.student-grid {
+    display: flex;
+    flex-direction: column;
     align-items: left;
     gap: 10px;
-    
+
     width: 50%;
 }
 
-.student-card { 
-    padding: 5px; 
-    background: #424bac; 
+.student-card {
+    padding: 5px;
+    background: #424bac;
     color: white;
-    cursor: pointer; 
+    cursor: pointer;
     border: 3px solid #ccc;
-    margin-left: 10px; 
+    margin-left: 10px;
     font-size: 18px;
     text-align: center;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -257,9 +317,9 @@ body {
     height: auto;
 
 }
-        
-.student-details { 
-    text-align: center; 
+
+.student-details {
+    text-align: center;
     width: 50%;
     padding: 20px;
     border: 1px solid #ccc;
@@ -272,7 +332,8 @@ body {
 }
 
 .delete-button {
-    background-color: #e74c3c; /* Red background */
+    background-color: #e74c3c;
+    /* Red background */
     color: white;
     border: none;
     padding: 5px 10px;
@@ -284,38 +345,49 @@ body {
 }
 
 .delete-button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b;
+    /* Darker red on hover */
 }
 
 .back-button-container {
-    text-align: left; /* Align the button to the left */
-    margin: 20px; /* Add some spacing around the button */
+    text-align: left;
+    /* Align the button to the left */
+    margin: 20px;
+    /* Add some spacing around the button */
     position: relative;
     z-index: 1;
 }
 
 .back-button {
-    background-color: #424bac; /* Blue background */
-    color: white; /* White text */
+    background-color: #424bac;
+    /* Blue background */
+    color: white;
+    /* White text */
     border: none;
-    padding: 8px 16px; /* Smaller padding for a compact button */
-    font-size: 14px; /* Smaller font size */
+    padding: 8px 16px;
+    /* Smaller padding for a compact button */
+    font-size: 14px;
+    /* Smaller font size */
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px; /* Add spacing between the arrow and text */
+    gap: 5px;
+    /* Add spacing between the arrow and text */
     transition: background-color 0.3s ease;
 }
 
 .back-button:hover {
-    background-color: #333a8b; /* Darker blue on hover */
+    background-color: #333a8b;
+    /* Darker blue on hover */
 }
 
 .back-button::before {
-    content: '←'; /* Unicode arrow character */
-    margin-right: 5px; /* Add spacing between the arrow and text */
+    content: '←';
+    /* Unicode arrow character */
+    margin-right: 5px;
+    /* Add spacing between the arrow and text */
 }
 
 /*Edit course page*/
@@ -330,7 +402,7 @@ body {
     margin-top: 20px;
 }
 
-#courseForm{
+#courseForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -354,7 +426,7 @@ body {
     height: auto;
 }
 
-#payment-options{
+#payment-options {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -363,25 +435,30 @@ body {
     justify-content: space-evenly;
 }
 
-#payment-options button{
+#payment-options button {
     padding: 12px 22px;
     background-color: #424bac;
     color: white;
     margin: 10px 0;
     font-weight: bold;
-    cursor: pointer;;
+    cursor: pointer;
+    ;
     transition: background-color 0.3s ease;
 }
-#payment-options button:hover, #cash-check-container button:hover {
-    background-color: #333a8b; /* Darker background on hover */
+
+#payment-options button:hover,
+#cash-check-container button:hover {
+    background-color: #333a8b;
+    /* Darker background on hover */
 }
 
-#cash-check-container{
+#cash-check-container {
     background-color: #cccccc;
     text-align: center;
     padding: 20px;
 }
-#cash-check-container button{
+
+#cash-check-container button {
     padding: 10px 20px;
     background-color: #424bac;
     cursor: pointer;
@@ -407,16 +484,16 @@ body {
     margin: 20px 0;
 }
 
-.card-info{
+.card-info {
     display: flex;
     flex-direction: row;
-    background-color: #d2d2d2d7;
+    background-color: white;
     padding: 20px;
     justify-content: space-between;
     width: 100%;
 }
 
-#customer-info-form{
+#customer-info-form {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -431,6 +508,7 @@ body {
 .customer-info-form {
     width: 40%;
 }
+
 .payment-form {
     width: 40%;
 }
@@ -449,7 +527,7 @@ body {
 
 
 /*Messages page*/
-.messages-container{
+.messages-container {
     background-color: #d2d2d2d7;
     color: #424bac;
     text-align: center;
@@ -466,7 +544,7 @@ body {
 
 /*Connect page*/
 .connect-container {
-    display: flex; 
+    display: flex;
     flex-direction: row;
     background-color: #d2d2d2d7;
     padding: 20px;
@@ -482,7 +560,8 @@ body {
     padding-top: 50px;
 }
 
-#contactForm input, textarea {
+#contactForm input,
+textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -492,12 +571,12 @@ body {
 }
 
 
-.connect-form{
+.connect-form {
     width: 50%;
     flex-direction: column;
 }
 
-.connect-form h2{
+.connect-form h2 {
     font-weight: bold;
     font-size: 20px;
     color: #424bac;
@@ -505,7 +584,7 @@ body {
     padding-top: 80px;
 }
 
-.contact-info{
+.contact-info {
     flex-direction: column;
     width: 50%;
     padding: 20px;
@@ -514,7 +593,7 @@ body {
     text-align: center;
 }
 
-#contactForm button{
+#contactForm button {
     background-color: #424bac;
     color: white;
     padding: 10px 20px;
@@ -532,16 +611,18 @@ body {
     text-align: center;
     background-color: #d2d2d2d7;
     padding: 20px;
-    height:auto;
+    height: auto;
     justify-content: space-evenly;
     color: #424bac;
 }
+
 .faq-container h2 {
     font-weight: bold;
     font-size: 24px;
     margin-top: 50px;
 }
-.faq-item{
+
+.faq-item {
     margin-bottom: 20px;
     width: 100%;
 }
@@ -558,11 +639,13 @@ body {
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
+
 .faq-question:hover {
-    background-color: #333a8b; /* Darker background on hover */
+    background-color: #333a8b;
+    /* Darker background on hover */
 }
 
-.faq-answer{
+.faq-answer {
     display: none;
     background-color: azure;
     color: #424bac;
@@ -573,15 +656,15 @@ body {
 }
 
 /*Courses page*/
-.main-courses{
+.main-courses {
     display: flex;
     align-items: stretch;
     height: 100%;
 }
 
-.courses-sidebar{
+.courses-sidebar {
     position: relative;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 25%;
@@ -591,7 +674,7 @@ body {
     padding: 20px;
     font-size: 25px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 
@@ -637,14 +720,14 @@ body {
 
 /*Home page*/
 
-.index-container{
-    display:flex;
+.index-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.left-index{
+.left-index {
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -656,7 +739,7 @@ body {
 }
 
 
-.home-offerings-container{
+.home-offerings-container {
     width: 65%;
     height: 100%;
     display: flex;
@@ -666,37 +749,39 @@ body {
     background-color: #424bac;
     border-radius: 15px;
 }
-.home-offerings{
+
+.home-offerings {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.home-offerings img{
+.home-offerings img {
     width: 80%;
     height: 200px;
     object-fit: contain;
     margin: 20px;
 }
 
-.chris-item,.home-item{
+.chris-item,
+.home-item {
     border-radius: 15px;
     background-color: azure;
-    color:#d32f2f;
+    color: #d32f2f;
     text-align: center;
     margin: 20px;
-   
+
 }
 
-.chris-item{
+.chris-item {
     width: 80%;
 }
 
-.home-item{
+.home-item {
     width: 40%;
 }
 
-.hidden-content-container{
+.hidden-content-container {
     display: none;
     width: 100%;
     height: 70vh;
@@ -707,35 +792,36 @@ body {
     align-items: center;
 }
 
-.hidden-content-container.show{
+.hidden-content-container.show {
     display: flex;
 }
 
-.hidden-content{
+.hidden-content {
     display: none;
     width: 85%;
     height: 90%;
-    border-radius: 15px;;
+    border-radius: 15px;
+    ;
     background-color: #424bac;
     margin-top: 30px;
     justify-items: center;
     display: flex;
     justify-content: center;
-   align-items: center;
+    align-items: center;
 }
 
-.hidden-textbox{
+.hidden-textbox {
     padding: 0;
     background-color: azure;
     width: 85%;
     border-radius: 15px;
     height: 95%;
-   display: flex;
-   flex-direction: row;
-   align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.hidden-border{
+.hidden-border {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -749,7 +835,7 @@ body {
     align-items: center;
 }
 
-.hidden-content img{
+.hidden-content img {
     width: 400px;
     height: 400px;
     object-fit: contain;
@@ -759,42 +845,57 @@ body {
 
 
 .chris-image-container {
-    display: flex; /* Use Flexbox for layout */
+    display: flex;
+    /* Use Flexbox for layout */
     flex-direction: column;
-    justify-content: center; /* Center the content initially */
-    align-items: center; /* Align items vertically */
+    justify-content: center;
+    /* Center the content initially */
+    align-items: center;
+    /* Align items vertically */
     width: 25%;
     background-color: #424bac;
     border-radius: 15px;
     height: auto;
-    transition: all 0.3s ease; /* Smooth transition for layout changes */
+    transition: all 0.3s ease;
+    /* Smooth transition for layout changes */
 }
 
-.chris-image-container img{
+.chris-image-container img {
     width: 75%;
     height: 250px;
     object-fit: contain;
     margin: 20px;
 }
 
-.chris-item:hover{
-    transform: scale(1.1); /* Slight zoom effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow */
-}.home-item:hover{
-    transform: scale(1.1); /* Slight zoom effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow */
+.chris-item:hover {
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add shadow */
 }
-.home-offering:hover{
-    transform: scale(1.1); /* Slight zoom effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow */
+
+.home-item:hover {
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add shadow */
 }
+
+.home-offering:hover {
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add shadow */
+}
+
 /* When the container is active */
 .chris-image-container.active {
     flex-direction: row;
-    justify-content: flex-start; /* Align content to the left */
+    justify-content: flex-start;
+    /* Align content to the left */
 }
 
-.index-description{
+.index-description {
     display: none;
     background-color: azure;
     text-align: center;
@@ -804,7 +905,7 @@ body {
     width: 50%;
 }
 
-.home-bottom{
+.home-bottom {
     background-color: black;
     display: flex;
     flex-direction: row;
@@ -813,36 +914,37 @@ body {
     justify-content: center;
     color: white;
     width: 100%;
-    
+
 }
-.home-bottom p{
+
+.home-bottom p {
     color: black
 }
 
 
 
-.index-description h2{
+.index-description h2 {
     margin-top: 0;
     font-weight: bold;
-    color:#d32f2f
+    color: #d32f2f
 }
 
-.car-images{
+.car-images {
     width: 100%;
-    height:auto;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color:black;
+    background-color: black;
     margin: 0;
     position: relative;
     z-index: 1;
 }
 
-.car-image{
-    
-   width: 450px;
+.car-image {
+
+    width: 450px;
     height: 400px;
     margin: 0;
     object-fit: cover;
@@ -851,9 +953,9 @@ body {
 }
 
 
-.index-bottom{
+.index-bottom {
     background-color: #d2d2d2d7;
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
@@ -865,16 +967,18 @@ body {
     text-align: center;
 }
 
-.index-bottom:hover{
-    transform: scale(1.1); /* Slight zoom effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+.index-bottom:hover {
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow */
 }
 
-.index-bottom button{
+.index-bottom button {
     background-color: #c0392b;
     color: white;
     padding-left: 30px;
-    padding-right:30px;
+    padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 16px;
@@ -883,8 +987,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/*Login screen*/ 
-.login-container{
+/*Login screen*/
+.login-container {
     width: 95%;
     height: 50vh;
     margin: 50px auto;
@@ -898,7 +1002,7 @@ body {
     justify-content: space-evenly;
 }
 
-.login-container h2{
+.login-container h2 {
     margin-bottom: 20px;
     font-size: 22px;
     color: #d32f2f;
@@ -912,11 +1016,14 @@ body {
     border-radius: 5px;
     font-size: 16px;
 }
+
 /* Submit Button */
 #loginForm button {
-    width: 100%; /* Full width for the button */
+    width: 100%;
+    /* Full width for the button */
     padding: 10px;
-    background-color: #424bac; /* Match the header color */
+    background-color: #424bac;
+    /* Match the header color */
     color: white;
     border: none;
     border-radius: 5px;
@@ -926,13 +1033,14 @@ body {
 }
 
 #loginForm button:hover {
-    background-color: #333; /* Darker color on hover */
+    background-color: #333;
+    /* Darker color on hover */
 }
 
 /*Registration form*/
 
 /*Footer section*/
-.footer{
+.footer {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -942,7 +1050,7 @@ body {
     font-size: 16px;
 }
 
-.footer-section{
+.footer-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -950,12 +1058,12 @@ body {
     margin-left: 20px;
 }
 
-.footer-section h3{
+.footer-section h3 {
     margin-bottom: 10px;
     font-size: 16px;
 }
 
-.footer-section button{
+.footer-section button {
     background-color: #000000;
     color: white;
     border: none;
@@ -966,26 +1074,31 @@ body {
     border-radius: 5px;
 }
 
-.footer-icon{
+.footer-icon {
     margin: 0 10px;
 }
-.footer-section a{
+
+.footer-section a {
     text-decoration: none;
-    color: #000000; /* Inherit color from parent */
+    color: #000000;
+    /* Inherit color from parent */
     transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-    color: #ffffff; /* Change color on hover */
+    color: #ffffff;
+    /* Change color on hover */
 }
 
-.footer-icon img{
+.footer-icon img {
     width: 60px;
     height: 60px;
     transition: transform 0.3s ease;
 }
+
 .footer-icon img:hover {
-    transform: scale(1.2); /* Slight zoom effect on hover */
+    transform: scale(1.2);
+    /* Slight zoom effect on hover */
 }
 
 
@@ -995,19 +1108,21 @@ body {
 
     /*Adjust header height*/
     .header {
-        height : 25vh;
+        height: 25vh;
     }
-    .header a{
+
+    .header a {
         text-decoration: none;
         color: white;
     }
-    .header-logo{
+
+    .header-logo {
         transform: translateY(125px);
-        
-        
+
+
     }
 
-    .header-logo img{
+    .header-logo img {
         width: 100px;
         height: 275px;
     }
@@ -1016,25 +1131,27 @@ body {
         height: 80%;
     }
 
-    .header-content{
+    .header-content {
         height: 20%;
     }
-    .nav-left{
+
+    .nav-left {
         padding-right: 10px;
     }
 
-    .nav-right{
+    .nav-right {
         padding-left: 10px;
     }
 
-    .header-content button{
+    .header-content button {
         margin: 5px;
         font-size: 12px;
         padding: 0;
         margin-left: 0;
     }
+
     /*Make nav bar buttons smaller*/
-    .navbar button{
+    .navbar button {
         margin: 0 5px;
         padding: 5px 10px;
         font-size: 12px;
@@ -1046,13 +1163,13 @@ body {
         height: auto;
     }
 
-    .index-description{
-        width : 60%;
+    .index-description {
+        width: 60%;
         padding: 5px;
         font-size: 10px;
     }
 
-    .right-index{
+    .right-index {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -1065,6 +1182,7 @@ body {
         height: auto;
         margin: 0;
     }
+
     .index-bottom {
         font-size: 14px;
         max-width: 100%;
@@ -1076,27 +1194,29 @@ body {
         padding: 5px 5px 5px 5px;
     }
 
-    .chris-image-container img{
+    .chris-image-container img {
         width: 120px;
         margin: 0;
         padding: 0;
     }
-    .chris-image-container{
+
+    .chris-image-container {
         width: 34%;
         text-align: center;
     }
 
-    .home-bottom{
+    .home-bottom {
         font-size: 12px;
     }
-    .home-offerings-container img{
+
+    .home-offerings-container img {
         width: 80px;
         padding: 0;
         margin: 0;
-      
-       }
 
-    .home-offerings{
+    }
+
+    .home-offerings {
         height: 400px;
         margin: 0;
         padding: 0;
@@ -1105,7 +1225,8 @@ body {
         justify-content: space-evenly;
         gap: 5px;
     }
-    .home-item{
+
+    .home-item {
         margin: 0;
         height: 100px;
         padding: 0;
@@ -1117,24 +1238,26 @@ body {
         flex-direction: row;
     }
 
-    .hidden-content img{
+    .hidden-content img {
         width: 150px;
         height: 200px;
         margin: 0;
     }
-    .hidden-content{
+
+    .hidden-content {
         width: 95%;
     }
-    .hidden-textbox{
+
+    .hidden-textbox {
         width: 90%;
     }
 
-    .hidden-border{
+    .hidden-border {
         font-size: 10px;
         padding: 0;
     }
 
-    .hidden-content-container{
+    .hidden-content-container {
         height: 56vh;
     }
 
@@ -1144,7 +1267,7 @@ body {
         justify-content: center;
     }
 
-    .courses-sidebar{
+    .courses-sidebar {
         width: 100%;
         height: auto;
         display: flex;
@@ -1156,13 +1279,13 @@ body {
         max-width: 100%;
     }
 
-    .courses-sidebar button{
+    .courses-sidebar button {
         width: auto;
         padding: 10px;
         margin: 15px;
     }
 
-    .course-description{
+    .course-description {
         width: 100%;
         text-align: center;
         font-size: 12px;
@@ -1173,11 +1296,12 @@ body {
         margin-top: 10px;
         font-size: 14px;
     }
-    .courses-sidebar button:hover{
+
+    .courses-sidebar button:hover {
         background-color: #d32f2f;
     }
 
-    .connect-container{
+    .connect-container {
         flex-direction: column;
         align-items: center;
         height: auto;
