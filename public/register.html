@@ -222,8 +222,6 @@
 
             try {
                 payments = window.Square.payments(appId, locationId);
-                card = await initializeCard(payments);
-                await card.attach('#card-container');
 
                 const cardButton = document.getElementById('card-button');
                 cardButton.addEventListener('click', async function (event) {
