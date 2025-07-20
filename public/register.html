@@ -191,10 +191,11 @@
         });
 
         async function initializeCard(payments) {
+            if (!window.Square) return console.error('Square not loaded');
+            payments = window.Square.payments(appId, locationId);
             const card = await payments.card();
             await card.attach('#card-container');
-
-            return card;
+            
         }
 
         async function handlePaymentMethodSubmission(event, card) {
@@ -215,25 +216,10 @@
             }
         }
 
-        async function InitializePaymentForm(){
-            if (!window.Square) {
-                alert('Square.js is not loaded.');
-            }
+       
 
-            try {
-                payments = window.Square.payments(appId, locationId);
-
-                const cardButton = document.getElementById('card-button');
-                cardButton.addEventListener('click', async function (event) {
-                await handlePaymentMethodSubmission(event, card);
-            });
-            } catch (e) {
-                console.error('Initializing Card failed', e);
-                alert('Failed to initialize payment method. Please try again later.');
-
-            }
-        }
-        InitializePaymentForm();
+            const cardButton = document.getElementById('card-button')
+        
         
 
         async function createPayment(token, price) {
