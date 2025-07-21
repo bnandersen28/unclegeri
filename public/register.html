@@ -399,6 +399,19 @@
                     });
             };
 
+            const continueButton = document.getElementById('continue-button');
+            continueButton.addEventListener('click', () => {
+                const regId = localStorage.getItem('registration_id');
+                const course = localStorage.getItem('course');
+                if (regId) {
+                    // Redirect to pay.html with the registration ID as a query parameter
+                    window.location.href = `pay.html?registration_id=${encodeURIComponent(regId)}`;
+                } else {
+                    alert('Registration ID not found. Please complete the registration form again.');
+                }
+            });
+
+
         </script>
     </body>
 
