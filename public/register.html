@@ -219,7 +219,19 @@
 
        
 
-            const cardButton = document.getElementById('card-button')
+        const cardButton = document.getElementById('card-button')
+        cardButton.addEventListener('click', async function (event) {
+            if (!card) {
+                console.error('Card not initialized');
+                return;
+            }
+            try {
+                await handlePaymentMethodSubmission(event, card);
+            } catch (error) {
+                console.error('Error during payment submission:', error);
+                displayPaymentResults('FAILURE');
+            }
+        });
         
         
 
