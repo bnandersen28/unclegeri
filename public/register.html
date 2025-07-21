@@ -257,7 +257,8 @@
                     locationId,
                     sourceId: token,
                     idempotencyKey: window.crypto.randomUUID(),
-                    amount: parseInt(price),
+                    amount: Math.round(parseFloat(price)), // ✅ $25.00 → 2500 cents
+
                 });
 
                 const paymentResponse = await fetch(`${backend}/payment`, {

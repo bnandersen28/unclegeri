@@ -138,6 +138,17 @@ body {
     border: 2px solid #424bac;
     
 }
+
+.fee-container:button{
+    background-color: #424bac;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
 #card-pay-button{
     background-color: #424bac;
     color: white;
