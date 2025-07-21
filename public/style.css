@@ -139,7 +139,7 @@ body {
     
 }
 
-#button{
+.continue-button{
     background-color: #424bac;
     color: white;
     padding: 10px 20px;

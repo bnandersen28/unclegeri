@@ -157,10 +157,12 @@
                     <form id="payment-form" class="payment-form">
                         <div id="card-container"></div>
                         <button id="card-button" type="button">Pay</button>
-                        <div id="payment-status-container" class="payment-status-container" style="visibility: hidden;">
+                        <div id="payment-status-container" class="payment-status-container" style="display: none;">
                             <p id="success-message" class="success-message">Payment Successful! Please fill out the
                                 registration form below.</p>
                             <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
+                            <button id="continue-button" class="continue-button" style="display: none;">Continue to
+                                Payment</button>
                         </div>
                     </form>
                 </div>
@@ -336,18 +338,19 @@
 
             // status is either SUCCESS or FAILURE;
             function displayPaymentResults(status) {
+                console.log('Displaying payment results:', status);
                 const statusContainer = document.getElementById(
                     'payment-status-container',
                 );
                 const successMessage = document.getElementById('success-message');
                 const failureMessage = document.getElementById('failure-message');
 
-                statusContainer.style.visibility = 'visible';
+                statusContainer.style.display = 'block';
                 if (status === 'SUCCESS') {
                     successMessage.style.display = 'block';
                     failureMessage.style.display = 'none';
                     cardInfo.style.display = 'none'; // Hide card info after successful payment
-                    showContinueButton(); // Show continue button
+                    document.getElementById('continue-button').style.display = 'block'; // Show continue button
                 } else {
                     successMessage.style.display = 'none';
                     failureMessage.style.display = 'block';
