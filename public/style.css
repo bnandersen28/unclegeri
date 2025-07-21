@@ -112,16 +112,18 @@ body {
 
 /*Registration page*/
 .register-form {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    padding-top: 50px;
+    padding-top: 10px;
     border-radius: 15px;
+    border: 2px solid #424bac;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     height: auto;
-    width: 40%;
+    width: 60%;
+    background-color: white;;
 }
 
 .fee-container {
@@ -130,6 +132,7 @@ body {
     align-items: center;
     text-align: left;
     width: 60%;
+    padding-left: 15px;
     background-color: white;
     border-radius: 15px;
     border: 2px solid #424bac;
@@ -204,8 +207,9 @@ body {
 .policy-section {
     flex-direction: column;
     width: 60%;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-left: 20px;
+    padding-bottom: 20px;
     border-radius: 15px;
     border:2px solid #424bac;
     background-color: white;

@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <title>Register</title>
     <script src="https://web.squarecdn.com/v1/square.js"></script>
-    </head>
-    <body>
+</head>
+
+<body>
     <div class="header">
         <div class="header-top"></div>
         <div class="header-content">
@@ -34,38 +35,102 @@
     </div>
 
 
-<body>
-    <div class="register-container">
-        <div class="policy-section">
-            <h2>Policy acknowledgement</h2>
-            <h1>Cash/check</h1>
-            <p>In-car tuition is paid on the first day of your driving session. . Payment can be made by check, credit
-                or cash. There will be a $35.00 fee for any returned checks The returned check fee doubles if payment
-                arrangements are not made within a week.
-            </p>
-            <h1>Refunds</h1>
-            <p>Refunds requests must be submitted in writing. If instructions are discontinued for any reason, tuition
-                fees will be calculated for the past session and the balance will be paid within 4 weeks.
-            </p>
-            <h1>Cancellation</h1>
-            <p>Students must cancel / reschedule in-car lessons at least 24 hours in advance or are subject to a $60.00
-                fee. The Academy will inform the student of any cancellation or rescheduling at least 24 hours in
-                advance. Lessons will be completed on the next available business day.</p>
-            <h1>Replacement of documentation</h1>
-            <p>There will be a $30.00 fee to replace any completed documentation.
-            </p>
-            <h1>Disclosure</h1>
-            <p>The academy does not guarantee that after taking the in-car lessons, the student will pass the state
-                examination or the student can secure a license, the student will be guaranteed employment upon
-                completion of the course.
-            </p>
-            <label for"acknowledgement">Do you understand and agree to the policies?</label>
-            <select name="acknowledgement" id="acknowledgement" required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="yes">Yes, I understand</option>
-                <option value="no">No, I do not understand</option>
-            </select>
-        </div>
+    <body>
+        <div class="register-container">
+            <div class="policy-section">
+                <h2>Policy acknowledgement</h2>
+                <h1>Cash/check</h1>
+                <p>In-car tuition is paid on the first day of your driving session. . Payment can be made by check,
+                    credit
+                    or cash. There will be a $35.00 fee for any returned checks The returned check fee doubles if
+                    payment
+                    arrangements are not made within a week.
+                </p>
+                <h1>Refunds</h1>
+                <p>Refunds requests must be submitted in writing. If instructions are discontinued for any reason,
+                    tuition
+                    fees will be calculated for the past session and the balance will be paid within 4 weeks.
+                </p>
+                <h1>Cancellation</h1>
+                <p>Students must cancel / reschedule in-car lessons at least 24 hours in advance or are subject to a
+                    $60.00
+                    fee. The Academy will inform the student of any cancellation or rescheduling at least 24 hours in
+                    advance. Lessons will be completed on the next available business day.</p>
+                <h1>Replacement of documentation</h1>
+                <p>There will be a $30.00 fee to replace any completed documentation.
+                </p>
+                <h1>Disclosure</h1>
+                <p>The academy does not guarantee that after taking the in-car lessons, the student will pass the state
+                    examination or the student can secure a license, the student will be guaranteed employment upon
+                    completion of the course.
+                </p>
+                <label for"acknowledgement">Do you understand and agree to the policies?</label>
+                <select name="acknowledgement" id="acknowledgement" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="yes">Yes, I understand</option>
+                    <option value="no">No, I do not understand</option>
+                </select>
+            </div>
+            <div class="register-form" id="register-form">
+                <h2>Enter info</h2>
+                <form id="registerForm" action="/register" method="POST">
+
+                    <label for="course">Choose a course:</label>
+                    <select name="course" id="course" required>
+                        <option value="" disabled selected>Select a course</option>
+                        <option value="Behind the Wheel">Behind the Wheel</option>
+                        <option value="1-1 4 days">1-1 4 days</option>
+                        <option value="1-1 7 days">1-1 7 days</option>
+                        <option value="Adult DMV exam">Adult DMV exam</option>
+                    </select><br><br>
+
+                    <label for="start-date">Select a Start Date:</label>
+                    <select id="start-date" name="start-date" required>
+                        <option value="" disabled selected>Select a start date</option>
+                        <option value="2025-07-07">7/7-7/13</option>
+                        <option value="2025-07-14">7/14-7/20</option>
+                        <option value="2025-07-21">7/21-7/27</option>
+                        <option value="2025-07-28">7/28-8/3</option>
+                        <option value="2025-08-04">8/4-8/10</option>
+                    </select><br><br>
+
+                    <label for="start-time">Select a Start Time:</label>
+                    <select id="start-time" name="start-time" required>
+                        <option value="" disabled selected>Select a start time</option>
+                        <option value="06:00">6:00am-8:00am</option>
+                        <option value="8:00">8:00am-10:00am</option>
+                        <option value="10:00">10:00am-12:00pm</option>
+                        <option value="13:00">1:00pm-3:00pm</option>
+                        <option value="16:00">3:00pm-5:00pm</option>
+                    </select><br><br>
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="studentName" required><br><br>
+
+                    <label for="parentName">Parent Name:</label>
+                    <input type="text" id="parentName" name="parentName" required><br><br>
+
+                    <label for="phone">Student Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required><br><br>
+
+                    <label for="parentPhone">Parent Phone Number:</label>
+                    <input type="tel" id="parentPhone" name="parentPhone" required><br><br>
+
+                    <label for="email">Student Email:</label>
+                    <input type="email" id="email" name="email" required><br><br>
+
+                    <label for="parentEmail">Parent Email:</label>
+                    <input type="email" id="parentEmail" name="parentEmail" required><br><br>
+
+                    <label for="address">Home Address:</label>
+                    <input type="text" id="address" name="address" required><br><br>
+
+                    <label for="permitNumber">Permit Number:</label>
+                    <input type="text" id="permitNumber" name="permitNumber" required><br><br>
+
+                    <button type="submit">Payment method</button>
+                </form>
+            </div>
+        
         <div class="fee-container">
             <h2>Registration fee</h2>
             <p>The $25.00 registration fee covers the administrative costs associated with processing Department of
@@ -93,325 +158,279 @@
                 <form id="payment-form" class="payment-form">
                     <div id="card-container"></div>
                     <button id="card-button" type="button">Pay</button>
+                    <div id="payment-status-container" class="payment-status-container" style="visibility: hidden;">
+                        <p id="success-message" class="success-message">Payment Successful! Please fill out the registration form below.</p>
+                        <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="register-form" id="register-form">
-            <h2>Enter info</h2>
-            <form id="registerForm" action="/register" method="POST">
-
-                <label for="course">Choose a course:</label>
-                <select name="course" id="course" required>
-                    <option value="" disabled selected>Select a course</option>
-                    <option value="Behind the Wheel">Behind the Wheel</option>
-                    <option value="1-1 4 days">1-1 4 days</option>
-                    <option value="1-1 7 days">1-1 7 days</option>
-                    <option value="Adult DMV exam">Adult DMV exam</option>
-                </select><br><br>
-
-                <label for="start-date">Select a Start Date:</label>
-                <select id="start-date" name="start-date" required>
-                    <option value="" disabled selected>Select a start date</option>
-                    <option value="2025-07-07">7/7-7/13</option>
-                    <option value="2025-07-14">7/14-7/20</option>
-                    <option value="2025-07-21">7/21-7/27</option>
-                    <option value="2025-07-28">7/28-8/3</option>
-                    <option value="2025-08-04">8/4-8/10</option>
-                </select><br><br>
-
-                <label for="start-time">Select a Start Time:</label>
-                <select id="start-time" name="start-time" required>
-                    <option value="" disabled selected>Select a start time</option>
-                    <option value="06:00">6:00am-8:00am</option>
-                    <option value="8:00">8:00am-10:00am</option>
-                    <option value="10:00">10:00am-12:00pm</option>
-                    <option value="13:00">1:00pm-3:00pm</option>
-                    <option value="16:00">3:00pm-5:00pm</option>
-                </select><br><br>
-                <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" name="studentName" required><br><br>
-
-                <label for="parentName">Parent Name:</label>
-                <input type="text" id="parentName" name="parentName" required><br><br>
-
-                <label for="phone">Student Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required><br><br>
-
-                <label for="parentPhone">Parent Phone Number:</label>
-                <input type="tel" id="parentPhone" name="parentPhone" required><br><br>
-
-                <label for="email">Student Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
-
-                <label for="parentEmail">Parent Email:</label>
-                <input type="email" id="parentEmail" name="parentEmail" required><br><br>
-
-                <label for="address">Home Address:</label>
-                <input type="text" id="address" name="address" required><br><br>
-
-                <label for="permitNumber">Permit Number:</label>
-                <input type="text" id="permitNumber" name="permitNumber" required><br><br>
-
-                <button type="submit">Payment method</button>
-            </form>
-        </div>
     </div>
 
 
 
-    <script>
-        const backend = 'https://unclegeri-backend.onrender.com';
-        const appId = 'sq0idp-uRjd8UFJBtDRt_anka4W9A';
-        const locationId = 'L8S8K9BPNDMPF';
-        const cardPayButton = document.getElementById('card-pay-button');
-        const cardInfo = document.getElementById('card-info');
-        const registerForm = document.getElementById('register-form');
-        const acknowledgement = document.getElementById('acknowledgement');
+        <script>
+            const backend = 'https://unclegeri-backend.onrender.com';
+            const appId = 'sq0idp-uRjd8UFJBtDRt_anka4W9A';
+            const locationId = 'L8S8K9BPNDMPF';
+            const cardPayButton = document.getElementById('card-pay-button');
+            const cardInfo = document.getElementById('card-info');
+            const registerForm = document.getElementById('register-form');
+            const acknowledgement = document.getElementById('acknowledgement');
 
 
-        let card, payments;
-        const price = 25; //Need to convert to cents
+            let card, payments;
+            let isCardInitialized = false;
+            const price = 2500; //Need to convert to cents
 
-        //Hide payment and registration info until acknowledged
-        cardPayButton.style.display = 'none';
+            //Hide payment and registration info until acknowledged
+            cardPayButton.style.display = 'none';
 
-        //Ensure policies are acknowledged
-        acknowledgement.addEventListener('change', function () {
-            if (acknowledgement.value === 'yes') {
-                cardPayButton.style.display = 'flex';
-            } else {
-                cardInfo.style.display = 'none';
+            //Ensure policies are acknowledged
+            acknowledgement.addEventListener('change', function () {
+                if (acknowledgement.value === 'yes') {
+                    cardPayButton.style.display = 'flex';
+                } else {
+                    cardInfo.style.display = 'none';
+                    registerForm.style.display = 'none';
+                }
+            });
+
+            cardPayButton.addEventListener('click', async function () {
+                if (isCardInitialized) return;
+                cardPayButton.disabled = true; // Disable button to prevent multiple clicks
+                cardInfo.style.display = 'flex';
                 registerForm.style.display = 'none';
+                await initializeCard();
+
+            });
+
+            async function initializeCard() {
+                if (!window.Square) return console.error('Square not loaded');
+                payments = window.Square.payments(appId, locationId);
+                const card = await payments.card();
+                await card.attach('#card-container');
+                isCardInitialized = true;
+
             }
-        });
 
-        cardPayButton.addEventListener('click', async function () {
-            cardInfo.style.display = 'flex';
-            registerForm.style.display = 'none';
-            await initializeCard();
-        });
-
-        async function initializeCard() {
-            if (!window.Square) return console.error('Square not loaded');
-            payments = window.Square.payments(appId, locationId);
-            const card = await payments.card();
-            await card.attach('#card-container');
-            
-        }
-
-        async function handlePaymentMethodSubmission(event, card) {
-            event.preventDefault();
-
-            try {
-                // disable the submit button as we await tokenization and make a payment request.
+            async function handlePaymentMethodSubmission(event, card) {
+                event.preventDefault();
                 cardButton.disabled = true;
-                const token = await tokenize(card, price);
-                const paymentResults = await createPayment(token, price);
-                displayPaymentResults('SUCCESS');
+                
 
-                console.debug('Payment Success', paymentResults);
-            } catch (e) {
-                cardButton.disabled = false;
-                displayPaymentResults('FAILURE');
-                console.error(e.message);
-            }
-        }
+                try {
+                    // disable the submit button as we await tokenization and make a payment request.
+                    const token = await tokenize(card, price);
+                    const paymentResults = await createPayment(token, price);
+                    displayPaymentResults('SUCCESS');
 
-       
-
-        const cardButton = document.getElementById('card-button')
-        cardButton.addEventListener('click', async function (event) {
-            if (!card) {
-                console.error('Card not initialized');
-                return;
-            }
-            try {
-                await handlePaymentMethodSubmission(event, card);
-            } catch (error) {
-                console.error('Error during payment submission:', error);
-                displayPaymentResults('FAILURE');
-            }
-        });
-        
-        
-
-        async function createPayment(token, price) {
-            const body = JSON.stringify({
-                locationId,
-                sourceId: token,
-                idempotencyKey: window.crypto.randomUUID(),
-                amount: parseInt(price),
-            });
-
-            const paymentResponse = await fetch(`${backend}/payment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body,
-            });
-
-            if (paymentResponse.ok) {
-                return paymentResponse.json();
+                    console.debug('Payment Success', paymentResults);
+                } catch (e) {
+                    cardButton.disabled = false;
+                    displayPaymentResults('FAILURE');
+                    console.error(e.message);
+                }
             }
 
-            const errorBody = await paymentResponse.text();
-            throw new Error(errorBody);
-        }
 
-        // New payment flow
-        async function tokenize(paymentMethod, price) {
-            //Get details from the form 
-            const firstName = document.getElementById('first-name').value;
-            const lastName = document.getElementById('last-name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
 
-            console.log('Tokenizing with details:', {
-                firstName,
-                lastName,
-                email,
-                phone,
-                price,
-            });
-
-            console.log("price variable type,", typeof price);
-
-            const verificationDetails = {
-                amount: price,
-                billingContact: {
-                    givenName: firstName,
-                    familyName: lastName,
-                    email: email,
-                    phone: phone,
-                    countryCode: 'US',
-                },
-                currencyCode: 'USD',
-                intent: 'CHARGE',
-                customerInitiated: true,
-                sellerKeyedIn: false,
-            };
-            const tokenResult = await paymentMethod.tokenize(verificationDetails);
-            console.log('Tokenization result:', tokenResult);
+            const cardButton = document.getElementById('card-button')
+            cardButton.addEventListener('click', async function (event) {
+                if (!card) {
+                    console.error('Card not initialized');
+                    return;
+                }
             
-            if (tokenResult.status === 'OK') {
-                return tokenResult.token;
-            } else {
-                let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
-                if (tokenResult.errors) {
-                    errorMessage += ` and errors: ${JSON.stringify(
-                        tokenResult.errors,
-                    )}`;
+                    await handlePaymentMethodSubmission(event, card);
+                
+            });
+
+
+
+            async function createPayment(token, price) {
+                const body = JSON.stringify({
+                    locationId,
+                    sourceId: token,
+                    idempotencyKey: window.crypto.randomUUID(),
+                    amount: parseInt(price),
+                });
+
+                const paymentResponse = await fetch(`${backend}/payment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body,
+                });
+
+                if (paymentResponse.ok) {
+                    return paymentResponse.json();
                 }
 
-                throw new Error(errorMessage);
-            }
-        }
-
-
-
-        // status is either SUCCESS or FAILURE;
-        function displayPaymentResults(status) {
-            const statusContainer = document.getElementById(
-                'payment-status-container',
-            );
-            const successMessage = document.getElementById('success-message');
-            const failureMessage = document.getElementById('failure-message');
-
-            statusContainer.style.visibility = 'visible';
-            if (status === 'SUCCESS') {
-                successMessage.style.display = 'block';
-                failureMessage.style.display = 'none';
-                registerForm.style.display = 'block';
-                cardInfo.style.display = 'none'; // Hide card info after successful payment
-            } else {
-                successMessage.style.display = 'none';
-                failureMessage.style.display = 'block';
+                const errorBody = await paymentResponse.text();
+                throw new Error(errorBody);
             }
 
+            // New payment flow
+            async function tokenize(paymentMethod, price) {
+                //Get details from the form 
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
 
-        }
-
-
-        const form = document.getElementById('registerForm');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Check if the user acknowledged the policies
-            if (acknowledgement.value !== 'yes') {
-                alert('You must acknowledge the policies to proceed.');
-                return;
-            }
-
-            const formData = {
-                course: document.getElementById('course').value,
-                start_date: document.getElementById('start-date').value,
-                start_time: document.getElementById('start-time').value,
-                studentName: document.getElementById('studentName').value,
-                parentName: document.getElementById('parentName').value,
-                phone: document.getElementById('phone').value,
-                parentPhone: document.getElementById('parentPhone').value,
-                email: document.getElementById('email').value,
-                parentEmail: document.getElementById('parentEmail').value,
-                home_address: document.getElementById('address').value,
-                permitNumber: document.getElementById('permitNumber').value,
-                acknowledged_policies: acknowledgement.value === 'yes'
-            };
-
-            // Convert FormData to JSON because your server expects JSON
-            const json = JSON.stringify(formData);
-
-
-            fetch(`${backend}/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: json
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json(); // Parse the JSON response
-                    } else {
-                        // Handle error
-                        throw new Error('Registration failed. Please try again.');
-                    }
-                })
-                .then(data => {
-                    //Store selected course and reg id for use in payment page
-                    localStorage.setItem('course', formData.course);
-                    localStorage.setItem('registration_id', data.id);
-
-                    // Redirect to payment page
-                    window.location.href = 'pay.html';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again.');
+                console.log('Tokenizing with details:', {
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    price,
                 });
-        });
 
-    </script>
-</body>
+                console.log("price variable type,", typeof price);
 
-<footer class="footer">
-    <div class="footer-section">
-        <h3>Learn More</h3>
-        <a href="courses.html">Courses</a>
-        <a href="faqs.html">FAQs</a>
-    </div>
-    <div class="footer-section">
-        <button onclick="window.location.href='register.html'">Register Now!</button>
-    </div>
-    <div class="footer-section">
-        <a href="connect.html" class="footer-icon">
-            <img src="imgs/message.png" alt="Connect">
-        </a>
-    </div>
-    <div class="footer-section">
-        <a href="index.html" class="footer-icon">
-            <img src="imgs/home.png" alt="Home">
-        </a>
-    </div>
-    </div>
-</footer>
+                const verificationDetails = {
+                    amount: price,
+                    billingContact: {
+                        givenName: firstName,
+                        familyName: lastName,
+                        email: email,
+                        phone: phone,
+                        countryCode: 'US',
+                    },
+                    currencyCode: 'USD',
+                    intent: 'CHARGE',
+                    customerInitiated: true,
+                    sellerKeyedIn: false,
+                };
+                const tokenResult = await paymentMethod.tokenize(verificationDetails);
+                console.log('Tokenization result:', tokenResult);
+
+                if (tokenResult.status === 'OK') {
+                    return tokenResult.token;
+                } else {
+                    let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
+                    if (tokenResult.errors) {
+                        errorMessage += ` and errors: ${JSON.stringify(
+                            tokenResult.errors,
+                        )}`;
+                    }
+
+                    throw new Error(errorMessage);
+                }
+            }
+
+            //Show button to continue to payment after registration fee is paid
+            function showContinueButton(){
+                const continueBtn= document.createElement('button');
+                continueBtn.textContent = 'Continue to Payment';
+                continueBtn.onclick=()=> window.location.href = 'pay.html';
+                document.querySelector('.fee-container').appendChild(continueBtn);
+            }
+
+            // status is either SUCCESS or FAILURE;
+            function displayPaymentResults(status) {
+                const statusContainer = document.getElementById(
+                    'payment-status-container',
+                );
+                const successMessage = document.getElementById('success-message');
+                const failureMessage = document.getElementById('failure-message');
+
+                statusContainer.style.visibility = 'visible';
+                if (status === 'SUCCESS') {
+                    successMessage.style.display = 'block';
+                    failureMessage.style.display = 'none';
+                    cardInfo.style.display = 'none'; // Hide card info after successful payment
+                    showContinueButton(); // Show continue button
+                } else {
+                    successMessage.style.display = 'none';
+                    failureMessage.style.display = 'block';
+                }
+
+
+            }
+
+
+            const form = document.getElementById('registerForm');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Check if the user acknowledged the policies
+                if (acknowledgement.value !== 'yes') {
+                    alert('You must acknowledge the policies to proceed.');
+                    return;
+                }
+
+                const formData = {
+                    course: document.getElementById('course').value,
+                    start_date: document.getElementById('start-date').value,
+                    start_time: document.getElementById('start-time').value,
+                    studentName: document.getElementById('studentName').value,
+                    parentName: document.getElementById('parentName').value,
+                    phone: document.getElementById('phone').value,
+                    parentPhone: document.getElementById('parentPhone').value,
+                    email: document.getElementById('email').value,
+                    parentEmail: document.getElementById('parentEmail').value,
+                    home_address: document.getElementById('address').value,
+                    permitNumber: document.getElementById('permitNumber').value,
+                    acknowledged_policies: acknowledgement.value === 'yes'
+                };
+
+                // Convert FormData to JSON because your server expects JSON
+                const json = JSON.stringify(formData);
+
+
+                fetch(`${backend}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: json
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json(); // Parse the JSON response
+                        } else {
+                            // Handle error
+                            throw new Error('Registration failed. Please try again.');
+                        }
+                    })
+                    .then(data => {
+                        //Store selected course and reg id for use in payment page
+                        localStorage.setItem('course', formData.course);
+                        localStorage.setItem('registration_id', data.id);
+
+                        // Redirect to payment page
+                        window.location.href = 'pay.html';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+            });
+
+        </script>
+    </body>
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Learn More</h3>
+            <a href="courses.html">Courses</a>
+            <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-section">
+            <button onclick="window.location.href='register.html'">Register Now!</button>
+        </div>
+        <div class="footer-section">
+            <a href="connect.html" class="footer-icon">
+                <img src="imgs/message.png" alt="Connect">
+            </a>
+        </div>
+        <div class="footer-section">
+            <a href="index.html" class="footer-icon">
+                <img src="imgs/home.png" alt="Home">
+            </a>
+        </div>
+        </div>
+    </footer>
 
 </html>
