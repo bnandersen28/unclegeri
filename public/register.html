@@ -73,7 +73,7 @@
             </div>
             <div class="register-form" id="register-form">
                 <h2>Enter info</h2>
-                <form id="registerForm" action="/register" method="POST">
+                <form id="registerForm">
 
                     <label for="course">Choose a course:</label>
                     <select name="course" id="course" required>
@@ -126,46 +126,46 @@
 
                     <label for="permitNumber">Permit Number:</label>
                     <input type="text" id="permitNumber" name="permitNumber" required><br><br>
-
-                    <button type="submit">Payment method</button>
                 </form>
             </div>
-        
-        <div class="fee-container">
-            <h2>Registration fee</h2>
-            <p>The $25.00 registration fee covers the administrative costs associated with processing Department of
-                Motor Vehicle (DMV) paperwork,
-                including the preparation and submission of required documents. It also includes the filing of your
-                license, certification documents
-                and any applicable payment processing fees, ensuring that all necessary steps are completed efficiently
-                and in compliance with state
-                regulations.</p>
-            <button id="card-pay-button">Pay $25.00</button>
-            <div id="card-info" class="card-info" style="display: none;">
-                <form id="customer-info-form" class="customer-info-form">
-                    <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" required><br>
 
-                    <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" required><br>
+            <div class="fee-container">
+                <h2>Registration fee</h2>
+                <p>The $25.00 registration fee covers the administrative costs associated with processing Department of
+                    Motor Vehicle (DMV) paperwork,
+                    including the preparation and submission of required documents. It also includes the filing of your
+                    license, certification documents
+                    and any applicable payment processing fees, ensuring that all necessary steps are completed
+                    efficiently
+                    and in compliance with state
+                    regulations.</p>
+                <button id="card-pay-button">Pay $25.00</button>
+                <div id="card-info" class="card-info" style="display: none;">
+                    <form id="customer-info-form" class="customer-info-form">
+                        <label for="first-name">First Name:</label>
+                        <input type="text" id="first-name" required><br>
 
-                    <label for="email">Email:</label>
-                    <input type="email" id="email"><br>
+                        <label for="last-name">Last Name:</label>
+                        <input type="text" id="last-name" required><br>
 
-                    <label for="phone">Phone:</label>
-                    <input type="tel" id="phone"><br>
-                </form>
-                <form id="payment-form" class="payment-form">
-                    <div id="card-container"></div>
-                    <button id="card-button" type="button">Pay</button>
-                    <div id="payment-status-container" class="payment-status-container" style="visibility: hidden;">
-                        <p id="success-message" class="success-message">Payment Successful! Please fill out the registration form below.</p>
-                        <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
-                    </div>
-                </form>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email"><br>
+
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone"><br>
+                    </form>
+                    <form id="payment-form" class="payment-form">
+                        <div id="card-container"></div>
+                        <button id="card-button" type="button">Pay</button>
+                        <div id="payment-status-container" class="payment-status-container" style="visibility: hidden;">
+                            <p id="success-message" class="success-message">Payment Successful! Please fill out the
+                                registration form below.</p>
+                            <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -195,12 +195,11 @@
                     registerForm.style.display = 'none';
                 }
             });
-
             cardPayButton.addEventListener('click', async function () {
                 if (isCardInitialized) return;
                 cardPayButton.disabled = true; // Disable button to prevent multiple clicks
+                cardPayButton.style.display = 'none'; // Hide button after click
                 cardInfo.style.display = 'flex';
-                registerForm.style.display = 'none';
                 await initializeCard();
 
             });
@@ -217,7 +216,7 @@
             async function handlePaymentMethodSubmission(event, card) {
                 event.preventDefault();
                 cardButton.disabled = true;
-                
+
 
                 try {
                     // disable the submit button as we await tokenization and make a payment request.
@@ -241,9 +240,9 @@
                     console.error('Card not initialized');
                     return;
                 }
-            
-                    await handlePaymentMethodSubmission(event, card);
-                
+                await submitRegistrationForm(); // Submit registration form before payment
+                await handlePaymentMethodSubmission(event, card);
+
             });
 
 
@@ -322,10 +321,10 @@
             }
 
             //Show button to continue to payment after registration fee is paid
-            function showContinueButton(){
-                const continueBtn= document.createElement('button');
+            function showContinueButton() {
+                const continueBtn = document.createElement('button');
                 continueBtn.textContent = 'Continue to Payment';
-                continueBtn.onclick=()=> window.location.href = 'pay.html';
+                continueBtn.onclick = () => window.location.href = 'pay.html';
                 document.querySelector('.fee-container').appendChild(continueBtn);
             }
 
@@ -351,17 +350,7 @@
 
             }
 
-
-            const form = document.getElementById('registerForm');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                // Check if the user acknowledged the policies
-                if (acknowledgement.value !== 'yes') {
-                    alert('You must acknowledge the policies to proceed.');
-                    return;
-                }
-
+            async function submitRegistrationForm() {
                 const formData = {
                     course: document.getElementById('course').value,
                     start_date: document.getElementById('start-date').value,
@@ -400,13 +389,13 @@
                         localStorage.setItem('registration_id', data.id);
 
                         // Redirect to payment page
-                        window.location.href = 'pay.html';
+                        //window.location.href = 'pay.html';
                     })
                     .catch(error => {
                         console.error('Error:', error);
                         alert('An error occurred. Please try again.');
                     });
-            });
+            };
 
         </script>
     </body>
