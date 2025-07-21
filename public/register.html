@@ -205,6 +205,7 @@
             });
 
             async function initializeCard() {
+                console.debug('Initializing Square Card');
                 if (!window.Square) return console.error('Square not loaded');
                 payments = window.Square.payments(appId, locationId);
                 const card = await payments.card();
