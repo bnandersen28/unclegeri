@@ -157,14 +157,14 @@
                     <form id="payment-form" class="payment-form">
                         <div id="card-container"></div>
                         <button id="card-button" type="button">Pay</button>
-                        <div id="payment-status-container" class="payment-status-container" style="display: none;">
-                            <p id="success-message" class="success-message">Payment Successful! Please fill out the
-                                registration form below.</p>
-                            <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
-                            <button id="continue-button" class="continue-button" style="display: none;">Continue to
-                                Payment</button>
-                        </div>
                     </form>
+                    <div id="payment-status-container" class="payment-status-container" style="display: none;">
+                        <p id="success-message" class="success-message">Payment Successful! Please fill out the
+                            registration form below.</p>
+                        <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
+                        <button id="continue-button" class="continue-button" style="display: none;">Continue to
+                            Payment</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -326,14 +326,6 @@
 
                     throw new Error(errorMessage);
                 }
-            }
-
-            //Show button to continue to payment after registration fee is paid
-            function showContinueButton() {
-                const continueBtn = document.createElement('button');
-                continueBtn.textContent = 'Continue to Payment';
-                continueBtn.onclick = () => window.location.href = 'pay.html';
-                document.querySelector('.fee-container').appendChild(continueBtn);
             }
 
             // status is either SUCCESS or FAILURE;
