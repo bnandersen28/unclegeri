@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Edit Courses</title>
+</head>
+<body>
     <div class="header">
         <div class="header-top"></div>
         <div class="header-content">
@@ -30,9 +32,7 @@
 
     </div>
 
-</head>
 
-<body>
     <div class="edit-course-container">
         <div class="back-button-container">
             <button class="back-button" onclick="window.location.href='admin.html'">
@@ -40,10 +40,16 @@
             </button>
         </div>
         <h1>Edit or Add Course</h1>
-        <p>You can use <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Markdown syntax</a> in Course Details to format text.</p>
+        <p>You can use <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Markdown syntax</a> in
+            Course Details to format text.</p>
 
 
-        <form id="courseForm">
+        <div id="courseButtonsContainer">
+            <button id="newCourseBtn" class="course-button new">+ New Course</button>
+            <!-- Dynamic course buttons will go here -->
+        </div>
+
+        <form id="courseForm" style="display: none;">
             <label for="courseKey">Course Key</label>
             <select id="courseKeyDropdown" required>
 
@@ -57,7 +63,7 @@
             <textarea id="courseDetails" required></textarea>
 
             <label for="coursePrice">Price ($)</label>
-            <input type="number" id="coursePrice" step="0.01" required/>
+            <input type="number" id="coursePrice" step="0.01" required />
 
             <label for"courseStatus">Status</label>
             <select id="courseStatus" required>
@@ -82,6 +88,10 @@
 
 
         document.addEventListener('DOMContentLoaded', async () => {
+            const courseButtonsContainer = document.getElementById('courseButtonsContainer');
+            const courseForm = document.getElementById('courseForm');
+            const newCourseBtn = document.getElementById('newCourseBtn');
+
             const courseKeyDropdown = document.getElementById('courseKeyDropdown');
             const newCourseKeyInput = document.getElementById('newCourseKey');
             const courseTitleInput = document.getElementById('courseTitle');
@@ -90,13 +100,28 @@
             const courseStatusInput = document.getElementById('courseStatus');
             const courseDeliveryInput = document.getElementById('courseDelivery');
 
-            const newOption = document.createElement('option');
-            newOption.value = 'new';
-            newOption.textContent = 'Add New Course';
-            courseKeyDropdown.appendChild(newOption);
-            courseKeyDropdown.value = 'new';
-            newCourseKeyInput.style.display = 'block';
-            newCourseKeyInput.required = true;
+            function showForm(course = null) {
+                courseForm.style.display = 'block';
+                if (!course) {
+                    newCourseKeyInput.disabled = false;
+                    newCourseKeyInput.value = '';
+                    courseTitleInput.value = '';
+                    courseDetailsInput.value = '';
+                    coursePriceInput.value = '';
+                    courseStatusInput.value = 'current';
+                    courseDeliveryInput.value = 'inperson';
+                } else {
+                    newCourseKeyInput.disabled = true;
+                    newCourseKeyInput.value = course.course_key;
+                    courseTitleInput.value = course.title || '';
+                    courseDetailsInput.value = course.description || '';
+                    coursePriceInput.value = course.price || '';
+                    courseStatusInput.value = course.status || 'current';
+                    courseDeliveryInput.value = course.delivery || 'inperson';
+                }
+            }
+
+            newCourseBtn.addEventListener('click', () => showForm(null));
 
 
             try {
@@ -105,42 +130,19 @@
 
                 data.forEach(course => {
                     courses[course.course_key] = course;
-                    const option = document.createElement('option');
-                    option.value = course.course_key;
-                    option.textContent = course.course_key;
-                    courseKeyDropdown.insertBefore(option, newOption);
+                    const btn = document.createElement('button');
+                    btn.textContent = course.title|| course.course_key;
+                    btn.className = 'course-button';
+                    btn.addEventListener('click', ()=> showForm(course));
+                    courseButtonsContainer.appendChild(btn);
                 });
 
             } catch (err) {
                 console.error('Failed to fetch courses:', err);
                 document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
             }
-            courseKeyDropdown.addEventListener('change', () => {
-                const selectedKey = courseKeyDropdown.value.trim();
-                if (selectedKey === 'new') {
-                    newCourseKeyInput.style.display = 'block';
-                    newCourseKeyInput.required = true;
-                    courseTitleInput.value = '';
-                    courseDetailsInput.value = '';
-                    coursePriceInput.value = '';
-                    courseStatusInput.value = 'current';
-                    courseDeliveryInput.value = 'inperson';
-                } else {
-                    newCourseKeyInput.style.display = 'none';
-                    newCourseKeyInput.required = false;
-
-                    const selectedCourse = courses[selectedKey];
-                    if (selectedCourse) {
-                        courseTitleInput.value = selectedCourse.title || '';
-                        courseDetailsInput.value = selectedCourse.description || '';
-                        coursePriceInput.value = selectedCourse.price || '';
-                        courseStatusInput.value = selectedCourse.status || 'current';
-                        courseDeliveryInput.value = selectedCourse.delivery || 'inperson';
-
-                    }
-                }
-            });
         });
+          
 
         document.getElementById('courseForm').addEventListener('submit', async (e) => {
             e.preventDefault();

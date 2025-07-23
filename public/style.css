@@ -540,6 +540,37 @@ body {
 }
 
 
+/*Edit courses buttons from chatgpt*/
+#courseButtonsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .course-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .course-button:hover {
+    background-color: #005fa3;
+  }
+  
+  .course-button.new {
+    background-color: #28a745;
+  }
+  
+  .course-button.new:hover {
+    background-color: #218838;
+  }
+  
+
+
 /*Messages page*/
 .messages-container {
     background-color: #d2d2d2d7;
