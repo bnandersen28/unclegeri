@@ -414,7 +414,6 @@ body {
     padding: 20px;
     height: auto;
     color: #424bac;
-    margin-top: 20px;
 }
 
 #courseForm {
@@ -923,7 +922,7 @@ textarea {
 .chris-image-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;/
+    justify-content: center;
     align-items: center;
     width: 25%;
     background-color: #424bac;
