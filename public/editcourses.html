@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
+    <link rel="stylesheet" href="style.css">
     <title>Edit Courses</title>
-    <div class = "header">
+    <div class="header">
         <div class="header-top"></div>
-        <div class = "header-content">
-     
+        <div class="header-content">
+
             <div class="nav-left">
-            <a href="courses.html"><button>Courses</button></a>
-            <a href="register.html"><button>Register</button></a>
+                <a href="courses.html"><button>Courses</button></a>
+                <a href="register.html"><button>Register</button></a>
             </div>
-           
-           
+
+
             <div class="header-logo">
-            <img src = "imgs/logo.png" alt="Logo">
+                <img src="imgs/logo.png" alt="Logo">
             </div>
-            
+
             <div class="nav-right">
-            <a href="faq.html"><button>FAQs</button></a>
-            <a href="connect.html"><button>Connect</button></a>
+                <a href="faq.html"><button>FAQs</button></a>
+                <a href="connect.html"><button>Connect</button></a>
             </div>
-            
-    
-        </div>  
-    
+
+
+        </div>
+
     </div>
 
 </head>
+
 <body>
     <div class="edit-course-container">
         <div class="back-button-container">
@@ -37,132 +39,159 @@
                 &#8592; Back to Admin Dashboard
             </button>
         </div>
-    <h1>Edit or Add Course</h1>
-    <p>To add new lines in course details, use \n at the end of a sentence</p>
-  
-    <form id="courseForm">
-      <label for="courseKey">Course Key</label>
-      <select id="courseKeyDropdown" required>
+        <h1>Edit or Add Course</h1>
+        <p>To add new lines in course details, use \n at the end of a sentence</p>
 
-      </select>
-      <input type="text" id="newCourseKey" placeholder="Enter new course key" style="display: none;"/>
-  
-      <label for="courseTitle">Course Title</label>
-      <input type="text" id="courseTitle" required/>
-  
-      <label for="courseDetails">Course Details</label>
-      <textarea id="courseDetails" required></textarea>
-  
-      <button type="submit">Save Course</button>
-    </form>
-  </div>
+        <form id="courseForm">
+            <label for="courseKey">Course Key</label>
+            <select id="courseKeyDropdown" required>
+
+            </select>
+            <input type="text" id="newCourseKey" placeholder="Enter new course key" style="display: none;" />
+
+            <label for="courseTitle">Course Title</label>
+            <input type="text" id="courseTitle" required />
+
+            <label for="courseDetails">Course Details</label>
+            <textarea id="courseDetails" required></textarea>
+
+            <label for="coursePrice">Price ($)</label>
+            <input type="number" id="coursePrice" step="0.01" required/>
+
+            <label for"courseStatus">Status</label>
+            <select id="courseStatus" required>
+                <option value="current">Current</option>
+                <option value="coming">Coming</option>
+            </select>
+
+            <label for"courseDelivery">Delivery Method</label>
+            <select id="courseDelivery" required>
+                <option value="inperson">In Person</option>
+                <option value="online">Online</option>
+            </select>
+
+            <button type="submit">Save Course</button>
+        </form>
+    </div>
     <div id="message"></div>
-  
+
     <script>
-      const backend = 'https://unclegeri-backend.onrender.com';
+        const backend = 'https://unclegeri-backend.onrender.com';
         let courses = {};
 
 
-    document.addEventListener('DOMContentLoaded', async ()=>{
-        const courseKeyDropdown = document.getElementById('courseKeyDropdown');
-        const newCourseKeyInput = document.getElementById('newCourseKey');
-        const courseTitleInput = document.getElementById('courseTitle');
-        const courseDetailsInput = document.getElementById('courseDetails');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const courseKeyDropdown = document.getElementById('courseKeyDropdown');
+            const newCourseKeyInput = document.getElementById('newCourseKey');
+            const courseTitleInput = document.getElementById('courseTitle');
+            const courseDetailsInput = document.getElementById('courseDetails');
+            const coursePriceInput = document.getElementById('coursePrice');
+            const courseStatusInput = document.getElementById('courseStatus');
+            const courseDeliveryInput = document.getElementById('courseDelivery');
 
-        const newOption = document.createElement('option');
-        newOption.value = 'new';
-        newOption.textContent = 'Add New Course';
-        courseKeyDropdown.appendChild(newOption);
-        courseKeyDropdown.value = 'new';
-        newCourseKeyInput.style.display = 'block';
-        newCourseKeyInput.required = true;
+            const newOption = document.createElement('option');
+            newOption.value = 'new';
+            newOption.textContent = 'Add New Course';
+            courseKeyDropdown.appendChild(newOption);
+            courseKeyDropdown.value = 'new';
+            newCourseKeyInput.style.display = 'block';
+            newCourseKeyInput.required = true;
 
 
-        try{
-            const res= await fetch(`${backend}/api/courses`);
-            const data = await res.json();
+            try {
+                const res = await fetch(`${backend}/api/courses`);
+                const data = await res.json();
 
-            data.forEach(course => {
-                courses[course.course_key] = course;
-                const option = document.createElement('option');
-                option.value = course.course_key;
-                option.textContent = course.course_key;
-                courseKeyDropdown.insertBefore(option, newOption);
-            });
+                data.forEach(course => {
+                    courses[course.course_key] = course;
+                    const option = document.createElement('option');
+                    option.value = course.course_key;
+                    option.textContent = course.course_key;
+                    courseKeyDropdown.insertBefore(option, newOption);
+                });
 
-        }catch (err) {
-            console.error('Failed to fetch courses:', err);
-            document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
-        }
-        courseKeyDropdown.addEventListener('change', ()=>{
-            const selectedKey = courseKeyDropdown.value.trim();
-            if(selectedKey === 'new'){
-                newCourseKeyInput.style.display = 'block';
-                newCourseKeyInput.required = true;
-                courseTitleInput.value = '';
-                courseDetailsInput.value = '';
-            }else{
-                newCourseKeyInput.style.display = 'none';
-                newCourseKeyInput.required = false;
-
-                const selectedCourse = courses[selectedKey];
-                if(selectedCourse){
-                    courseTitleInput.value = selectedCourse.title || '';
-                    courseDetailsInput.value = selectedCourse.description || '';
-
+            } catch (err) {
+                console.error('Failed to fetch courses:', err);
+                document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
             }
-        }
+            courseKeyDropdown.addEventListener('change', () => {
+                const selectedKey = courseKeyDropdown.value.trim();
+                if (selectedKey === 'new') {
+                    newCourseKeyInput.style.display = 'block';
+                    newCourseKeyInput.required = true;
+                    courseTitleInput.value = '';
+                    courseDetailsInput.value = '';
+                    coursePriceInput.value = '';
+                    courseStatusInput.value = 'current';
+                    courseDeliveryInput.value = 'inperson';
+                } else {
+                    newCourseKeyInput.style.display = 'none';
+                    newCourseKeyInput.required = false;
+
+                    const selectedCourse = courses[selectedKey];
+                    if (selectedCourse) {
+                        courseTitleInput.value = selectedCourse.title || '';
+                        courseDetailsInput.value = selectedCourse.description || '';
+                        coursePriceInput.value = selectedCourse.price || '';
+                        courseStatusInput.value = selectedCourse.status || 'current';
+                        courseDeliveryInput.value = selectedCourse.delivery || 'inperson';
+
+                    }
+                }
+            });
         });
-    });
 
-      document.getElementById('courseForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-  
-        const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
-        const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
-        const title = document.getElementById('courseTitle').value.trim();
-        const details = document.getElementById('courseDetails').value.trim();
-  
-        const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
+        document.getElementById('courseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
+            const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
+            const title = document.getElementById('courseTitle').value.trim();
+            const description = document.getElementById('courseDetails').value.trim();
+            const price = parseFloat(document.getElementById('coursePrice').value.trim());
+            const status = document.getElementById('courseStatus').value;
+            const delivery = document.getElementById('courseDelivery').value;
+
+            const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
 
 
-        if (!key || !title || !details) {
-          document.getElementById('message').textContent = 'Please fill in all fields.';
-          return;
-        }
-        try{
-        const response = await fetch(`${backend}/api/courses`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ course_key: key, title, description:details })
+            if (!key || !title || !description) {
+                document.getElementById('message').textContent = 'Please fill in all fields.';
+                return;
+            }
+            try {
+                const response = await fetch(`${backend}/api/courses`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ course_key: key, title, description, price, status, delivery })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text(); // Read the error response as text
+                    console.error('Error response:', errorText);
+                    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+                    return;
+                }
+
+                const result = await response.json();
+
+                document.getElementById('message').textContent = result.message || 'Something went wrong.';
+            } catch (err) {
+                console.error('Error saving course:', err);
+                document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+            }
         });
-
-        if (!response.ok) {
-    const errorText = await response.text(); // Read the error response as text
-    console.error('Error response:', errorText);
-    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
-    return;
-  }
-  
-        const result = await response.json();
-  
-        document.getElementById('message').textContent = result.message || 'Something went wrong.';
-      }catch(err){
-        console.error('Error saving course:', err);
-        document.getElementById('message').textContent = 'Failed to save course. Please try again.';
-      }
-      });
     </script>
-  
-  </body>
-  <footer class="footer">
+
+</body>
+<footer class="footer">
     <div class="footer-section">
         <h3>Learn More</h3>
         <a href="courses.html">Courses</a>
         <a href="faqs.html">FAQs</a>
     </div>
     <div class="footer-section">
-        <button onclick ="window.location.href='register.html'">Register Now!</button>
+        <button onclick="window.location.href='register.html'">Register Now!</button>
     </div>
     <div class="footer-section">
         <a href="connect.html" class="footer-icon">
@@ -176,4 +205,5 @@
     </div>
     </div>
 </footer>
+
 </html>
