@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/markdown/lib/markdown.min.js"></script>
     <title>Courses</title>
 </head>
 
@@ -37,7 +38,6 @@
         <div class="courses-boxes">
             <h2>In-person</h2>
             <div class="courses-items" id="inPersonCourses">
-
             </div>
         </div>
         <div class="courses-boxes">
@@ -47,6 +47,7 @@
 
             </div>
         </div>
+        <div id="course-details" class="course-details-container"></div>
     </div>
     </div>
 
@@ -97,6 +98,17 @@
                     <h2>${emoji}</h2>
                     <h2>${course.title}</h2>
                 `;
+
+                courseEl.addEventListener('click', () => {
+                    const markdownHTML = markdown.toHTML(course.description || '');
+                    detailsContainer.innerHTML = `
+                        <h2>${emoji} ${course.title}</h2>
+                        <div class="course-description">${markdownHTML}</div>
+                     `;
+                    // Scroll to the details section
+                    detailsContainer.scrollIntoView({ behavior: 'smooth' });
+                });
+
 
                 if (course.delivery === 'online') {
                     onlineContainer.appendChild(courseEl);
