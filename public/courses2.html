@@ -36,40 +36,18 @@
         <h2>Courses offered</h2>
         <div class="courses-boxes">
             <h2>In-person</h2>
-            <div class="courses-items">
-                <div class="courses-item">
-                    <h2>🚗</h2>
-                    <h2>Behind the Wheel</h2>
-                </div>
-                <div class="courses-item">
-                    <h2>👨‍🏫</h2>
-                    <h2>1-on-1 Lessons</h2>
-                </div>
-                <div class="courses-item">
-                    <h2>🛻</h2>
-                    <h2>Road Test Vehicle Use</h2>
-                </div>
-            </div>
-            </div>
-            <div class="courses-boxes">
-                <h2>Online (Coming Soon)</h2>
-                <div class="courses-items">
-                    <div class="courses-item">
-                            <h2>🖥️</h2>
-                            <h2>Online Driver's Education</h2>
-                    </div>
-                    <div class="courses-item">
-                        <h2> ⚠️</h2>
-                        <h2>Online Driver Improvement</h2>
-                    </div>
-                    <div class="courses-item">
-                        <h2> ❌ </h2>
-                        <h2>Online Driver's Manual (3x failure)</h2>
-                    </div>
+            <div class="courses-items" id="inPersonCourses">
 
-                </div>
             </div>
         </div>
+        <div class="courses-boxes" id="onlineCourses">
+            <h2>Online (Coming Soon)</h2>
+            <div class="courses-items">
+
+
+            </div>
+        </div>
+    </div>
     </div>
 
 
@@ -96,3 +74,38 @@
     </footer>
 
 </html>
+
+<script>
+    const backend = 'https://unclegeri-backend.onrender.com';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const res = await fetch(`${backend}/api/courses`);
+            const data = await res.json();
+
+            const inPersonContainer = document.getElementById('inPersonCourses');
+            const onlineContainer = document.getElementById('onlineCourses');
+
+            data.forEach(course => {
+                const courseEl = document.createElement('div');
+                courseEl.className = 'courses-item';
+
+                // Optional emoji logic (or you can skip it)
+                const emoji = course.delivery === 'online' ? '🖥️' : '🚗';
+
+                courseEl.innerHTML = `
+                    <h2>${emoji}</h2>
+                    <h2>${course.title}</h2>
+                `;
+
+                if (course.delivery === 'online') {
+                    onlineContainer.appendChild(courseEl);
+                } else {
+                    inPersonContainer.appendChild(courseEl);
+                }
+            });
+        } catch (err) {
+            console.error('Failed to load courses:', err);
+        }
+    });
+</script>
