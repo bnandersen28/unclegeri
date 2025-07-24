@@ -69,7 +69,7 @@
 
                     const button = document.createElement('button');
                     button.textContent = course.title;
-                    button.onclick = () => showDescription(course.course_key);
+                    button.onclick = () => showDescription(course.id);
                     sidebar.appendChild(button);
                 });
 
@@ -84,9 +84,9 @@
             }
         }
 
-        function showDescription(courseKey) {
+        function showDescription(courseId) {
 
-            const course = descriptionsd[id]; // Retrieve the course from the descriptions object
+            const course = descriptions[id]; // Retrieve the course from the descriptions object
             const titleEl = document.getElementById('course-title');
             const detailsEl = document.getElementById('course-details');
 
