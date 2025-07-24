@@ -743,8 +743,9 @@ textarea {
     color: white;
     text-align: center;
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     padding: 20px;
+    margin: 10px;
     height: auto;
     border: 2px solid black;
     border-radius: 15px;
