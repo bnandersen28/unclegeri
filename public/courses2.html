@@ -40,6 +40,17 @@
             <div class="courses-items" id="inPersonCourses">
             </div>
         </div>
+        <div class="hidden-content-container" id="hiddenContent">
+            <div class="hidden-content">
+                <div class="hidden-textbox">
+                    <img id="contentImage" src="" alt="Content Image">
+                    <div class="hidden-border">
+                        <h2 id="contentHeader"></h2>
+                        <p id="contentDescription"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="courses-boxes">
             <h2>Online (Coming Soon)</h2>
             <div class="courses-items" id="onlineCourses">
@@ -47,7 +58,16 @@
 
             </div>
         </div>
-        <div id="course-details" class="course-details-container"></div>
+        <div class="hidden-content-container" id="hiddenContent">
+            <div class="hidden-content">
+                <div class="hidden-textbox">
+                    <div class="hidden-border">
+                        <h2 id="contentHeader"></h2>
+                        <p id="contentDescription"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 
@@ -86,7 +106,7 @@
 
             const inPersonContainer = document.getElementById('inPersonCourses');
             const onlineContainer = document.getElementById('onlineCourses');
-            const detailsContainer = document.getElementById('course-details');
+            const detailsContainer = document.getElementById('hiddenContent');
 
             data.forEach(course => {
                 const courseEl = document.createElement('div');
@@ -104,7 +124,7 @@
                     const markdownHTML = markdown.toHTML(course.description || '');
                     detailsContainer.innerHTML = `
                         <h2>${emoji} ${course.title}</h2>
-                        <div class="course-description">${markdownHTML}</div>
+                        <div id="contentDescription">${markdownHTML}</div>
                      `;
                     // Scroll to the details section
                     detailsContainer.scrollIntoView({ behavior: 'smooth' });
@@ -122,12 +142,7 @@
         }
         
     });
-    courseKeyDropdown.addEventListener('change', () => {
-    if (courseKeyDropdown.value === 'new') {
-        newCourseKeyInput.style.display = 'block';
-    } else {
-        newCourseKeyInput.style.display = 'none';
-    }
-});
+
+
 
 </script>
