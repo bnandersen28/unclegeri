@@ -156,7 +156,7 @@
             // Prepare payload with id if editing, else without id to add new course
             const payload = { title, description, price, status, delivery };
             if (currentlyEditingCourseId) {
-                payload.id = currentlyEditingCourseId;
+                payload.id = curr;
             }
 
             try {
