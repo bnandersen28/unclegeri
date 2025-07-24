@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Edit Courses</title>
 </head>
+
 <body>
     <div class="header">
         <div class="header-top"></div>
@@ -52,7 +53,7 @@
         <form id="courseForm" style="display: none;">
             <label for="courseKey">Course Key</label>
             <select id="courseKeyDropdown" required>
-
+                <option value="new">+ New Course</option>
             </select>
             <input type="text" id="newCourseKey" placeholder="Enter new course key" style="display: none;" />
 
@@ -131,10 +132,16 @@
                 data.forEach(course => {
                     courses[course.course_key] = course;
                     const btn = document.createElement('button');
-                    btn.textContent = course.title|| course.course_key;
+                    btn.textContent = course.title || course.course_key;
                     btn.className = 'course-button';
-                    btn.addEventListener('click', ()=> showForm(course));
+                    btn.addEventListener('click', () => showForm(course));
                     courseButtonsContainer.appendChild(btn);
+
+                    // Add to dropdown
+                    const option = document.createElement('option');
+                    option.value = course.course_key;
+                    option.textContent = course.course_key;
+                    courseKeyDropdown.appendChild(option);
                 });
 
             } catch (err) {
@@ -142,7 +149,7 @@
                 document.getElementById('message').textContent = 'Could not load course information. Please try again later.';
             }
         });
-          
+
 
         document.getElementById('courseForm').addEventListener('submit', async (e) => {
             e.preventDefault();
