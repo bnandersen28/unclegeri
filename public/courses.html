@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/markdown/lib/markdown.min.js"></script>
     <title>Courses</title>
+</head>
 
+<body>
     <div class="header">
         <div class="header-top"></div>
         <div class="header-content">
@@ -30,104 +33,113 @@
         </div>
 
     </div>
-</head>
-
-<body>
-    <div class="main-courses">
-        <div class="courses-sidebar">
-
-            <button onclick="showDescription('behind-the-wheel')">Behind the Wheel</button>
-            <button onclick="showDescription('1-1')">1-1 In Car Lessons </button>
-            <button onclick="showDescription('adult')">Adult DMV road test</button>
-
+    <div class="courses-container">
+        <h2>Courses offered</h2>
+        <div class="courses-boxes">
+            <h2>In-person</h2>
+            <div class="courses-items" id="inPersonCourses">
+            </div>
         </div>
-        <div class="course-description">
-            <h2 id="course-title">Behind the Wheel</h2>
-            <p id="course-details">This course provides comprehensive behind-the-wheel training for new drivers,
-                focusing on practical skills and road safety.</p>
+        <div class="hidden-content-container" id="inPersonDetails" style="display:block"></div>
+        <div class="courses-boxes">
+            <h2>Online (Coming Soon)</h2>
+            <div class="courses-items" id="onlineCourses">
+
+            </div>
         </div>
-    </div>
-
-    <script>
-        let descriptions = {};
-
-        async function fetchCourses() {
-            try {
-                const res = await fetch('https://unclegeri-backend.onrender.com/api/courses');
-                const data = await res.json();
-                console.log('Fetched courses:', data);
-
-                descriptions = {};
-                const sidebar = document.querySelector('.courses-sidebar');
-                sidebar.innerHTML = ''; // Clear sidebar buttons  ???
-
-                data.forEach(course => {
-                    descriptions[course.id] = {
-                        title: course.title,
-                        details: course.description
-                    };
-
-                    const button = document.createElement('button');
-                    button.textContent = course.title;
-                    button.onclick = () => showDescription(course.id);
-                    sidebar.appendChild(button);
-                });
-
-                // Show first course by default
-                if (data.length > 0) {
-                    showDescription(data[0].id);
-                }
-            } catch (err) {
-                console.error('Failed to fetch courses:', err);
-                document.querySelector('.course-description').innerHTML =
-                    '<p>Could not load course information. Please try again later.</p>';
-            }
-        }
-
-        function showDescription(courseId) {
-
-            const course = descriptions[courseId]; // Retrieve the course from the descriptions object
-            const titleEl = document.getElementById('course-title');
-            const detailsEl = document.getElementById('course-details');
-
-            if (!titleEl || !detailsEl) {
-                console.error('Elements not found in DOM');
-                return;
-            }
-
-            if (!course || !course.title || !course.details) {
-                titleEl.textContent = 'Course Not Found';
-                detailsEl.innerHTML = '';
-                return;
-            }
-
-            titleEl.textContent = course.title;
-            detailsEl.innerHTML = course.details.replace(/\\n/g, '<br>');
-        }
-        //Set default course description
-        document.addEventListener('DOMContentLoaded', fetchCourses);
-    </script>
-</body>
-<footer class="footer">
-    <div class="footer-section">
-        <h3>Learn More</h3>
-        <a href="courses.html">Courses</a>
-        <a href="faqs.html">FAQs</a>
-    </div>
-    <div class="footer-section">
-        <button onclick="window.location.href='register.html'">Register Now!</button>
-    </div>
-    <div class="footer-section">
-        <a href="connect.html" class="footer-icon">
-            <img src="imgs/message.png" alt="Connect">
-        </a>
-    </div>
-    <div class="footer-section">
-        <a href="index.html" class="footer-icon">
-            <img src="imgs/home.png" alt="Home">
-        </a>
+        <div class="hidden-content-container" id="onlineDetails" style="display:block"></div>
     </div>
     </div>
-</footer>
+
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Learn More</h3>
+            <a href="courses.html">Courses</a>
+            <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-section">
+            <button onclick="window.location.href='register.html'">Register Now!</button>
+        </div>
+        <div class="footer-section">
+            <a href="connect.html" class="footer-icon">
+                <img src="imgs/message.png" alt="Connect">
+            </a>
+        </div>
+        <div class="footer-section">
+            <a href="index.html" class="footer-icon">
+                <img src="imgs/home.png" alt="Home">
+            </a>
+        </div>
+        </div>
+    </footer>
 
 </html>
+
+<script>
+    const backend = 'https://unclegeri-backend.onrender.com';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const res = await fetch(`${backend}/api/courses`);
+            const data = await res.json();
+
+            const inPersonContainer = document.getElementById('inPersonCourses');
+            const onlineContainer = document.getElementById('onlineCourses');
+            const inPersonDetails = document.getElementById('inPersonDetails');
+            const onlineDetails = document.getElementById('onlineDetails');
+
+
+            data.forEach(course => {
+                const courseEl = document.createElement('div');
+                courseEl.className = 'courses-item';
+
+
+                courseEl.innerHTML = `
+                    <h2>${course.title}</h2>
+                `;
+
+                courseEl.addEventListener('click', () => {
+                    const markdownHTML = markdown.toHTML(course.description || '');
+                    const detailsHTML = `
+                    <div class="hidden-content" style="display: block;"> 
+                        <div class="hidden-textbox">
+                            <div class="hidden-border">
+                                <h2>${course.title}</h2>
+                                <p>${markdownHTML}<p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+               
+
+                // Clear both details areas
+                inPersonDetails.innerHTML = '';
+                onlineDetails.innerHTML = '';
+
+                if(course.delivery=='online'){
+                    onlineDetails.innerHTML = detailsHTML;
+                    onlineDetails.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    inPersonDetails.innerHTML = detailsHTML;
+                    inPersonDetails.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                });
+
+
+                if (course.delivery === 'online') {
+                    onlineContainer.appendChild(courseEl);
+                } else {
+                    inPersonContainer.appendChild(courseEl);
+                }
+            });
+        } catch (err) {
+            console.error('Failed to load courses:', err);
+        }
+
+    });
+
+
+
+</script>
