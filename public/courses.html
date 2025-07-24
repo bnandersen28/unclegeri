@@ -40,7 +40,7 @@
             <div class="courses-items" id="inPersonCourses">
             </div>
         </div>
-        <div class="hidden-content-container" id="inPersonDetails" style="display:block"></div>
+        <div class="hidden-content-container" id="inPersonDetails"></div>
         <div class="courses-boxes">
             <h2>Online (Coming Soon)</h2>
             <div class="courses-items" id="onlineCourses">
@@ -88,6 +88,7 @@
             const onlineContainer = document.getElementById('onlineCourses');
             const inPersonDetails = document.getElementById('inPersonDetails');
             const onlineDetails = document.getElementById('onlineDetails');
+            const hiddenContent = document.querySelector('.hidden-content-container');
 
 
             data.forEach(course => {
@@ -116,7 +117,7 @@
                 // Clear both details areas
                 inPersonDetails.innerHTML = '';
                 onlineDetails.innerHTML = '';
-
+                hiddenContent.style.display = 'block';
                 if(course.delivery=='online'){
                     onlineDetails.innerHTML = detailsHTML;
                     onlineDetails.scrollIntoView({ behavior: 'smooth' });
