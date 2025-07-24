@@ -58,7 +58,7 @@
             <label for="coursePrice">Price ($)</label>
             <input type="number" id="coursePrice" step="0.01" required />
 
-            <label for"courseStatus">Status</label>
+            <label for="courseStatus">Status</label>
             <select id="courseStatus" required>
                 <option value="current">Current</option>
                 <option value="coming">Coming</option>
@@ -98,14 +98,14 @@
             function showForm(course = null) {
                 courseForm.style.display = 'block';
                 if (!course) {
-                    newCourseKeyInput.value = '';
+                    curr= null;
                     courseTitleInput.value = '';
                     courseDetailsInput.value = '';
                     coursePriceInput.value = '';
                     courseStatusInput.value = 'current';
                     courseDeliveryInput.value = 'inperson';
                 } else {
-                    newCourseKeyInput.disabled = true;
+                    curr= course.id;
                     newCourseKeyInput.value = course.course_key;
                     courseTitleInput.value = course.title || '';
                     courseDetailsInput.value = course.description || '';
