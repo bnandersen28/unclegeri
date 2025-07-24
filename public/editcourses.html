@@ -81,14 +81,14 @@
     <script>
         const backend = 'https://unclegeri-backend.onrender.com';
         let courses = {};
-
+        let curr = null;
 
         document.addEventListener('DOMContentLoaded', async () => {
             const courseButtonsContainer = document.getElementById('courseButtonsContainer');
             const courseForm = document.getElementById('courseForm');
             const newCourseBtn = document.getElementById('newCourseBtn');
 
-         
+
             const courseTitleInput = document.getElementById('courseTitle');
             const courseDetailsInput = document.getElementById('courseDetails');
             const coursePriceInput = document.getElementById('coursePrice');
@@ -129,12 +129,6 @@
                     btn.className = 'course-button';
                     btn.addEventListener('click', () => showForm(course));
                     courseButtonsContainer.appendChild(btn);
-
-                    // Add to dropdown
-                    const option = document.createElement('option');
-                    option.value = course.course_key;
-                    option.textContent = course.course_key;
-                    courseKeyDropdown.appendChild(option);
                 });
 
             } catch (err) {
@@ -143,51 +137,51 @@
             }
         });
 
-        courseKeyDropdown.addEventListener('change', () => {
-            if (courseKeyDropdown.value === 'new') {
-                newCourseKeyInput.style.display = 'block';
-            } else {
-                newCourseKeyInput.style.display = 'none';
+
+        document.getElementById('courseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('courseTitle').value.trim();
+            const description = document.getElementById('courseDetails').value.trim();
+            const price = parseFloat(document.getElementById('coursePrice').value.trim());
+            const status = document.getElementById('courseStatus').value;
+            const delivery = document.getElementById('courseDelivery').value;
+
+
+
+            if (!title || !description) {
+                document.getElementById('message').textContent = 'Please fill in all fields.';
+                return;
             }
-        });
-            document.getElementById('courseForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
 
-                const title = document.getElementById('courseTitle').value.trim();
-                const description = document.getElementById('courseDetails').value.trim();
-                const price = parseFloat(document.getElementById('coursePrice').value.trim());
-                const status = document.getElementById('courseStatus').value;
-                const delivery = document.getElementById('courseDelivery').value;
+            // Prepare payload with id if editing, else without id to add new course
+            const payload = { title, description, price, status, delivery };
+            if (currentlyEditingCourseId) {
+                payload.id = currentlyEditingCourseId;
+            }
 
-                const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
+            try {
+                const response = await fetch(`${backend}/api/courses`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-
-                if ( !title || !description) {
-                    document.getElementById('message').textContent = 'Please fill in all fields.';
+                if (!response.ok) {
+                    const errorText = await response.text(); // Read the error response as text
+                    console.error('Error response:', errorText);
+                    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
                     return;
                 }
-                try {
-                    const response = await fetch(`${backend}/api/courses`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ course_key: key, title, description, price, status, delivery })
-                    });
 
-                    if (!response.ok) {
-                        const errorText = await response.text(); // Read the error response as text
-                        console.error('Error response:', errorText);
-                        document.getElementById('message').textContent = 'Failed to save course. Please try again.';
-                        return;
-                    }
+                const result = await response.json();
 
-                    const result = await response.json();
-
-                    document.getElementById('message').textContent = result.message || 'Something went wrong.';
-                } catch (err) {
-                    console.error('Error saving course:', err);
-                    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
-                }
-            });
+                document.getElementById('message').textContent = result.message || 'Something went wrong.';
+            } catch (err) {
+                console.error('Error saving course:', err);
+                document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+            }
+        });
     </script>
 
 </body>
