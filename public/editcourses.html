@@ -51,11 +51,6 @@
         </div>
 
         <form id="courseForm" style="display: none;">
-            <label for="courseKey">Course Key</label>
-            <select id="courseKeyDropdown">
-                <option value="new">+ New Course</option>
-            </select>
-            <input type="text" id="newCourseKey" placeholder="Enter new course key" style="display: none;" />
 
             <label for="courseTitle">Course Title</label>
             <input type="text" id="courseTitle" required />
@@ -76,7 +71,7 @@
             </select>
 
             <label for="courseDetails">Course Details</label>
-            <textarea id="courseDetails" required></textarea>
+            <textarea rows="10" cols="50" id="courseDetails" required></textarea>
 
             <button type="submit">Save Course</button>
         </form>
@@ -93,8 +88,7 @@
             const courseForm = document.getElementById('courseForm');
             const newCourseBtn = document.getElementById('newCourseBtn');
 
-            const courseKeyDropdown = document.getElementById('courseKeyDropdown');
-            const newCourseKeyInput = document.getElementById('newCourseKey');
+         
             const courseTitleInput = document.getElementById('courseTitle');
             const courseDetailsInput = document.getElementById('courseDetails');
             const coursePriceInput = document.getElementById('coursePrice');
@@ -104,7 +98,6 @@
             function showForm(course = null) {
                 courseForm.style.display = 'block';
                 if (!course) {
-                    newCourseKeyInput.disabled = false;
                     newCourseKeyInput.value = '';
                     courseTitleInput.value = '';
                     courseDetailsInput.value = '';
@@ -160,8 +153,6 @@
             document.getElementById('courseForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
-                const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
                 const title = document.getElementById('courseTitle').value.trim();
                 const description = document.getElementById('courseDetails').value.trim();
                 const price = parseFloat(document.getElementById('coursePrice').value.trim());
@@ -171,7 +162,7 @@
                 const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
 
 
-                if (!key || !title || !description) {
+                if ( !title || !description) {
                     document.getElementById('message').textContent = 'Please fill in all fields.';
                     return;
                 }
