@@ -120,5 +120,14 @@
         } catch (err) {
             console.error('Failed to load courses:', err);
         }
+        
     });
+    courseKeyDropdown.addEventListener('change', () => {
+    if (courseKeyDropdown.value === 'new') {
+        newCourseKeyInput.style.display = 'block';
+    } else {
+        newCourseKeyInput.style.display = 'none';
+    }
+});
+
 </script>
