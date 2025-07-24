@@ -60,9 +60,6 @@
             <label for="courseTitle">Course Title</label>
             <input type="text" id="courseTitle" required />
 
-            <label for="courseDetails">Course Details</label>
-            <textarea id="courseDetails" required></textarea>
-
             <label for="coursePrice">Price ($)</label>
             <input type="number" id="coursePrice" step="0.01" required />
 
@@ -77,6 +74,9 @@
                 <option value="inperson">In Person</option>
                 <option value="online">Online</option>
             </select>
+
+            <label for="courseDetails">Course Details</label>
+            <textarea id="courseDetails" required></textarea>
 
             <button type="submit">Save Course</button>
         </form>
@@ -150,47 +150,53 @@
             }
         });
 
-
-        document.getElementById('courseForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
-            const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
-            const title = document.getElementById('courseTitle').value.trim();
-            const description = document.getElementById('courseDetails').value.trim();
-            const price = parseFloat(document.getElementById('coursePrice').value.trim());
-            const status = document.getElementById('courseStatus').value;
-            const delivery = document.getElementById('courseDelivery').value;
-
-            const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
-
-
-            if (!key || !title || !description) {
-                document.getElementById('message').textContent = 'Please fill in all fields.';
-                return;
-            }
-            try {
-                const response = await fetch(`${backend}/api/courses`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ course_key: key, title, description, price, status, delivery })
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text(); // Read the error response as text
-                    console.error('Error response:', errorText);
-                    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
-                    return;
-                }
-
-                const result = await response.json();
-
-                document.getElementById('message').textContent = result.message || 'Something went wrong.';
-            } catch (err) {
-                console.error('Error saving course:', err);
-                document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+        courseKeyDropdown.addEventListener('change', () => {
+            if (courseKeyDropdown.value === 'new') {
+                newCourseKeyInput.style.display = 'block';
+            } else {
+                newCourseKeyInput.style.display = 'none';
             }
         });
+            document.getElementById('courseForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const courseKeyDropdown = document.getElementById('courseKeyDropdown').value.trim();
+                const newCourseKeyInput = document.getElementById('newCourseKey').value.trim();
+                const title = document.getElementById('courseTitle').value.trim();
+                const description = document.getElementById('courseDetails').value.trim();
+                const price = parseFloat(document.getElementById('coursePrice').value.trim());
+                const status = document.getElementById('courseStatus').value;
+                const delivery = document.getElementById('courseDelivery').value;
+
+                const key = courseKeyDropdown === 'new' ? newCourseKeyInput : courseKeyDropdown;
+
+
+                if (!key || !title || !description) {
+                    document.getElementById('message').textContent = 'Please fill in all fields.';
+                    return;
+                }
+                try {
+                    const response = await fetch(`${backend}/api/courses`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ course_key: key, title, description, price, status, delivery })
+                    });
+
+                    if (!response.ok) {
+                        const errorText = await response.text(); // Read the error response as text
+                        console.error('Error response:', errorText);
+                        document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    document.getElementById('message').textContent = result.message || 'Something went wrong.';
+                } catch (err) {
+                    console.error('Error saving course:', err);
+                    document.getElementById('message').textContent = 'Failed to save course. Please try again.';
+                }
+            });
     </script>
 
 </body>
