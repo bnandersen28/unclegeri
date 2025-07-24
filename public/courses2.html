@@ -40,17 +40,7 @@
             <div class="courses-items" id="inPersonCourses">
             </div>
         </div>
-        <div class="hidden-content-container" id="hiddenContent">
-            <div class="hidden-content">
-                <div class="hidden-textbox">
-                    <img id="contentImage" src="" alt="Content Image">
-                    <div class="hidden-border">
-                        <h2 id="contentHeader"></h2>
-                        <p id="contentDescription"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="hidden-content-container" id="inPersonDetails"></div>
         <div class="courses-boxes">
             <h2>Online (Coming Soon)</h2>
             <div class="courses-items" id="onlineCourses">
@@ -58,16 +48,7 @@
 
             </div>
         </div>
-        <div class="hidden-content-container" id="hiddenContent">
-            <div class="hidden-content">
-                <div class="hidden-textbox">
-                    <div class="hidden-border">
-                        <h2 id="contentHeader"></h2>
-                        <p id="contentDescription"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="hidden-content-container" id="onlineDetails"></div>
     </div>
     </div>
 
@@ -106,7 +87,9 @@
 
             const inPersonContainer = document.getElementById('inPersonCourses');
             const onlineContainer = document.getElementById('onlineCourses');
-            const detailsContainer = document.getElementById('hiddenContent');
+            const inPersonDetails = document.getElementById('inPersonDetails');
+            const onlineDetails = document.getElementById('onlineDetails');
+
 
             data.forEach(course => {
                 const courseEl = document.createElement('div');
@@ -122,12 +105,30 @@
 
                 courseEl.addEventListener('click', () => {
                     const markdownHTML = markdown.toHTML(course.description || '');
-                    detailsContainer.innerHTML = `
-                        <h2>${emoji} ${course.title}</h2>
-                        <div id="contentDescription">${markdownHTML}</div>
-                     `;
-                    // Scroll to the details section
-                    detailsContainer.scrollIntoView({ behavior: 'smooth' });
+                    const detailsHTML = `
+                    <div class="hidden-content">
+                        <div class="hidden-textbox">
+                            <div class="hidden-border">
+                                <h2>${emoji} ${course.title}</h2>
+                                <div class="course-description">${markdownHTML}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+               
+
+                // Clear both details areas
+                inPersonDetails.innerHTML = '';
+                onlineDetails.innerHTML = '';
+
+                if(course.delivery=='online'){
+                    onlineDetails.innerHTML = detailsHTML;
+                    onlineDetails.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    inPersonDetails.innerHTML = detailsHTML;
+                    inPersonDetails.scrollIntoView({ behavior: 'smooth' });
+                }
+
                 });
 
 
@@ -140,7 +141,7 @@
         } catch (err) {
             console.error('Failed to load courses:', err);
         }
-        
+
     });
 
 
