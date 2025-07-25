@@ -896,6 +896,7 @@ textarea {
     align-items: center;
     justify-items: center;
     align-items: center;
+    position: relative;
 }
 
 .hidden-content-container.show {
@@ -1410,5 +1411,10 @@ textarea {
         text-align: center;
     }
 
-
+}
+@media (max-width: 1024px) {
+    .hidden-content {
+        justify-content: center; /* Ensure vertical centering */
+        align-items: center; /* Ensure horizontal centering */
+    }
 }
