@@ -1,69 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script>
+<script>
     if (localStorage.getItem('authenticated') !== 'true') {
-      alert('You must be logged in to access this page.');
-      window.location.href = 'login.html';
+        alert('You must be logged in to access this page.');
+        window.location.href = 'login.html';
     }
-    </script>
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
-    <title>Register</title>
-    <div class = "header">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin</title>
+</head>
+
+<body>
+    <div class="header">
         <div class="header-top"></div>
-        <div class = "header-content">
-     
+        <div class="header-content">
+
             <div class="nav-left">
-            <a href="courses.html"><button>Courses</button></a>
-            <a href="register.html"><button>Register</button></a>
+                <a href="courses.html"><button>Courses</button></a>
+                <a href="register.html"><button>Register</button></a>
             </div>
-           
-           
+
+
             <div class="header-logo">
-            <img src = "imgs/logo.png" alt="Logo">
+                <img src="imgs/logo.png" alt="Logo">
             </div>
-            
+
             <div class="nav-right">
-            <a href="faq.html"><button>FAQs</button></a>
-            <a href="connect.html"><button>Connect</button></a>
+                <a href="faq.html"><button>FAQs</button></a>
+                <a href="connect.html"><button>Connect</button></a>
             </div>
-            
-    
-        </div>  
-    
+
+
+        </div>
+
     </div>
 
-</head>
-<body>
     <div class="admin-container">
-      <h1>Admin Dashboard</h1>
-      <button onclick="window.location.href='messages.html'">View Messages</button>
-      <button onclick="window.location.href='registrations.html'">View Registrations</button>
-      <button onclick="window.location.href='editcourses.html'">Edit Courses</button>
-      <button onclick="window.location.href='editfaqs.html'">Edit FAQs</button>
+        <h1>Admin Dashboard</h1>
+        <button onclick="window.location.href='messages.html'">View Messages</button>
+        <button onclick="window.location.href='registrations.html'">View Registrations</button>
+        <button onclick="window.location.href='editcourses.html'">Edit Courses</button>
+        <button onclick="window.location.href='editfaqs.html'">Edit FAQs</button>
+        <button onclick="window.location.href='emails.html'">Edit Confirmation Emails</button>
     </div>
-    </body>
-    <footer class="footer">
-      <div class="footer-section">
-          <h3>Learn More</h3>
-          <a href="courses.html">Courses</a>
-          <a href="faqs.html">FAQs</a>
-      </div>
-      <div class="footer-section">
-          <button onclick ="window.location.href='register.html'">Register Now!</button>
-      </div>
-      <div class="footer-section">
-          <a href="connect.html" class="footer-icon">
-              <img src="imgs/message.png" alt="Connect">
-          </a>
-      </div>
-      <div class="footer-section">
-          <a href="index.html" class="footer-icon">
-              <img src="imgs/home.png" alt="Home">
-          </a>
-      </div>
-      </div>
-  </footer>
-    </html>
+</body>
+<footer class="footer">
+    <div class="footer-section">
+        <h3>Learn More</h3>
+        <a href="courses.html">Courses</a>
+        <a href="faqs.html">FAQs</a>
+    </div>
+    <div class="footer-section">
+        <button onclick="window.location.href='register.html'">Register Now!</button>
+    </div>
+    <div class="footer-section">
+        <a href="connect.html" class="footer-icon">
+            <img src="imgs/message.png" alt="Connect">
+        </a>
+    </div>
+    <div class="footer-section">
+        <a href="index.html" class="footer-icon">
+            <img src="imgs/home.png" alt="Home">
+        </a>
+    </div>
+    </div>
+</footer>
+
+</html>
