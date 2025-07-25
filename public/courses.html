@@ -115,14 +115,20 @@
                
 
                 // Clear both details areas
+                inPersonDetails.style.display = 'none';
+                onlineDetails.style.display = 'none';
+
                 inPersonDetails.innerHTML = '';
                 onlineDetails.innerHTML = '';
-                hiddenContent.style.display = 'block';
+
+              
                 if(course.delivery=='online'){
                     onlineDetails.innerHTML = detailsHTML;
+                    onlineDetails.style.display = 'block';
                     onlineDetails.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     inPersonDetails.innerHTML = detailsHTML;
+                    inPersonDetails.style.display = 'block';
                     inPersonDetails.scrollIntoView({ behavior: 'smooth' });
                 }
 
