@@ -10,7 +10,9 @@ body {
     width: auto;
     overflow-x: hidden;
     max-width: 100%;
-   
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 
 }
 
