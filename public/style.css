@@ -1413,6 +1413,7 @@ textarea {
 
     .courses-boxes{
         justify-content: center;
+        width: 90%;
     }
 
     .connect-container {
