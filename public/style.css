@@ -924,6 +924,8 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hidden-textbox {
@@ -1358,7 +1360,6 @@ textarea {
 
     .hidden-content {
         width: 95%;
-        margin-left: 10px;
     }
 
     .hidden-textbox {
