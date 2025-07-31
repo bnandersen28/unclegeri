@@ -896,7 +896,7 @@ textarea {
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    position: fixed;
+    position: relative;
 }
 
 .hidden-content-container.show {
