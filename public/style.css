@@ -1358,7 +1358,9 @@ textarea {
     }
 
     .hidden-content-container {
-        height: 56vh;
+        height: 75vh;
+        justify-content: center;
+        align-items: center;
     }
 
 
