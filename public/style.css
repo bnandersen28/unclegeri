@@ -1353,10 +1353,11 @@ textarea {
 
     .hidden-content {
         width: 95%;
+        margin-left: 15px;
     }
 
     .hidden-textbox {
-        width: 90%;
+        width: 85%;
     }
 
     .hidden-border {
@@ -1439,6 +1440,10 @@ textarea {
     .courses-boxes{
         justify-content: center;
         align-items: center;
+    }
+
+    .courses-item {
+        font-size: 15px;;
     }
 
 }
