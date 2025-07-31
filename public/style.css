@@ -940,6 +940,9 @@ textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-self: center;
 }
 
 .hidden-border {
@@ -1451,6 +1454,10 @@ textarea {
     .courses-boxes{
         justify-content: center;
         align-items: center;
+    }
+
+    .courses-container h2 {
+        font-size: 20px;
     }
 
     
