@@ -920,6 +920,7 @@ textarea {
     border-radius: 15px;
     background-color: #424bac;
     margin-top: 30px;
+    margin-bottom: 30px;
     justify-items: center;
     display: flex;
     justify-content: center;
@@ -1363,7 +1364,7 @@ textarea {
     }
 
     .hidden-textbox {
-        width: 85%;
+        width: 90%;
     }
 
     .hidden-border {
