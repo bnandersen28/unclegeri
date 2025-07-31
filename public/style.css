@@ -1353,12 +1353,12 @@ textarea {
     }
 
     .hidden-border {
-        font-size: 10px;
+        font-size: 12px;
         padding: 0;
     }
 
     .hidden-content-container {
-        height: 75vh;
+        height: 80vh;
         justify-content: center;
         align-items: center;
     }
