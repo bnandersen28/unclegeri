@@ -1365,7 +1365,6 @@ textarea {
     }
 
     .hidden-content-container {
-        height: 80vh;
         justify-content: center;
         align-items: center;
     }
@@ -1430,6 +1429,10 @@ textarea {
         align-items: center;
         height: auto;
         text-align: center;
+    }
+
+    .courses-container{
+        justify-content: center;
     }
 
 }
