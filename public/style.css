@@ -898,7 +898,10 @@ textarea {
 }
 
 .hidden-content-container.show {
-    display: flex;
+    display: flex; 
+    flex-direction: column; /* Ensures vertical centering */
+    justify-content: center;
+    align-items: center;
 }
 
 .hidden-content {
