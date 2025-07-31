@@ -1433,6 +1433,12 @@ textarea {
 
     .courses-container{
         justify-content: center;
+        align-items: center;
+    }
+
+    .courses-boxes{
+        justify-content: center;
+        align-items: center;
     }
 
 }
