@@ -703,7 +703,7 @@ textarea {
     align-items: center;
     background-color: black;
     padding: 20px;
-    justify-content: space-between;
+    justify-content: center;
     color: white;
     font-size: 20px;
     
@@ -909,7 +909,6 @@ textarea {
 }
 
 .hidden-content {
-    display: none;
     width: 85%;
     height: 90%;
     border-radius: 15px;
