@@ -118,6 +118,7 @@
     let locationId = '';
     let price;
     let isCardInitialized = false;
+    let card;
 
     // Fetch the App ID from the backend
     async function fetchConfig() {
@@ -190,13 +191,16 @@
         return;
       }
 
-      let card;
-      try {
-        card = await initializeCard(payments);
-      } catch (e) {
-        console.error('Initializing Card failed', e);
-        return;
+      if(!isCardInitialized){
+        try {
+          card = await initializeCard(payments);
+          isCardInitialized = true;
+        } catch (e) {
+          console.error('Initializing Card failed', e);
+          return;
+        }
       }
+    
 
       async function handlePaymentMethodSubmission(event, card) {
         event.preventDefault();
@@ -226,9 +230,9 @@
 
       const card = await payments.card();
       await card.attach('#card-container');
-      isCardInitialized = true;
       return card;
     }
+
 
 
     async function createPayment(token, price) {
