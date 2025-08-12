@@ -160,8 +160,7 @@
                     </form>
                 </div>
                 <div id="payment-status-container" class="payment-status-container" style="display: none;">
-                    <p id="success-message" class="success-message">Payment Successful! Please fill out the
-                        registration form below.</p>
+                    <p id="success-message" class="success-message">Payment Successful! </p>
                     <p id="failure-message" class="failure-message">Payment Failed. Please try again.</p>
                     <button id="continue-button" class="continue-button" style="display: none;">Continue to
                         Payment</button>
@@ -193,8 +192,6 @@
                     const data = await response.json();
                     appId = data.appId;
                     locationId = data.locationId;
-                    console.log('App ID fetched:', appId);
-                    console.log('Location ID fetched:', locationId);
                 } catch (error) {
                     console.error('Error fetching App ID:', error);
                 }
@@ -288,7 +285,7 @@
                     locationId,
                     sourceId: token,
                     idempotencyKey: window.crypto.randomUUID(),
-                    amount: Math.round(parseFloat(price)), // ✅ $25.00 → 2500 cents
+                    amount: Math.round(parseFloat(price*100)), // ✅ $25.00 → 2500 cents
 
                 });
 
