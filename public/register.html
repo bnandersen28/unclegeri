@@ -174,8 +174,6 @@
 
         <script>
             const backend = 'https://unclegeri-backend.onrender.com';
-            const appId = 'sq0idp-uRjd8UFJBtDRt_anka4W9A';
-            const locationId = 'L8S8K9BPNDMPF';
             const cardPayButton = document.getElementById('card-pay-button');
             const cardInfo = document.getElementById('card-info');
             const registerForm = document.getElementById('register-form');
@@ -183,8 +181,25 @@
 
 
             let card, payments;
+            let appId = '';
+            let locationId ='';
             let isCardInitialized = false;
             const price = "25.00"; //Need to convert to cents
+
+            // Fetch the App ID from the backend
+            async function fetchConfig() {
+                try {
+                    const response = await fetch(`${backend}/config`);
+                    const data = await response.json();
+                    appId = data.appId;
+                    locationId = data.locationId;
+                } catch (error) {
+                    console.error('Error fetching App ID:', error);
+                }
+            }
+
+            // Call the fetch function to get the App ID when the page loads
+            fetchConfig();
 
             //Hide payment and registration info until acknowledged
             cardPayButton.style.display = 'none';
@@ -198,14 +213,25 @@
                     registerForm.style.display = 'none';
                 }
             });
+
+            //Load payment form
             cardPayButton.addEventListener('click', async function () {
                 if (isCardInitialized) return;
                 cardPayButton.disabled = true; // Disable button to prevent multiple clicks
                 cardPayButton.style.display = 'none'; // Hide button after click
                 cardInfo.style.display = 'flex';
-                await initializeCard();
 
+
+                //check for app and location id and initialize card
+                if (appId && locationId) {
+                    // Call initializeCard with App ID and Location ID once they are available
+                    await initializeCard();
+                } else {
+                    console.error('App ID or Location ID not available.');
+                }
             });
+
+
 
             async function initializeCard() {
                 console.debug('Initializing Square Card');
@@ -260,7 +286,7 @@
                     locationId,
                     sourceId: token,
                     idempotencyKey: window.crypto.randomUUID(),
-                    amount: Math.round(parseFloat(price*100)), // ✅ $25.00 → 2500 cents
+                    amount: Math.round(parseFloat(price)), // ✅ $25.00 → 2500 cents
 
                 });
 
