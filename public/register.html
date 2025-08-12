@@ -77,9 +77,6 @@
                 <select name="course" id="course" required>
                     <option value="" disabled selected>Select a course</option>
                     <option value="Behind the Wheel">Behind the Wheel</option>
-                    <option value="1-1 4 days">1-1 4 days</option>
-                    <option value="1-1 7 days">1-1 7 days</option>
-                    <option value="Adult DMV exam">Adult DMV exam</option>
                 </select><br><br>
 
 
@@ -189,6 +186,20 @@
 
     // Load courses when the page is ready
     loadCourses();
+
+    // Event listener for course selection
+    courseDropdown.addEventListener('change', (e) => {
+        const courseId = e.target.value;
+        const courseText = e.target.options[e.target.selectedIndex].text;
+        const price = parseFloat(courseText.split('- $')[1]);
+
+        // Store the selected course ID, title, and price in localStorage
+        localStorage.setItem('course_id', courseId);          // Store course ID
+        localStorage.setItem('course_title', courseText);     // Store course title
+        localStorage.setItem('course_price', price);          // Store course price
+
+        console.log('Course selected:', { courseId, courseText, price });
+    });
 
     let card, payments;
     let appId = '';
