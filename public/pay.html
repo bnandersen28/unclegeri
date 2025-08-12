@@ -114,10 +114,119 @@
 
   <script>
     const backend = 'https://unclegeri-backend.onrender.com';
-    const appId = 'sq0idp-uRjd8UFJBtDRt_anka4W9A';
-    const locationId = 'L8S8K9BPNDMPF';
+    let appId = '';
+    let locationId = '';
     let price;
 
+    // Fetch the App ID from the backend
+    async function fetchConfig() {
+      try {
+        const response = await fetch(`${backend}/config`);
+        const data = await response.json();
+        appId = data.appId;
+        locationId = data.locationId;
+        console.log('App ID fetched:', appId);
+        console.log('Location ID fetched:', locationId);
+      } catch (error) {
+        console.error('Error fetching App ID:', error);
+      }
+    }
+
+    // Call the fetch function to get the App ID when the page loads
+    fetchConfig();
+    
+
+     document.addEventListener('DOMContentLoaded', async function () {
+      const course = localStorage.getItem('course');
+      const registrationId = localStorage.getItem('registration_id');
+      console.log('Course:', course);
+      console.log('Registration ID:', registrationId);
+
+      let payment_method = null;
+
+      // Define course prices
+      const coursePrices = {
+        'Behind the Wheel': 300.00,
+        '1-1 4 days': 200,
+        '1-1 7 days': 350,
+        'Adult DMV exam': 150.00
+      };
+
+      // Check if course exists in localStorage
+      if (!course || !registrationId) {
+        alert('No course or registration ID found. Please complete the registration first.');
+        window.location.href = '/register.html'; // Redirect back to registration
+        return;
+      }
+
+      // Get the price for the selected course
+      const rawPrice = coursePrices[course];
+      console.log('Raw Price:', rawPrice);
+      price = Math.round(parseFloat(rawPrice) * 100).toString(); //convert dollars to cents
+      console.log('Price in cents:', price);
+      console.log('price type:', typeof price);
+
+      if (isNaN(price)) {
+        console.error('invalid course price', price);
+        alert('Invalid course selected. Please try again.');
+      }
+
+      // Update the price container with course name and price
+      const priceContainer = document.getElementById('price-container');
+      priceContainer.innerHTML = `
+    <h2>Selected Course: ${course}</h2>
+    <h3>Course Price: $${rawPrice}</h3>
+  `;
+
+      if (!window.Square) {
+        throw new Error('Square.js failed to load properly');
+      }
+
+      let payments;
+      try {
+        payments = window.Square.payments(appId, locationId);
+      } catch {
+        const statusContainer = document.getElementById(
+          'payment-status-container',
+        );
+        statusContainer.className = 'missing-credentials';
+        statusContainer.style.visibility = 'visible';
+        return;
+      }
+
+      let card;
+      try {
+        card = await initializeCard(payments);
+      } catch (e) {
+        console.error('Initializing Card failed', e);
+        return;
+      }
+
+      async function handlePaymentMethodSubmission(event, card) {
+        event.preventDefault();
+
+        try {
+          // disable the submit button as we await tokenization and make a payment request.
+          cardButton.disabled = true;
+          const token = await tokenize(card, price);
+          const paymentResults = await createPayment(token, price);
+          displayPaymentResults('SUCCESS');
+
+          console.debug('Payment Success', paymentResults);
+        } catch (e) {
+          cardButton.disabled = false;
+          displayPaymentResults('FAILURE');
+          console.error(e.message);
+        }
+      }
+
+      const cardButton = document.getElementById('card-button');
+      cardButton.addEventListener('click', async function (event) {
+        await handlePaymentMethodSubmission(event, card);
+      });
+    });
+
+    
     async function initializeCard(payments) {
       const card = await payments.card();
       await card.attach('#card-container');
@@ -219,96 +328,6 @@
 
     }
 
-    document.addEventListener('DOMContentLoaded', async function () {
-      const course = localStorage.getItem('course');
-      const registrationId = localStorage.getItem('registration_id');
-      console.log('Course:', course);
-      console.log('Registration ID:', registrationId);
-
-      let payment_method = null;
-
-      // Define course prices
-      const coursePrices = {
-        'Behind the Wheel': 300.00,
-        '1-1 4 days': 200,
-        '1-1 7 days': 350,
-        'Adult DMV exam': 150.00
-      };
-
-      // Check if course exists in localStorage
-      if (!course || !registrationId) {
-        alert('No course or registration ID found. Please complete the registration first.');
-        window.location.href = '/register.html'; // Redirect back to registration
-        return;
-      }
-
-      // Get the price for the selected course
-      const rawPrice = coursePrices[course];
-      console.log('Raw Price:', rawPrice);
-      price = Math.round(parseFloat(rawPrice) * 100).toString(); //convert dollars to cents
-      console.log('Price in cents:', price);
-      console.log('price type:', typeof price);
-
-      if (isNaN(price)) {
-        console.error('invalid course price', price);
-        alert('Invalid course selected. Please try again.');
-      }
-
-      // Update the price container with course name and price
-      const priceContainer = document.getElementById('price-container');
-      priceContainer.innerHTML = `
-    <h2>Selected Course: ${course}</h2>
-    <h3>Course Price: $${rawPrice}</h3>
-`;
-
-      if (!window.Square) {
-        throw new Error('Square.js failed to load properly');
-      }
-
-      let payments;
-      try {
-        payments = window.Square.payments(appId, locationId);
-      } catch {
-        const statusContainer = document.getElementById(
-          'payment-status-container',
-        );
-        statusContainer.className = 'missing-credentials';
-        statusContainer.style.visibility = 'visible';
-        return;
-      }
-
-      let card;
-      try {
-        card = await initializeCard(payments);
-      } catch (e) {
-        console.error('Initializing Card failed', e);
-        return;
-      }
-
-      async function handlePaymentMethodSubmission(event, card) {
-        event.preventDefault();
-
-        try {
-          // disable the submit button as we await tokenization and make a payment request.
-          cardButton.disabled = true;
-          const token = await tokenize(card, price);
-          const paymentResults = await createPayment(token, price);
-          displayPaymentResults('SUCCESS');
-
-          console.debug('Payment Success', paymentResults);
-        } catch (e) {
-          cardButton.disabled = false;
-          displayPaymentResults('FAILURE');
-          console.error(e.message);
-        }
-      }
-
-      const cardButton = document.getElementById('card-button');
-      cardButton.addEventListener('click', async function (event) {
-        await handlePaymentMethodSubmission(event, card);
-      });
-    });
-
     //Display cash/check confirmation
     document.getElementById('cash-button').addEventListener('click', () => {
       console.log('Cash payment selected');
@@ -323,7 +342,7 @@
       document.getElementById('payment-options').style.display = 'none';
     });
 
-
+    //Send card/check payment notification to backend
     document.getElementById('confirm').addEventListener('click', async () => {
       console.log('Cash/Check payment confirmed');
 
@@ -358,6 +377,8 @@
       }
     });
 
+
+    //Send notification of card payment to backend
     document.getElementById('card-pay-button').addEventListener('click', async () => {
       document.getElementById('card-info').style.display = 'flex';
       document.getElementById('payment-options').style.display = 'none';
