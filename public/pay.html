@@ -137,34 +137,29 @@
     
 
      document.addEventListener('DOMContentLoaded', async function () {
-      const course = localStorage.getItem('course');
+      const course = localStorage.getItem('course_title');
+      const courseId = localStorage.getItem('course_id');
+      const rawPrice = localStorage.getItem('course_price');
       const registrationId = localStorage.getItem('registration_id');
       console.log('Course:', course);
+      console.log('Course price: ', rawPrice);
+      console.log('Course ID:', courseId);
       console.log('Registration ID:', registrationId);
 
       let payment_method = null;
 
-      // Define course prices
-      const coursePrices = {
-        'Behind the Wheel': 300.00,
-        '1-1 4 days': 200,
-        '1-1 7 days': 350,
-        'Adult DMV exam': 150.00
-      };
+  
 
       // Check if course exists in localStorage
-      if (!course || !registrationId) {
+      if (!course || !registrationId ||!rawPrice) {
         alert('No course or registration ID found. Please complete the registration first.');
         window.location.href = '/register.html'; // Redirect back to registration
         return;
       }
 
-      // Get the price for the selected course
-      const rawPrice = coursePrices[course];
-      console.log('Raw Price:', rawPrice);
-      price = Math.round(parseFloat(rawPrice) * 100).toString(); //convert dollars to cents
+      // Convert price to cents
+      price = Math.round(parseFloat(rawPrice)).toString(); //convert dollars to cents
       console.log('Price in cents:', price);
-      console.log('price type:', typeof price);
 
       if (isNaN(price)) {
         console.error('invalid course price', price);
@@ -226,7 +221,7 @@
       });
     });
 
-    
+
     async function initializeCard(payments) {
       const card = await payments.card();
       await card.attach('#card-container');
