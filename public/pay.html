@@ -191,32 +191,13 @@
         return;
       }
 
-      if(!isCardInitialized){
+      if (!isCardInitialized) {
         try {
           card = await initializeCard(payments);
           isCardInitialized = true;
         } catch (e) {
           console.error('Initializing Card failed', e);
           return;
-        }
-      }
-    
-
-      async function handlePaymentMethodSubmission(event, card) {
-        event.preventDefault();
-
-        try {
-          // disable the submit button as we await tokenization and make a payment request.
-          cardButton.disabled = true;
-          const token = await tokenize(card, price);
-          const paymentResults = await createPayment(token, price);
-          displayPaymentResults('SUCCESS');
-
-          console.debug('Payment Success', paymentResults);
-        } catch (e) {
-          cardButton.disabled = false;
-          displayPaymentResults('FAILURE');
-          console.error(e.message);
         }
       }
 
@@ -226,12 +207,76 @@
       });
     });
 
-     async function initializeCard(payments) {
-
+    async function initializeCard(payments) {
+      if (!window.Square) {
+        console.error("Square.js failed to load.");
+        return;
+      }
       const card = await payments.card();
       await card.attach('#card-container');
       return card;
     }
+
+
+    async function handlePaymentMethodSubmission(event, card) {
+      event.preventDefault();
+
+      try {
+        // disable the submit button as we await tokenization and make a payment request.
+        cardButton.disabled = true;
+        const token = await tokenize(card, price);
+        const paymentResults = await createPayment(token, price);
+        displayPaymentResults('SUCCESS');
+
+        console.debug('Payment Success', paymentResults);
+      } catch (e) {
+        cardButton.disabled = false;
+        displayPaymentResults('FAILURE');
+        console.error(e.message);
+      }
+    }
+
+
+    // New payment flow
+    async function tokenize(paymentMethod, price) {
+      //Get details from the form 
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      console.log('Tokenizing with details:', {
+        firstName,
+        lastName,
+        email,
+        phone,
+        price,
+      });
+
+      console.log("price variable type,", typeof price);
+
+      const verificationDetails = {
+        amount: price,
+        billingContact: {
+          givenName: firstName,
+          familyName: lastName,
+          email: email,
+          phone: phone,
+          countryCode: 'US',
+        },
+        currencyCode: 'USD',
+        intent: 'CHARGE',
+        customerInitiated: true,
+        sellerKeyedIn: false,
+      };
+      const tokenResult = await paymentMethod.tokenize(verificationDetails);
+      console.log('Tokenization result:', tokenResult);
+      if (tokenResult.status === 'OK') {
+        return tokenResult.token;
+      } else {
+          throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
+        }
+      }
 
 
 
@@ -258,6 +303,7 @@
       const errorBody = await paymentResponse.text();
       throw new Error(errorBody);
     }
+  
 
 
     // status is either SUCCESS or FAILURE;
@@ -393,53 +439,6 @@
 
 
 
-       // New payment flow
-    async function tokenize(paymentMethod, price) {
-      //Get details from the form 
-      const firstName = document.getElementById('first-name').value;
-      const lastName = document.getElementById('last-name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-
-      console.log('Tokenizing with details:', {
-        firstName,
-        lastName,
-        email,
-        phone,
-        price,
-      });
-
-      console.log("price variable type,", typeof price);
-
-      const verificationDetails = {
-        amount: price,
-        billingContact: {
-          givenName: firstName,
-          familyName: lastName,
-          email: email,
-          phone: phone,
-          countryCode: 'US',
-        },
-        currencyCode: 'USD',
-        intent: 'CHARGE',
-        customerInitiated: true,
-        sellerKeyedIn: false,
-      };
-      const tokenResult = await paymentMethod.tokenize(verificationDetails);
-      console.log('Tokenization result:', tokenResult);
-      if (tokenResult.status === 'OK') {
-        return tokenResult.token;
-      } else {
-        let errorMessage = `Tokenization failed with status: ${tokenResult.status}`;
-        if (tokenResult.errors) {
-          errorMessage += ` and errors: ${JSON.stringify(
-            tokenResult.errors,
-          )}`;
-        }
-
-        throw new Error(errorMessage);
-      }
-    }
 
   </script>
 
