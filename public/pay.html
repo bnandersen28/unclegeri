@@ -388,7 +388,7 @@
       // Ensure card is initialized before proceeding
       if (!isCardInitialized) {
         try {
-          await initializeCard();
+          await initializeCard(payments);
         } catch (e) {
           console.error('Failed to initialize the card:', e);
           return;  // Stop execution if the card cannot be initialized
