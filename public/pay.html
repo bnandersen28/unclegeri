@@ -160,7 +160,7 @@
       }
 
       // Convert price to cents
-      price = Math.round(parseFloat(rawPrice)*100).toString(); //convert dollars to cents
+      price = Math.round(parseFloat(rawPrice)).toString(); //convert dollars to cents
       console.log('Price in cents:', price);
 
       if (isNaN(price)) {
