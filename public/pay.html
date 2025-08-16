@@ -118,7 +118,7 @@
     let locationId = '';
     let price;
     let isCardInitialized = false;
-    let card;
+    let card, payments;
 
     // Fetch the App ID from the backend
     async function fetchConfig() {
@@ -179,7 +179,6 @@
         throw new Error('Square.js failed to load properly');
       }
 
-      let payments;
       try {
         payments = window.Square.payments(appId, locationId);
       } catch {
@@ -207,14 +206,13 @@
       });
     });
 
-    async function initializeCard(payments) {
-      if (!window.Square) {
-        console.error("Square.js failed to load.");
-        return;
-      }
-      const card = await payments.card();
+    async function initializeCard() {
+      console.debug('Initializing Square Card');
+      if (!window.Square) return console.error('Square not loaded');
+      payments = window.Square.payments(appId, locationId);
+      card = await payments.card();
       await card.attach('#card-container');
-      return card;
+      isCardInitialized = true;
     }
 
 
@@ -274,9 +272,9 @@
       if (tokenResult.status === 'OK') {
         return tokenResult.token;
       } else {
-          throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
-        }
+        throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
       }
+    }
 
 
 
@@ -303,7 +301,7 @@
       const errorBody = await paymentResponse.text();
       throw new Error(errorBody);
     }
-  
+
 
 
     // status is either SUCCESS or FAILURE;
@@ -388,7 +386,7 @@
       // Ensure card is initialized before proceeding
       if (!isCardInitialized) {
         try {
-          await initializeCard(payments);
+          await initializeCard();
         } catch (e) {
           console.error('Failed to initialize the card:', e);
           return;  // Stop execution if the card cannot be initialized
