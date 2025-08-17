@@ -375,7 +375,7 @@
 
 
     //Send notification of card payment to backend
-    document.getElementById('card-pay-button').addEventListener('click', async () => {
+    cardPayButton = document.getElementById('card-pay-button');
       console.log('Card payment button clicked');  // Debugging
 
 
@@ -384,26 +384,49 @@
 
       //Ensure card is intialized 
       // Ensure card is initialized before proceeding
-      if (!isCardInitialized) {
-        try {
-          await initializeCard();
-        } catch (e) {
-          console.error('Failed to initialize the card:', e);
-          return;  // Stop execution if the card cannot be initialized
-        }
-      }
 
-      // Wait for the payment method to be tokenized
-      try {
-        const token = await tokenize(card, price);
-        // Send payment method to the backend after tokenization
-        await sendPaymentMethodToBackend(token);
-      } catch (error) {
-        console.error('Payment method submission failed:', error);
-        alert('Payment failed. Please try again.');
-        return;
-      }
+       cardPayButton.addEventListener('click', async function () {
+        if (isCardInitialized) return;
+        cardPayButton.disabled = true; // Disable button to prevent multiple clicks
+       
+        console.log('Card payment button clicked');  // Debugging
+
+
+      document.getElementById('payment-options').style.display = 'none';
+      document.getElementById('card-info').style.display = 'block';
+
+      //Ensure card is intialized 
+      // Ensure card is initialized before proceeding
+
+
+        //check for app and location id and initialize card
+        if (appId && locationId) {
+            // Call initializeCard with App ID and Location ID once they are available
+            await initializeCard();
+        } else {
+            console.error('App ID or Location ID not available.');
+        }
     });
+    //   if (!isCardInitialized) {
+    //     try {
+    //       await initializeCard();
+    //     } catch (e) {
+    //       console.error('Failed to initialize the card:', e);
+    //       return;  // Stop execution if the card cannot be initialized
+    //     }
+    //   }
+
+    //   // Wait for the payment method to be tokenized
+    //   try {
+    //     const token = await tokenize(card, price);
+    //     // Send payment method to the backend after tokenization
+    //     await sendPaymentMethodToBackend(token);
+    //   } catch (error) {
+    //     console.error('Payment method submission failed:', error);
+    //     alert('Payment failed. Please try again.');
+    //     return;
+    //   }
+    // });
 
     async function sendPaymentMethodToBackend(token) {
 
