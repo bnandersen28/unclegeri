@@ -127,7 +127,7 @@
       function dollarsToCents(v) {
         const n = Number.parseFloat(v);
         if (Number.isNaN(n)) return NaN;
-        return Math.round(n); //no *100 for testing
+        return Math.round(n*100); //no *100 for testing
       }
 
       async function fetchConfig() {
