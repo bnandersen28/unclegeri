@@ -247,7 +247,7 @@
         document.getElementById('card-pay-button').addEventListener('click', async () => {
           console.log('Card payment button clicked');
           document.getElementById('payment-options').style.display = 'none';
-          document.getElementById('card-info').style.display = 'block';
+          document.getElementById('card-info').style.display = 'flex';
           try {
             await initializeCard();
           } catch (e) {
