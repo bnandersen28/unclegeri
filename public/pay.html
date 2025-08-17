@@ -113,353 +113,196 @@
   </footer>
 
   <script>
-    const backend = 'https://unclegeri-backend.onrender.com';
-    let appId = '';
-    let locationId = '';
-    let price;
-    let isCardInitialized = false;
-    let card, payments;
+    // ---------- Constants / Globals ----------
+      const backend = 'https://unclegeri-backend.onrender.com';
+      let appId = '';
+      let locationId = '';
+      let payments = null; // Square payments instance
+      let card = null; // Square card instance
+      let isCardInitialized = false;
+      let priceDollars = 0;
+      let priceCents = 0; // minor units
 
-    // Fetch the App ID from the backend
-    async function fetchConfig() {
-      try {
+      // ---------- Helpers ----------
+      function dollarsToCents(v) {
+        const n = Number.parseFloat(v);
+        if (Number.isNaN(n)) return NaN;
+        return Math.round(n); //no *100 for testing
+      }
+
+      async function fetchConfig() {
         const response = await fetch(`${backend}/config`);
         const data = await response.json();
         appId = data.appId;
         locationId = data.locationId;
         console.log('App ID fetched:', appId);
         console.log('Location ID fetched:', locationId);
-      } catch (error) {
-        console.error('Error fetching App ID:', error);
-      }
-    }
-
-    // Call the fetch function to get the App ID when the page loads
-    fetchConfig();
-
-
-    document.addEventListener('DOMContentLoaded', async function () {
-      const course = localStorage.getItem('course_title');
-      const courseId = localStorage.getItem('course_id');
-      const rawPrice = localStorage.getItem('course_price');
-      const registrationId = localStorage.getItem('registration_id');
-      console.log('Course:', course);
-      console.log('Course price: ', rawPrice);
-      console.log('Course ID:', courseId);
-      console.log('Registration ID:', registrationId);
-
-      let payment_method = null;
-
-
-
-      // Check if course exists in localStorage
-      if (!course || !registrationId || !rawPrice) {
-        alert('No course or registration ID found. Please complete the registration first.');
-        window.location.href = '/register.html'; // Redirect back to registration
-        return;
       }
 
-      // Convert price to cents
-      price = Math.round(parseFloat(rawPrice)).toString(); //convert dollars to cents
-      console.log('Price in cents:', price);
-
-      if (isNaN(price)) {
-        console.error('invalid course price', price);
-        alert('Invalid course selected. Please try again.');
+      async function ensureSquareReady() {
+        if (!window.Square) throw new Error('Square.js failed to load properly');
+        if (!appId || !locationId) await fetchConfig();
+        if (!payments) payments = window.Square.payments(appId, locationId);
+        return payments;
       }
 
-      // Update the price container with course name and price
-      const priceContainer = document.getElementById('price-container');
-      priceContainer.innerHTML = `
-    <h2>Selected Course: ${course}</h2>
-    <h3>Course Price: $${rawPrice}</h3>
-  `;
-
-      if (!window.Square) {
-        throw new Error('Square.js failed to load properly');
+      async function initializeCard() {
+        console.debug('Initializing Square Card');
+        await ensureSquareReady();
+        if (isCardInitialized && card) return card;
+        card = await payments.card();
+        await card.attach('#card-container');
+        isCardInitialized = true;
+        return card;
       }
 
-      try {
-        payments = window.Square.payments(appId, locationId);
-      } catch {
-        const statusContainer = document.getElementById(
-          'payment-status-container',
-        );
-        statusContainer.className = 'missing-credentials';
+      async function createPayment(token) {
+        const body = JSON.stringify({
+          locationId,
+          sourceId: token,
+          idempotencyKey: window.crypto.randomUUID(),
+          amount: priceCents, // integer cents
+        });
+        const paymentResponse = await fetch(`${backend}/payment`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+        });
+        if (paymentResponse.ok) return paymentResponse.json();
+        const errorBody = await paymentResponse.text();
+        throw new Error(errorBody);
+      }
+
+      function displayPaymentResults(status) {
+        const statusContainer = document.getElementById('payment-status-container');
+        const successMessage = document.getElementById('success-message');
+        const failureMessage = document.getElementById('failure-message');
         statusContainer.style.visibility = 'visible';
-        return;
+        if (status === 'SUCCESS') {
+          successMessage.style.display = 'block';
+          failureMessage.style.display = 'none';
+        } else {
+          successMessage.style.display = 'none';
+          failureMessage.style.display = 'block';
+        }
       }
 
-      if (!isCardInitialized) {
-        try {
-          card = await initializeCard(payments);
-          isCardInitialized = true;
-        } catch (e) {
-          console.error('Initializing Card failed', e);
+      async function sendCashCheck(method) {
+        const registration_id = localStorage.getItem('registration_id');
+        const body = JSON.stringify({ id: registration_id, payment_method: method });
+        const response = await fetch(`${backend}/payment-method`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+        });
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.message || 'Failed to submit payment method');
+        }
+      }
+
+      // ---------- Bootstrap ----------
+      document.addEventListener('DOMContentLoaded', async () => {
+        const course = localStorage.getItem('course_title');
+        const courseId = localStorage.getItem('course_id');
+        const rawPrice = localStorage.getItem('course_price');
+        const registrationId = localStorage.getItem('registration_id');
+        console.log('Course:', course);
+        console.log('Course price: ', rawPrice);
+        console.log('Course ID:', courseId);
+        console.log('Registration ID:', registrationId);
+
+        if (!course || !registrationId || !rawPrice) {
+          alert('No course or registration ID found. Please complete the registration first.');
+          window.location.href = '/register.html';
           return;
         }
-      }
 
-      const cardButton = document.getElementById('card-button');
-      cardButton.addEventListener('click', async function (event) {
-        await handlePaymentMethodSubmission(event, card);
-      });
-    });
-
-    async function initializeCard() {
-      console.debug('Initializing Square Card');
-      if (!window.Square) return console.error('Square not loaded');
-      payments = window.Square.payments(appId, locationId);
-      card = await payments.card();
-      await card.attach('#card-container');
-      isCardInitialized = true;
-    }
-
-
-    async function handlePaymentMethodSubmission(event, card) {
-      event.preventDefault();
-
-      try {
-        // disable the submit button as we await tokenization and make a payment request.
-        cardButton.disabled = true;
-        const token = await tokenize(card, price);
-        const paymentResults = await createPayment(token, price);
-        displayPaymentResults('SUCCESS');
-
-        console.debug('Payment Success', paymentResults);
-      } catch (e) {
-        cardButton.disabled = false;
-        displayPaymentResults('FAILURE');
-        console.error(e.message);
-      }
-    }
-
-
-    // New payment flow
-    async function tokenize(paymentMethod, price) {
-      //Get details from the form 
-      const firstName = document.getElementById('first-name').value;
-      const lastName = document.getElementById('last-name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-
-      console.log('Tokenizing with details:', {
-        firstName,
-        lastName,
-        email,
-        phone,
-        price,
-      });
-
-      console.log("price variable type,", typeof price);
-
-      const verificationDetails = {
-        amount: price,
-        billingContact: {
-          givenName: firstName,
-          familyName: lastName,
-          email: email,
-          phone: phone,
-          countryCode: 'US',
-        },
-        currencyCode: 'USD',
-        intent: 'CHARGE',
-        customerInitiated: true,
-        sellerKeyedIn: false,
-      };
-      const tokenResult = await paymentMethod.tokenize(verificationDetails);
-      console.log('Tokenization result:', tokenResult);
-      if (tokenResult.status === 'OK') {
-        return tokenResult.token;
-      } else {
-        throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
-      }
-    }
-
-
-
-    async function createPayment(token, price) {
-      const body = JSON.stringify({
-        locationId,
-        sourceId: token,
-        idempotencyKey: window.crypto.randomUUID(),
-        amount: parseInt(price),
-      });
-
-      const paymentResponse = await fetch(`${backend}/payment`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-
-      if (paymentResponse.ok) {
-        return paymentResponse.json();
-      }
-
-      const errorBody = await paymentResponse.text();
-      throw new Error(errorBody);
-    }
-
-
-
-    // status is either SUCCESS or FAILURE;
-    function displayPaymentResults(status) {
-      const statusContainer = document.getElementById(
-        'payment-status-container',
-      );
-      const successMessage = document.getElementById('success-message');
-      const failureMessage = document.getElementById('failure-message');
-
-      statusContainer.style.visibility = 'visible';
-      if (status === 'SUCCESS') {
-        successMessage.style.display = 'block';
-        failureMessage.style.display = 'none';
-      } else {
-        successMessage.style.display = 'none';
-        failureMessage.style.display = 'block';
-      }
-
-
-    }
-
-    //Display cash/check confirmation
-    document.getElementById('cash-button').addEventListener('click', () => {
-      console.log('Cash payment selected');
-      payment_method = 'cash';
-      document.getElementById('cash-check-container').style.display = 'block';
-      document.getElementById('payment-options').style.display = 'none';
-    });
-
-    document.getElementById('check-button').addEventListener('click', () => {
-      document.getElementById('cash-check-container').style.display = 'block';
-      payment_method = 'check';
-      document.getElementById('payment-options').style.display = 'none';
-    });
-
-    //Send card/check payment notification to backend
-    document.getElementById('confirm').addEventListener('click', async () => {
-      console.log('Cash/Check payment confirmed');
-
-      //check if payment method is correctly set
-      // Check if payment method is correctly set
-      if (!payment_method) {
-        alert('Payment method not selected. Please choose Cash or Check.');
-        return;
-      }
-      console.log('Payment method: ' + payment_method);
-
-      //send payment method to backend
-      const body = JSON.stringify({
-        id: localStorage.getItem('registration_id'),
-        payment_method: payment_method,
-      });
-
-      const response = await fetch(`${backend}/payment-method`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-
-      if (response.ok) {
-        document.getElementById('confirmation-message').style.display = 'block';
-        document.getElementById('cash-check-container').style.display = 'none';
-      } else {
-        const errorData = await response.json();
-        alert(`Failed to submit payment method: ${errorData.message}`);
-      }
-    });
-
-
-    //Send notification of card payment to backend
-    cardPayButton = document.getElementById('card-pay-button');
-      console.log('Card payment button clicked');  // Debugging
-
-
-      document.getElementById('payment-options').style.display = 'none';
-      document.getElementById('card-info').style.display = 'block';
-
-      //Ensure card is intialized 
-      // Ensure card is initialized before proceeding
-
-       cardPayButton.addEventListener('click', async function () {
-        if (isCardInitialized) return;
-        cardPayButton.disabled = true; // Disable button to prevent multiple clicks
-       
-        console.log('Card payment button clicked');  // Debugging
-
-
-      document.getElementById('payment-options').style.display = 'none';
-      document.getElementById('card-info').style.display = 'block';
-
-      //Ensure card is intialized 
-      // Ensure card is initialized before proceeding
-
-
-        //check for app and location id and initialize card
-        if (appId && locationId) {
-            // Call initializeCard with App ID and Location ID once they are available
-            await initializeCard();
-        } else {
-            console.error('App ID or Location ID not available.');
+        priceDollars = Number.parseFloat(rawPrice);
+        priceCents = dollarsToCents(rawPrice);
+        console.log('Price in cents:', priceCents);
+        if (Number.isNaN(priceDollars) || Number.isNaN(priceCents)) {
+          console.error('Invalid course price', rawPrice);
+          alert('Invalid course selected. Please try again.');
+          return;
         }
-    });
-    //   if (!isCardInitialized) {
-    //     try {
-    //       await initializeCard();
-    //     } catch (e) {
-    //       console.error('Failed to initialize the card:', e);
-    //       return;  // Stop execution if the card cannot be initialized
-    //     }
-    //   }
 
-    //   // Wait for the payment method to be tokenized
-    //   try {
-    //     const token = await tokenize(card, price);
-    //     // Send payment method to the backend after tokenization
-    //     await sendPaymentMethodToBackend(token);
-    //   } catch (error) {
-    //     console.error('Payment method submission failed:', error);
-    //     alert('Payment failed. Please try again.');
-    //     return;
-    //   }
-    // });
+        const priceContainer = document.getElementById('price-container');
+        priceContainer.innerHTML = `
+          <h2>Selected Course: ${course}</h2>
+          <h3>Course Price: $${priceDollars.toFixed(2)}</h3>
+        `;
 
-    async function sendPaymentMethodToBackend(token) {
+        try {
+          await ensureSquareReady();
+        } catch (e) {
+          console.error('Square init failed:', e);
+          const statusContainer = document.getElementById('payment-status-container');
+          statusContainer.style.visibility = 'visible';
+          document.getElementById('failure-message').style.display = 'block';
+          return;
+        }
 
+        // --- Card flow ---
+        document.getElementById('card-pay-button').addEventListener('click', async () => {
+          console.log('Card payment button clicked');
+          document.getElementById('payment-options').style.display = 'none';
+          document.getElementById('card-info').style.display = 'block';
+          try {
+            await initializeCard();
+          } catch (e) {
+            console.error('Failed to initialize the card:', e);
+            alert('Card failed to initialize. Please refresh and try again.');
+          }
+        });
 
-      let payment_method = 'card';        //send payment method to backend
+        document.getElementById('card-button').addEventListener('click', async (event) => {
+          event.preventDefault();
+          const btn = event.currentTarget;
+          btn.disabled = true;
+          try {
+            const tokenResult = await card.tokenize(); // basic tokenize
+            if (tokenResult.status !== 'OK') {
+              throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
+            }
+            const paymentResults = await createPayment(tokenResult.token);
+            console.debug('Payment Success', paymentResults);
+            displayPaymentResults('SUCCESS');
+          } catch (e) {
+            console.error(e);
+            displayPaymentResults('FAILURE');
+          } finally {
+            btn.disabled = false;
+          }
+        });
 
-      if (!registrationId) {
-        console.error('Registration ID not found.');
-        return;
-      }
-      const body = JSON.stringify({
-        id: localStorage.getItem('registration_id'),
-        payment_method: payment_method,
-        token: token,
+        // --- Cash / Check flow ---
+        let selectedPaymentMethod = null;
+        document.getElementById('cash-button').addEventListener('click', () => {
+          selectedPaymentMethod = 'cash';
+          document.getElementById('cash-check-container').style.display = 'block';
+          document.getElementById('payment-options').style.display = 'none';
+        });
+        document.getElementById('check-button').addEventListener('click', () => {
+          selectedPaymentMethod = 'check';
+          document.getElementById('cash-check-container').style.display = 'block';
+          document.getElementById('payment-options').style.display = 'none';
+        });
+
+        document.getElementById('confirm').addEventListener('click', async () => {
+          if (!selectedPaymentMethod) {
+            alert('Payment method not selected. Please choose Cash or Check.');
+            return;
+          }
+          try {
+            await sendCashCheck(selectedPaymentMethod);
+            document.getElementById('confirmation-message').style.display = 'block';
+            document.getElementById('cash-check-container').style.display = 'none';
+          } catch (e) {
+            alert(e.message);
+          }
+        });
       });
-
-      const response = await fetch(`${backend}/payment-method`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(`Failed to submit payment method: ${errorData.message}`);
-        return;
-      }
-      console.log('Payment method submitted successfully');
-    }
-
-
-
 
   </script>
 
