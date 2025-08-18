@@ -307,7 +307,7 @@
             locationId,
             sourceId: token,
             idempotencyKey: window.crypto.randomUUID(),
-            amount: Math.round(parseFloat(price)), // ✅ $25.00 → 2500 cents
+            amount: Math.round(parseFloat(price*100)), // ✅ $25.00 → 2500 cents
 
         });
 
