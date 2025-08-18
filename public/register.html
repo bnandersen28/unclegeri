@@ -174,7 +174,7 @@
             // Populate the dropdown with fetched courses
             courses.forEach(course => {
                 const option = document.createElement('option');
-                option.value = course.id;  // Set the course ID as the value
+                option.value = course.title;  // Set the course ID as the value
                 option.textContent = `${course.title} - $${course.price}`;  // Display course title and price
                 courseDropdown.appendChild(option);  // Add to the dropdown
             });
