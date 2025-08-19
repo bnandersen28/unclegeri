@@ -175,7 +175,7 @@
             courses.forEach(course => {
                 const option = document.createElement('option');
                 option.value = course.title;  // Set the course ID as the value
-                option.textContent = `${course.title} - $${course.price}`;  // Display course title and price
+                option.textContent = `${course.title}`;  // Display course title and price
                 courseDropdown.appendChild(option);  // Add to the dropdown
             });
         } catch (error) {
