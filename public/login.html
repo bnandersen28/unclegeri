@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
-    <title>Admin Login</title>
-    <div class = "header">
-      <div class="header-top"></div>
-      <div class = "header-content">
-   
-          <div class="nav-left">
-          <a href="courses.html"><button>Courses</button></a>
-          <a href="register.html"><button>Register</button></a>
-          </div>
-         
-         
-          <div class="header-logo">
-          <img src = "imgs/logo.png" alt="Logo">
-          </div>
-          
-          <div class="nav-right">
-          <a href="faq.html"><button>FAQs</button></a>
-          <a href="connect.html"><button>Connect</button></a>
-          </div>
-          
-  
-      </div>  
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Admin Login</title>
+  <div class="header">
+    <div class="header-top"></div>
+    <div class="header-content">
+
+      <div class="nav-left">
+        <a href="courses.html"><button>Courses</button></a>
+        <a href="register.html"><button>Register</button></a>
+      </div>
+
+
+      <a href="index.html" class="header-logo">
+        <img src="imgs/logo.png" alt="Logo">
+      </a>
+
+      <div class="nav-right">
+        <a href="faq.html"><button>FAQs</button></a>
+        <a href="connect.html"><button>Connect</button></a>
+      </div>
+
+
+    </div>
+
   </div>
 
 </head>
 
 <body>
-    <div class="login-container">
-      <h2> Admin Login</h2>
+  <div class="login-container">
+    <h2> Admin Login</h2>
     <form id="loginForm">
-        <input type="text" id="username" name="username" placeholder="Username" required>
-        <input type="password" id="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-      </div>
-      
-      <script>
-      document.getElementById('loginForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-      
-        const backend = 'https://unclegeri-backend.onrender.com';
-        const res = await fetch(`${backend}/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value,
-          }),
-        });
-      
-        const data = await res.json();
-        if (res.ok) {
-          localStorage.setItem('authenticated', 'true');
-          window.location.href = '/admin.html'; // Only accessible after login
-        } else {
-          alert(data.message || 'Login failed');
-        }
+      <input type="text" id="username" name="username" placeholder="Username" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const backend = 'https://unclegeri-backend.onrender.com';
+      const res = await fetch(`${backend}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value,
+        }),
       });
-      </script>
-      
+
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('authenticated', 'true');
+        window.location.href = '/admin.html'; // Only accessible after login
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    });
+  </script>
+
 </body>
 
 <footer class="footer">
   <div class="footer-section">
-      <h3>Learn More</h3>
-      <a href="courses.html">Courses</a>
-      <a href="faqs.html">FAQs</a>
+    <h3>Learn More</h3>
+    <a href="courses.html">Courses</a>
+    <a href="faqs.html">FAQs</a>
   </div>
   <div class="footer-section">
-      <button onclick ="window.location.href='register.html'">Register Now!</button>
+    <button onclick="window.location.href='register.html'">Register Now!</button>
   </div>
   <div class="footer-section">
-      <a href="connect.html" class="footer-icon">
-          <img src="imgs/message.png" alt="Connect">
-      </a>
+    <a href="connect.html" class="footer-icon">
+      <img src="imgs/message.png" alt="Connect">
+    </a>
   </div>
   <div class="footer-section">
-      <a href="index.html" class="footer-icon">
-          <img src="imgs/home.png" alt="Home">
-      </a>
+    <a href="index.html" class="footer-icon">
+      <img src="imgs/home.png" alt="Home">
+    </a>
   </div>
   </div>
 </footer>
+
 </html>

@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
+    <link rel="stylesheet" href="style.css">
     <title>Uncle Geri's Driving Academy</title>
 </head>
+
 <body>
-    <div class = "header">
+    <div class="header">
         <div class="header-top"></div>
-        <div class = "header-content">
-     
+        <div class="header-content">
+
             <div class="nav-left">
-            <a href="courses.html"><button>Courses</button></a>
-            <a href="register.html"><button>Register</button></a>
+                <a href="courses.html"><button>Courses</button></a>
+                <a href="register.html"><button>Register</button></a>
             </div>
-           
-           
-            <div class="header-logo">
-            <img src = "imgs/logo.png" alt="Logo">
-            </div>
-            
+
+
+            <a href="index.html" class="header-logo">
+                <img src="imgs/logo.png" alt="Logo">
+            </a>
+
             <div class="nav-right">
-            <a href="faq.html"><button>FAQs</button></a>
-            <a href="connect.html"><button>Connect</button></a>
+                <a href="faq.html"><button>FAQs</button></a>
+                <a href="connect.html"><button>Connect</button></a>
             </div>
-            
-    
-        </div>  
-    
+
+
+        </div>
+
     </div>
 
     <body>
         <div class="connect-container">
             <div class="contact-info">
-            <h2>Contact info</h2>
-            <p>Email: unclegerisdrivingacademy@gmail.com </p>
-            <p>Phone: 804-251-0102</p>
+                <h2>Contact info</h2>
+                <p>Email: unclegerisdrivingacademy@gmail.com </p>
+                <p>Phone: 804-251-0102</p>
             </div>
             <div class="connect-form">
-            <h2>Leave Uncle Geri a message</h2>
-            <form id="contactForm">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+                <h2>Leave Uncle Geri a message</h2>
+                <form id="contactForm">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
             </div>
         </div>
 
@@ -62,7 +64,7 @@
             <a href="faq.html">FAQs</a>
         </div>
         <div class="footer-section">
-            <button onclick ="window.location.href='register.html'">Register Now!</button>
+            <button onclick="window.location.href='register.html'">Register Now!</button>
         </div>
         <div class="footer-section">
             <a href="connect.html" class="footer-icon">
@@ -79,27 +81,27 @@
     <script>
         const backend = 'https://unclegeri-backend.onrender.com';
         const form = document.getElementById('contactForm');
-        
+
         const responseMessage = document.createElement('p');
         responseMessage.style.marginTop = '10px';
         form.appendChild(responseMessage); // Append it to the form
 
-        
-        form.addEventListener('submit', async function(event) {
+
+        form.addEventListener('submit', async function (event) {
             event.preventDefault(); // Prevent the default form submission
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
             //send message to backend
-            const body= JSON.stringify({
+            const body = JSON.stringify({
                 name: name,
                 email: email,
                 message: message
             });
 
-            try{
+            try {
                 const response = await fetch(`${backend}/send-message`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -121,6 +123,7 @@
                 responseMessage.textContent = 'An error occurred. Please try again.';
             }
         });
-        
+
     </script>
+
 </html>

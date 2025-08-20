@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
+    <link rel="stylesheet" href="style.css">
     <title>Frequently asked questions</title>
 </head>
+
 <body>
-    <div class = "header">
+    <div class="header">
         <div class="header-top"></div>
-        <div class = "header-content">
-     
+        <div class="header-content">
+
             <div class="nav-left">
-            <a href="courses.html"><button>Courses</button></a>
-            <a href="register.html"><button>Register</button></a>
+                <a href="courses.html"><button>Courses</button></a>
+                <a href="register.html"><button>Register</button></a>
             </div>
-           
-           
-            <div class="header-logo">
-            <img src = "imgs/logo.png" alt="Logo">
-            </div>
-            
+
+
+            <a href="index.html" class="header-logo">
+                <img src="imgs/logo.png" alt="Logo">
+            </a>
+
             <div class="nav-right">
-            <a href="faq.html"><button>FAQs</button></a>
-            <a href="connect.html"><button>Connect</button></a>
+                <a href="faq.html"><button>FAQs</button></a>
+                <a href="connect.html"><button>Connect</button></a>
             </div>
-            
-    
-        </div>  
-    
+
+
+        </div>
+
     </div>
 
     <div class="faq-container">
@@ -36,7 +38,7 @@
         <div id="faq-list"></div>
     </div>
     <script>
-        async function fetchFAQs(){
+        async function fetchFAQs() {
             const backend = 'https://unclegeri-backend.onrender.com';
             try {
                 const res = await fetch(`${backend}/faqs`);
@@ -46,13 +48,13 @@
                 const faqs = await res.json();
                 const faqList = document.getElementById('faq-list');
                 faqList.innerHTML = '';
-                
+
                 faqs.forEach(faq => {
                     const faqItem = document.createElement('div');
                     faqItem.className = 'faq-item';
-                    
-                    
-                    const questionBtn= document.createElement('button');
+
+
+                    const questionBtn = document.createElement('button');
                     questionBtn.className = 'faq-question';
                     questionBtn.textContent = faq.question;
 
@@ -70,7 +72,7 @@
 
                     //Toggle answer display on click
                     questionBtn.addEventListener('click', () => {
-                       answerDiv.style.display = answerDiv.style.display === 'block' ? 'none' : 'block';
+                        answerDiv.style.display = answerDiv.style.display === 'block' ? 'none' : 'block';
                     });
                 });
             } catch (error) {
@@ -80,7 +82,7 @@
         }
         document.addEventListener('DOMContentLoaded', fetchFAQs);
     </script>
-        
+
 </body>
 <footer class="footer">
     <div class="footer-section">
@@ -89,7 +91,7 @@
         <a href="faq.html">FAQs</a>
     </div>
     <div class="footer-section">
-        <button onclick ="window.location.href='register.html'">Register Now!</button>
+        <button onclick="window.location.href='register.html'">Register Now!</button>
     </div>
     <div class="footer-section">
         <a href="connect.html" class="footer-icon">
@@ -105,29 +107,15 @@
 </footer>
 <script>
     //Add javascript to show answer when faq question is clicked on
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const faqQuestions = document.querySelectorAll('.faq-question');
         faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
+            question.addEventListener('click', function () {
                 const answer = this.nextElementSibling;
                 answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
             });
         });
     });
 </script>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

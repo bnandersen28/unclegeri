@@ -1,89 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script>
-    if (localStorage.getItem('authenticated') !== 'true') {
-      alert('You must be logged in to access this page.');
-      window.location.href = 'login.html';
-    }
-    </script>
+<script>
+  if (localStorage.getItem('authenticated') !== 'true') {
+    alert('You must be logged in to access this page.');
+    window.location.href = 'login.html';
+  }
+</script>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">   
-    <title>Register</title>
-    <div class = "header">
-      <div class="header-top"></div>
-      <div class = "header-content">
-   
-          <div class="nav-left">
-          <a href="courses.html"><button>Courses</button></a>
-          <a href="register.html"><button>Register</button></a>
-          </div>
-         
-         
-          <div class="header-logo">
-          <img src = "imgs/logo.png" alt="Logo">
-          </div>
-          
-          <div class="nav-right">
-          <a href="faq.html"><button>FAQs</button></a>
-          <a href="connect.html"><button>Connect</button></a>
-          </div>
-          
-  
-      </div>  
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Register</title>
+  <div class="header">
+    <div class="header-top"></div>
+    <div class="header-content">
+
+      <div class="nav-left">
+        <a href="courses.html"><button>Courses</button></a>
+        <a href="register.html"><button>Register</button></a>
+      </div>
+
+
+      <a href="index.html" class="header-logo">
+        <img src="imgs/logo.png" alt="Logo">
+      </a>
+
+      <div class="nav-right">
+        <a href="faq.html"><button>FAQs</button></a>
+        <a href="connect.html"><button>Connect</button></a>
+      </div>
+
+
+    </div>
+
   </div>
 
 </head>
-<body>
-    
-    
-    <body>
 
-        <div class="registrations">
-          <div class="back-button-container">
-            <button class="back-button" onclick="window.location.href='admin.html'">
-                &#8592; Back to Admin Dashboard
-            </button>
-        </div>
+<body>
+
+
+  <body>
+
+    <div class="registrations">
+      <div class="back-button-container">
+        <button class="back-button" onclick="window.location.href='admin.html'">
+          &#8592; Back to Admin Dashboard
+        </button>
+      </div>
       <h1>Student Registrations</h1>
       <div class="row">
-      <div class="student-grid" id="studentGrid"></div>
-      <div class="student-details" id="detailsContainer">
-        <p>.</p>
-      </div>
+        <div class="student-grid" id="studentGrid"></div>
+        <div class="student-details" id="detailsContainer">
+          <p>.</p>
+        </div>
       </div>
     </div>
-      <script>
-        async function fetchRegistrations() {
-            const backend = 'https://unclegeri-backend.onrender.com';
-            const res = await fetch(`${backend}/api/registrations`);
-            console.log('Response status:', res.status);
-          
-          
-            const data = await res.json();
-            console.log('Data received:', data);
-            
-            if (!Array.isArray(data)) {
-              console.error('Expected an array of registrations, but received:', data);
-              return;
-            }
-          const grid = document.getElementById('studentGrid');
-          const details = document.getElementById('detailsContainer');
-    
-          grid.innerHTML = '';
-          details.innerHTML = '';
+    <script>
+      async function fetchRegistrations() {
+        const backend = 'https://unclegeri-backend.onrender.com';
+        const res = await fetch(`${backend}/api/registrations`);
+        console.log('Response status:', res.status);
 
-          data.forEach(student => {
-            const card = document.createElement('div');
-            card.className = 'student-card';
-            card.innerHTML=`<p>${student.student_name}</p>`;
-            
-            
 
-            card.onclick = () => {
-              details.innerHTML = `
+        const data = await res.json();
+        console.log('Data received:', data);
+
+        if (!Array.isArray(data)) {
+          console.error('Expected an array of registrations, but received:', data);
+          return;
+        }
+        const grid = document.getElementById('studentGrid');
+        const details = document.getElementById('detailsContainer');
+
+        grid.innerHTML = '';
+        details.innerHTML = '';
+
+        data.forEach(student => {
+          const card = document.createElement('div');
+          card.className = 'student-card';
+          card.innerHTML = `<p>${student.student_name}</p>`;
+
+
+
+          card.onclick = () => {
+            details.innerHTML = `
                 <h2>${student.student_name}</h2>
                 <p><strong>Course:</strong> ${student.course}</p>
                 <p><strong>Parent:</strong> ${student.parent_name}</p>
@@ -97,73 +99,70 @@
                 <p><strong>Payment Method:</strong> ${student.payment_method || 'Not specified'}</p>
               `;
 
-              const deleteButton = document.createElement('button');
-              deleteButton.className = 'delete-button';
-              deleteButton.textContent = 'Delete Registration';
-              deleteButton.onclick= async() =>{
-                if (!confirm('Are you sure you want to delete this registration?')) {
-                  return;
-                }
-                await deleteRegistration(student.id);
-              };
-              details.appendChild(deleteButton);
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Delete Registration';
+            deleteButton.onclick = async () => {
+              if (!confirm('Are you sure you want to delete this registration?')) {
+                return;
+              }
+              await deleteRegistration(student.id);
             };
+            details.appendChild(deleteButton);
+          };
 
-            grid.appendChild(card);
-          });
-        }
+          grid.appendChild(card);
+        });
+      }
 
-        async function deleteRegistration(id){
-          const backend = 'https://unclegeri-backend.onrender.com';
+      async function deleteRegistration(id) {
+        const backend = 'https://unclegeri-backend.onrender.com';
 
-        
-         console.log(`Deleting registration with ID: ${id}`);
-      
+
+        console.log(`Deleting registration with ID: ${id}`);
+
         // Make a DELETE request to the backend
-         try {
+        try {
           const res = await fetch(`${backend}/api/registrations/${id}`, {
-              method: 'DELETE',
+            method: 'DELETE',
           });
 
-            if (res.ok) {
-                alert('Registration deleted successfully.');
-                fetchRegistrations(); // Refresh the list after deletion
-            } else {
-                const errorData = await res.json();
-                alert(`Failed to delete registration: ${errorData.message}`);
-            }
+          if (res.ok) {
+            alert('Registration deleted successfully.');
+            fetchRegistrations(); // Refresh the list after deletion
+          } else {
+            const errorData = await res.json();
+            alert(`Failed to delete registration: ${errorData.message}`);
+          }
         } catch (error) {
-            console.error('Error deleting registration:', error);
-            alert('An error occurred while deleting the registration.');
+          console.error('Error deleting registration:', error);
+          alert('An error occurred while deleting the registration.');
         }
-}
-    
-        fetchRegistrations();
-      </script>
-    </body>
-    <footer class="footer">
-      <div class="footer-section">
-          <h3>Learn More</h3>
-          <a href="courses.html">Courses</a>
-          <a href="faq.html">FAQs</a>
-      </div>
-      <div class="footer-section">
-          <button onclick ="window.location.href='register.html'">Register Now!</button>
-      </div>
-      <div class="footer-section">
-          <a href="connect.html" class="footer-icon">
-              <img src="imgs/message.png" alt="Connect">
-          </a>
-      </div>
-      <div class="footer-section">
-          <a href="index.html" class="footer-icon">
-              <img src="imgs/home.png" alt="Home">
-          </a>
-      </div>
-      </div>
+      }
+
+      fetchRegistrations();
+    </script>
+  </body>
+  <footer class="footer">
+    <div class="footer-section">
+      <h3>Learn More</h3>
+      <a href="courses.html">Courses</a>
+      <a href="faq.html">FAQs</a>
+    </div>
+    <div class="footer-section">
+      <button onclick="window.location.href='register.html'">Register Now!</button>
+    </div>
+    <div class="footer-section">
+      <a href="connect.html" class="footer-icon">
+        <img src="imgs/message.png" alt="Connect">
+      </a>
+    </div>
+    <div class="footer-section">
+      <a href="index.html" class="footer-icon">
+        <img src="imgs/home.png" alt="Home">
+      </a>
+    </div>
+    </div>
   </footer>
+
 </html>
-
-
-
-
