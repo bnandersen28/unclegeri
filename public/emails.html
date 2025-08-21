@@ -64,14 +64,58 @@
                 <button type="button" onclick="saveEmail('subject2','quill2')">Save</button>
             </div>
         </div>
+        <div class="course-item">
+            <div class="course-header" onclick="toggleForm('form3')">Adult Road Test</div>
+            <div class="course-form" id="form3">
+                <label>Subject:</label><br>
+                <input type="text" id="subject3" name="subject" placeholder="Email subject"><br><br>
+                <label>Body:</label>
+                <div id="editor3" style="height:150px; background:white;"></div>
+                <button type="button" onclick="saveEmail('subject3','quill3')">Save</button>
+            </div>
+        </div>
 
-        <!-- Repeat for other 4 courses... -->
+        <div class="course-item">
+            <div class="course-header" onclick="toggleForm('form4')">Online Driver's Education</div>
+            <div class="course-form" id="form4">
+                <label>Subject:</label><br>
+                <input type="text" id="subject4" name="subject" placeholder="Email subject"><br><br>
+                <label>Body:</label>
+                <div id="editor4" style="height:150px; background:white;"></div>
+                <button type="button" onclick="saveEmail('subject4','quill4')">Save</button>
+            </div>
+        </div>
+        <div class="course-item">
+            <div class="course-header" onclick="toggleForm('form5')">Driver Manual 3XF</div>
+            <div class="course-form" id="form5">
+                <label>Subject:</label><br>
+                <input type="text" id="subject5" name="subject" placeholder="Email subject"><br><br>
+                <label>Body:</label>
+                <div id="editor5" style="height:150px; background:white;"></div>
+                <button type="button" onclick="saveEmail('subject5','quill5')">Save</button>
+            </div>
+        </div>
+        <div class="course-item">
+            <div class="course-header" onclick="toggleForm('form6')">Driver Improvement Clinic</div>
+            <div class="course-form" id="form6">
+                <label>Subject:</label><br>
+                <input type="text" id="subject6" name="subject" placeholder="Email subject"><br><br>
+                <label>Body:</label>
+                <div id="editor6" style="height:150px; background:white;"></div>
+                <button type="button" onclick="saveEmail('subject6','quill6')">Save</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
         // Initialize Quill editors
         const quill1 = new Quill('#editor1', { theme: 'snow' });
         const quill2 = new Quill('#editor2', { theme: 'snow' });
+        const quill3 = new Quill('#editor3', { theme: 'snow' });
+        const quill4 = new Quill('#editor4', { theme: 'snow' });
+        const quill5 = new Quill('#editor5', { theme: 'snow' });
+        const quill6 = new Quill('#editor6', { theme: 'snow' });
         // add more as needed
 
         // Toggle visibility of forms
