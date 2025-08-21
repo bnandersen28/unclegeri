@@ -38,3 +38,63 @@
         </div>
 
     </div>
+
+<div class="container">
+    <h1>Edit Course Emails</h1>
+
+    <!-- Course block -->
+    <div class="course-item">
+      <div class="course-header" onclick="toggleForm('form1')">Behind the Wheel</div>
+      <div class="course-form" id="form1">
+        <label>Subject:</label><br>
+        <input type="text" id="subject1" name="subject" placeholder="Email subject"><br><br>
+        <label>Body:</label>
+        <div id="editor1" style="height:150px; background:white;"></div>
+        <button type="button" onclick="saveEmail('subject1','quill1')">Save</button>
+      </div>
+    </div>
+
+    <div class="course-item">
+      <div class="course-header" onclick="toggleForm('form2')">1-1 Driving Lessons</div>
+      <div class="course-form" id="form2">
+        <label>Subject:</label><br>
+        <input type="text" id="subject2" name="subject" placeholder="Email subject"><br><br>
+        <label>Body:</label>
+        <div id="editor2" style="height:150px; background:white;"></div>
+        <button type="button" onclick="saveEmail('subject2','quill2')">Save</button>
+      </div>
+    </div>
+
+    <!-- Repeat for other 4 courses... -->
+  </div>
+
+  <script>
+    // Initialize Quill editors
+    const quill1 = new Quill('#editor1', { theme: 'snow' });
+    const quill2 = new Quill('#editor2', { theme: 'snow' });
+    // add more as needed
+
+    // Toggle visibility of forms
+    function toggleForm(id) {
+      const form = document.getElementById(id);
+      form.style.display = form.style.display === "block" ? "none" : "block";
+    }
+
+    // Save email (send to backend)
+    function saveEmail(subjectId, editorVar) {
+      const subject = document.getElementById(subjectId).value;
+      const body = window[editorVar].root.innerHTML;
+
+      const data = { subject, body };
+      fetch('/api/saveEmailTemplate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => {
+        if (res.ok) alert("Saved successfully!");
+        else alert("Error saving email");
+      });
+    }
+  </script>
+</body>
+</html>
