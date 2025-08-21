@@ -13,6 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     align-content: center;
+    height: auto;
 
 }
 
@@ -845,7 +846,7 @@ textarea {
 
 
 .home-offerings-container {
-    width: 85%;
+    width: 95%;
     height: 100%;
     display: flex;
     flex-direction: column;

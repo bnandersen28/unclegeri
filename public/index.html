@@ -58,6 +58,18 @@
                         <img src="imgs/car7.jpeg" alt="Car">
                         <h2>Adult DMV Road Test</h2>
                     </div>
+                    <div class="home-item" id="item5">
+                        <img src="imgs/comp.jpg" alt="Computer">
+                        <h2>Online Driver's Education</h2>
+                    </div>
+                    <div class="home-item" id="item6">
+                        <img src="imgs/fail.jpg" alt="Failure">
+                        <h2>Driver Manual 3XF</h2>
+                    </div>
+                    <div class="home-item" id="item7">
+                        <img src="imgs/safe.jpg" alt="Drive Safely">
+                        <h2>Driver Improvement Clinic</h2>
+                    </div>
                 </div>
             </div>
 
@@ -111,19 +123,53 @@
         item2: {
             image: "imgs/car5.jpeg",
             header: "Behind the Wheel",
-            content: "If you're under 18 and have completed classroom Driver’s Ed, Uncle Geri’s Behind-the-Wheel program is your next step toward getting licensed. This 7-day DMV-required course pairs driving and observation each day, culminating in a final skills evaluation. Upon successful completion, students receive a temporary license and begin the final steps toward earning their full Virginia driver's license. With flexible scheduling and home pickup/drop-off, we make it easy to get started."
+            content: `Behind-the-Wheel is a DMV-required 7-day program designed for students under the age of 18 who have already completed a 36-hour state-approved classroom Driver’s Education program. This course fulfills the DMV mandate of 14 periods of in-car instruction — split evenly between driving and observing.<br> Each day, students will:<br> -Drive for 50 minutes under the guidance of a certified instructor.<br>
+            -Observe another student for 50 minutes as they drive.<br>
+            On the 7th day, students are evaluated on a series of required driving maneuvers prescribed by the Virginia DMV. These include real-world skills such as turning, parking, lane changing, and more. 
+            <br>If the student successfully completes this evaluation, they will be issued a temporary paper license(interim license).The DMV will then mail a court date to the student's registered home address. At that court session (typically within 6 months), students will receive their permanent driver's license.
+            <br>Uncle Geri’s driving academy has flexible scheduling and offers pick up and drop off for additional fee.<br>
+            <br>The 7-day package costs $325.`
 
         },
         item3: {
             image: "imgs/car6.jpeg",
             header: "1-1 In Car Lessons",
-            content: "Whether you're a teen or an adult looking to build confidence behind the wheel, Uncle Geri offers personalized one-on-one driving lessons designed to meet your needs. Each session helps reinforce key driving skills with expert guidance. Lessons are scheduled at an hourly rate and provide at home pick-up and dropoff, making it easy to fit into your day."
+            content: `Uncle Geri offers 1-1 in-car driving lessons for both teenagers and adults to become more comfortable behind the wheel. In order to be eligible, one must already hold a learner’s permit. Each session is 60 mins, and students may purchase as many sessions as needed, with a two session minimum.
+            <br><br>Uncle Geri’s driving academy has flexible scheduling and will pick up students from their home, and drop them off after each session.
+            <br><br>The hourly rate for 1-1 lessons is $100.00
+            <br><br>Lesson packages:
+            <br><br>2 lessons $175.00 4 lessons $250.00 6 lessons $300.00`
         },
         item4: {
             image: "imgs/car7.jpeg",
             header: "Adult DMV Road Test",
-            content: "Need to take your DMV road test as an adult? Uncle Geri’s Driving Academy offers a dedicated one-hour session with a certified instructor to help you prepare. If you’re 18 or older and have held a learner’s permit for 60 days, we’ll guide you through the final steps. Scheduling is flexible, and we’ll handle pickup and drop-off to make things stress-free."
+            content: `The DMV requires those over the age of 18 seeking their permanent license to complete a behind the wheel road test at the DMV. Individuals seeking to take their road test at the Virginia, D.M.V. must provide a car.
+            <br><br>Uncle Geri's Driving Academy can help you fulfill this requirements! The adult DMV Road test package includes car usage for test and hour individual instruction prior to the road test.
+            <br><br>The DMV requires that you have a valid learner's permit, and have completed Virginia Department of Motor Vehicles Form(s) DL 1P, CSMA and held permit for 60 days.
+            <br><br>Uncle Geri’s driving academy has flexible scheduling and offers pick up and drop off.
+            <br><br>The cost of the Adult DMV Road Test is $100.00`
         },
+        item5: {
+            image: "imgs/comp.jpg",
+            header: "Online Driver's Education",
+            content: `The course consists of at least 30 hours of instruction and includes information about alcohol and drug abuse, aggressive driving, distracted driving, motorcycle awareness, organ and tissue donor awareness, pedestrian and bicycle safety, handicapped parking, fuel efficient driving practices, and traffic stops as required by Virginia law. You must be at least 15 years old to take the online driver education course. All individuals who elect to take the classroom component of the driver's education course online must take the online course through a DMV licensed driver training school. In order to benefit from the course, you must be able to work independently and be comfortable with using a computer.
+            <br><br>The 30 hour course costs $115.00.`
+        }, 
+        item6: {
+            image: "imgs/fail.jpg",
+            header: "Driver Manual 3XF",
+            content: `You may be taking this Driver Improvement Clinic for several reasons.
+            <br><br>You may need to take it to satisfy a court order. The DMV requires you to attend a clinic. You must complete the entire eight hour course within 90 days. If you fail to complete the clinic by the DMV deadline, your driving privilege will be suspended until you meet this requirement. Your license has been revoked and you are required to complete the course as part of your reinstatement process. You may also volunteer to take this course, if you have a Virginia driver's license, to receive up to 5 safe driving points on your driving record. Students who satisfactorily complete this 8-hour course can now also get insurance premium reductions. Individuals should contact their insurance companies to advise as to whether or not they offer this discount for their insures.
+            <br><br>The 8-hour course costs $150.00`
+        },
+        item7: {
+            image: "imgs/safe.jpg",
+            header: "Driver Improvement Clinic",
+            content: `You may be taking this Driver Improvement Clinic for several reasons.
+            <br><br>You may need to take it to satisfy a court order. The DMV requires you to attend a clinic. You must complete the entire eight hour course within 90 days. If you fail to complete the clinic by the DMV deadline, your driving privilege will be suspended until you meet this requirement.
+            <br><br>Your license has been revoked and you are required to complete the course as part of your reinstatement process. You may also volunteer to take this course, if you have a Virginia driver's license, to receive up to 5 safe driving points on your driving record. Students who satisfactorily complete this 8-hour course can now also get insurance premium reductions. Individuals should contact their insurance companies to advise as to whether or not they offer this discount for their insures.
+            <br><br>The 8-hour course costs $75.00`
+        }
     };
 
     //Add event listeners to each home item
@@ -140,7 +186,7 @@
             if (content) {
                 contentImage.src = content.image;
                 contentHeader.textContent = content.header;
-                contentDescription.textContent = content.content;
+                contentDescription.innerHTML = content.content;
                 hiddenBox.style.display = 'block';
             }
         });
