@@ -1371,6 +1371,7 @@ textarea {
 
     .hidden-textbox {
         width: 90%;
+        flex-direction: column;
     }
 
     .hidden-border {
