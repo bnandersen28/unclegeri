@@ -128,7 +128,7 @@
         }
 
         // Save email (send to backend)
-        function saveEmail(buttonEl) {
+        async function saveEmail(buttonEl) {
             const courseItem = buttonEl.closest('.course-item');
             const courseKey = courseItem.dataset.courseKey;
 
