@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Uncle Geri's Driving Academy</title>
+    <div class="header">
+        <div class="header-top"></div>
+        <div class="header-content">
+
+            <div class="nav-left">
+                <a href="courses.html"><button>Courses</button></a>
+                <a href="register.html"><button>Register</button></a>
+            </div>
+
+
+            <a href="index.html" class="header-logo">
+                <img src="imgs/logo.png" alt="Logo">
+            </a>
+
+            <div class="nav-right">
+                <a href="faq.html"><button>FAQs</button></a>
+                <a href="connect.html"><button>Connect</button></a>
+            </div>
+
+
+        </div>
+
+    </div>
+</head>
+
+<body>
+    <div class="index-container">
+        <div class="car-images">
+            <img src="imgs/car1.jpeg" class="car-image" alt="Car">
+            <img src="imgs/car4.jpeg" class="car-image" alt="Car">
+            <img src="imgs/car2.jpeg" class="car-image" alt="Car">
+        </div>
+        <div class="index-bottom">
+            <p>Ready to take this 2025 Toyota Camry for a spin with Uncle Geri?</p>
+            <a href="register.html"><button>Register Now!</button></a>
+        </div>
+        <section class="home-bottom">
+            <div id="street-sim" class="da-split" aria-label="Course Street Picker"></div>
+        </section>
+
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>Learn More</h3>
+            <a href="courses.html">Courses</a>
+            <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-section">
+            <button onclick="window.location.href='register.html'">Register Now!</button>
+        </div>
+        <div class="footer-section">
+            <a href="connect.html" class="footer-icon">
+                <img src="imgs/message.png" alt="Connect">
+            </a>
+        </div>
+        <div class="footer-section">
+            <a href="index.html" class="footer-icon">
+                <img src="imgs/home.png" alt="Home">
+            </a>
+        </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+<!-- Load your sketch -->
+<script src="sketch.js" ></script>
+<script>
+  // Configure labels and (optional) click-through URLs
+  initSplitRoad('#street-sim', {
+    labels: [
+      'Behind-the-Wheel',
+      '1-1 In-Car Lessons',
+      'Adult DMV Road Test',
+      "Online Driver's Ed",
+      'Driver Manual 3XF',
+      'Driver Improvement Clinic'
+    ],
+    labelToUrl: {
+      'Behind-the-Wheel': 'courses.html#btw',
+      '1-1 In-Car Lessons': 'courses.html#one-on-one',
+      'Adult DMV Road Test': 'courses.html#road-test',
+      "Online Driver's Ed": 'courses.html#online-de',
+      'Driver Manual 3XF': 'courses.html#3xf',
+      'Driver Improvement Clinic': 'courses.html#clinic'
+    }
+  });
+
+
+
+</script>
