@@ -1114,7 +1114,8 @@ textarea {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    background-color: #cdd6c7;
+    background-color: #d2d2d2d7;
+    height: 100%;
 }
 .course-item {
       border: 1px solid black;
@@ -1122,7 +1123,7 @@ textarea {
       border-radius: 4px;
 }
 .course-header {
-      background: #0077cc;
+      background: #424bac;
       padding: 10px;
       cursor: pointer;
       font-weight: bold;
