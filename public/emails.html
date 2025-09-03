@@ -46,80 +46,80 @@
         <h1>Edit Course Emails</h1>
 
         <!-- Course block -->
-        <div class="course-item">
+        <div class="course-item" data-course-key="behind_the_wheel">
             <div class="course-header" onclick="toggleForm('form1')">Behind the Wheel</div>
             <div class="course-form" id="form1">
                 <label>Subject:</label><br>
                 <input type="text" id="subject1" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor1" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject1','quill1')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
 
-        <div class="course-item">
+        <div class="course-item" data-course-key="one_on_one">
             <div class="course-header" onclick="toggleForm('form2')">1-1 Driving Lessons</div>
             <div class="course-form" id="form2">
                 <label>Subject:</label><br>
                 <input type="text" id="subject2" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor2" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject2','quill2')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
-        <div class="course-item">
+        <div class="course-item" data-course-key="adult_road_test">
             <div class="course-header" onclick="toggleForm('form3')">Adult Road Test</div>
             <div class="course-form" id="form3">
                 <label>Subject:</label><br>
                 <input type="text" id="subject3" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor3" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject3','quill3')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
 
-        <div class="course-item">
+        <div class="course-item" data-course-key="online_de">
             <div class="course-header" onclick="toggleForm('form4')">Online Driver's Education</div>
             <div class="course-form" id="form4">
                 <label>Subject:</label><br>
                 <input type="text" id="subject4" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor4" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject4','quill4')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
-        <div class="course-item">
+        <div class="course-item" data-course-key="driver_manual_3xf">
             <div class="course-header" onclick="toggleForm('form5')">Driver Manual 3XF</div>
             <div class="course-form" id="form5">
                 <label>Subject:</label><br>
                 <input type="text" id="subject5" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor5" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject5','quill5')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
-        <div class="course-item">
+        <div class="course-item" data-course-key="driver_improvement">
             <div class="course-header" onclick="toggleForm('form6')">Driver Improvement Clinic</div>
             <div class="course-form" id="form6">
                 <label>Subject:</label><br>
                 <input type="text" id="subject6" name="subject" placeholder="Email subject"><br><br>
                 <label>Body:</label>
                 <div id="editor6" style="height:150px; background:white;"></div>
-                <button type="button" onclick="saveEmail('subject6','quill6')">Save</button>
+                <button type="button" onclick="saveEmail(this)">Save</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Initialize Quill editors
-        const quill1 = new Quill('#editor1', { theme: 'snow' });
-        const quill2 = new Quill('#editor2', { theme: 'snow' });
-        const quill3 = new Quill('#editor3', { theme: 'snow' });
-        const quill4 = new Quill('#editor4', { theme: 'snow' });
-        const quill5 = new Quill('#editor5', { theme: 'snow' });
-        const quill6 = new Quill('#editor6', { theme: 'snow' });
-        // add more as needed
+        // Initialize Quill editors based on edit ids
+        function initEditors() {
+            document.querySelectorAll('[id^="editor"]').forEach(ed => {
+                new Quill('#' + ed.id, {
+                    theme: 'snow'
+                });
+            });
+        }
 
         // Toggle visibility of forms
         function toggleForm(id) {
@@ -128,20 +128,76 @@
         }
 
         // Save email (send to backend)
-        function saveEmail(subjectId, editorVar) {
-            const subject = document.getElementById(subjectId).value;
-            const body = window[editorVar].root.innerHTML;
+        function saveEmail(buttonEl) {
+            const courseItem = buttonEl.closest('.course-item');
+            const courseKey = courseItem.dataset.courseKey;
 
-            const data = { subject, body };
-            fetch('/api/saveEmailTemplate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(res => {
-                if (res.ok) alert("Saved successfully!");
-                else alert("Error saving email");
-            });
+            const subjectInput = courseItem.querySelector('input[name="subject"]');
+            const editorEl = courseItem.querySelector('[id^="editor"]');
+            const quill = editorEl.__quill;
+
+            const payload = {
+                courseKey,
+                subject: subjectInput.value || '',
+                body: quill.root.innerHTML || ''
+            }
+
+            if (!payload.subject.trim()) {
+                alert('Please enter a subject.');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/email-templates', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include', // send session cookie
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || 'Failed to save template');
+                }
+                alert('Saved successfully!');
+            } catch (e) {
+                console.error(e);
+                alert('Error saving email: ' + e.message);
+            }
         }
+
+
+        // Load existing templates and prefill each block
+        async function loadTemplates() {
+            const items = document.querySelectorAll('.course-item');
+            for (const item of items) {
+                const courseKey = item.dataset.courseKey;
+                try {
+                    const res = await fetch(`/api/email-templates?courseKey=${encodeURIComponent(courseKey)}`, {
+                        credentials: 'include'
+                    });
+                    if (res.status === 404) continue; // no template yet
+                    if (!res.ok) {
+                        console.warn('Failed to fetch template for', courseKey);
+                        continue;
+                    }
+                    const tpl = await res.json(); // { subject, bodyHtml }
+                    const subjectInput = item.querySelector('input[name="subject"]');
+                    const editorEl = item.querySelector('[id^="editor"]');
+                    const quill = editorEl.__quill;
+
+                    if (tpl.subject) subjectInput.value = tpl.subject;
+                    if (tpl.bodyHtml) quill.root.innerHTML = tpl.bodyHtml;
+                } catch (e) {
+                    console.warn('Fetch error for', courseKey, e);
+                }
+            }
+        }
+
+        //When page loads, initialize Quill editors and load templates
+        document.addEventListener('DOMContentLoaded', () => {
+            initEditors();
+            loadTemplates();
+        });
     </script>
 </body>
 
