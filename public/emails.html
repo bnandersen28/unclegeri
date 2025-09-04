@@ -141,7 +141,7 @@
             const payload = {
                 courseKey,
                 subject: subjectInput.value || '',
-                body: quill.root.innerHTML || ''
+                bodyHtml: quill.root.innerHTML || ''
             }
 
             if (!payload.subject.trim()) {
