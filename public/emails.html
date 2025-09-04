@@ -112,6 +112,8 @@
     </div>
 
     <script>
+        const backend = 'https://unclegeri-backend.onrender.com';
+        
         // Initialize Quill editors based on edit ids
         function initEditors() {
             document.querySelectorAll('[id^="editor"]').forEach(ed => {
@@ -148,7 +150,7 @@
             }
 
             try {
-                const res = await fetch('/api/email-templates', {
+                const res = await fetch(`${backend}/api/email-templates`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include', // send session cookie
