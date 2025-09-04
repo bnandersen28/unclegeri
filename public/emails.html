@@ -149,7 +149,7 @@
 
             try {
                 const res = await fetch('/api/email-templates', {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include', // send session cookie
                     body: JSON.stringify(payload)
