@@ -37,23 +37,19 @@
         <h2>Courses offered</h2>
         <div class="courses-boxes">
             <h2>In-person</h2>
-            <div class="courses-items" id="inPersonCourses">
-            </div>
+            <div class="courses-items" id="inPersonCourses"></div>
         </div>
         <div class="hidden-content-container" id="inPersonDetails"></div>
         <div class="courses-boxes">
             <h2>Online</h2>
-            <div class="courses-items" id="onlineCourses">
-
-            </div>
+            <div class="courses-items" id="onlineCourses"></div>
         </div>
         <div class="hidden-content-container" id="onlineDetails"></div>
+        <div class="courses-boxes">
+            <h2>Credentials</h2>
+            <img src="imgs/cert.png" alt="Certificate">
+        </div>
     </div>
-    <div class="courses-boxes">
-        <h2>Credentials</h2>
-        <img src="imgs/cert.png" alt="Certificate">
-    </div>
-</div>
 
 
     <footer class="footer">
@@ -116,25 +112,25 @@
                         </div>
                     </div>
                 `;
-               
 
-                // Clear both details areas
-                inPersonDetails.style.display = 'none';
-                onlineDetails.style.display = 'none';
 
-                inPersonDetails.innerHTML = '';
-                onlineDetails.innerHTML = '';
+                    // Clear both details areas
+                    inPersonDetails.style.display = 'none';
+                    onlineDetails.style.display = 'none';
 
-              
-                if(course.delivery=='online'){
-                    onlineDetails.innerHTML = detailsHTML;
-                    onlineDetails.style.display = 'block';
-                    onlineDetails.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    inPersonDetails.innerHTML = detailsHTML;
-                    inPersonDetails.style.display = 'block';
-                    inPersonDetails.scrollIntoView({ behavior: 'smooth' });
-                }
+                    inPersonDetails.innerHTML = '';
+                    onlineDetails.innerHTML = '';
+
+
+                    if (course.delivery == 'online') {
+                        onlineDetails.innerHTML = detailsHTML;
+                        onlineDetails.style.display = 'block';
+                        onlineDetails.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        inPersonDetails.innerHTML = detailsHTML;
+                        inPersonDetails.style.display = 'block';
+                        inPersonDetails.scrollIntoView({ behavior: 'smooth' });
+                    }
 
                 });
 
