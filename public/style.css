@@ -711,7 +711,7 @@ textarea {
 }
 .courses-container h2 {
     font-weight: bold;
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .courses-boxes{
@@ -732,6 +732,12 @@ textarea {
 
 .courses-boxes h2{
     font-size: 2em;
+}
+
+.courses-boxes img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .courses-items{
