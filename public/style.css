@@ -752,7 +752,10 @@ textarea {
     height: auto;
     border: 2px solid black;
     border-radius: 15px;
+    font-size: 1em;
 }
+
+
 
 .courses-item:hover {
     transform: scale(1.1);
