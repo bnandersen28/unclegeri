@@ -736,7 +736,7 @@ textarea {
 
 .courses-boxes img{
     width: 92%;
-    height: 90%;
+    height: 50%;
     object-fit: contain;
 }
 
@@ -752,7 +752,7 @@ textarea {
     color: white;
     text-align: center;
     flex-direction: column;
-    width: 35%;
+    width: 30%;
     padding: 20px;
     margin: 10px;
     height: auto;
