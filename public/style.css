@@ -711,7 +711,7 @@ textarea {
 }
 .courses-container h2 {
     font-weight: bold;
-    font-size: 28px;
+    font-size: 4em;
 }
 
 .courses-boxes{
@@ -730,6 +730,10 @@ textarea {
     
 }
 
+.courses-boxes h2{
+    font-size: 2em;
+}
+
 .courses-items{
     flex-direction: row;
     justify-content: space-evenly;
@@ -742,7 +746,7 @@ textarea {
     color: white;
     text-align: center;
     flex-direction: column;
-    width: 25%;
+    width: 35%;
     padding: 20px;
     margin: 10px;
     height: auto;
