@@ -735,8 +735,8 @@ textarea {
 }
 
 .courses-boxes img{
-    width: 100%;
-    height: auto;
+    width: 92%;
+    height: 90%;
     object-fit: contain;
 }
 
