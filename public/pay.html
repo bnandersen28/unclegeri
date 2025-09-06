@@ -8,35 +8,33 @@
   <title>Register</title>
   <script src="https://web.squarecdn.com/v1/square.js"></script>
 </head>
-<div class="header">
-  <div class="header-top"></div>
-  <div class="header-content">
 
-    <div class="nav-left">
-      <a href="courses.html"><button>Courses</button></a>
-      <a href="register.html"><button>Register</button></a>
+<body>
+  <div class="header">
+    <div class="header-top"></div>
+    <div class="header-content">
+
+      <div class="nav-left">
+        <a href="courses.html"><button>Courses</button></a>
+        <a href="register.html"><button>Register</button></a>
+      </div>
+
+
+      <a href="index.html" class="header-logo">
+        <img src="imgs/logo.png" alt="Logo">
+      </a>
+
+      <div class="nav-right">
+        <a href="faq.html"><button>FAQs</button></a>
+        <a href="connect.html"><button>Connect</button></a>
+      </div>
+
+
     </div>
-
-
-    <a href="index.html" class="header-logo">
-      <img src="imgs/logo.png" alt="Logo">
-    </a>
-
-    <div class="nav-right">
-      <a href="faq.html"><button>FAQs</button></a>
-      <a href="connect.html"><button>Connect</button></a>
-    </div>
-
 
   </div>
 
-</div>
-</head>
 
-<body>
-
-
-  <body>
     <div id="price-container"></div>
     <div id="payment-options">
       <button id="cash-button">I'm Paying Cash</button>
@@ -207,10 +205,17 @@
       const courseId = localStorage.getItem('course_id');
       const rawPrice = localStorage.getItem('course_price');
       const registrationId = localStorage.getItem('registration_id');
+
+      const courseDelivery = localStorage.getItem('course_delivery');
+      const isOnline = courseDelivery ? courseDelivery.toLowerCase() == 'online'
+        : /online/i.test(course || ''); // fallback if missing
+
       console.log('Course:', course);
       console.log('Course price: ', rawPrice);
       console.log('Course ID:', courseId);
       console.log('Registration ID:', registrationId);
+      console.log("Delivery method:", localStorage.getItem('course_delivery'));
+      console.log("Is online course:", isOnline);
 
       if (!course || !registrationId || !rawPrice) {
         alert('No course or registration ID found. Please complete the registration first.');
@@ -229,9 +234,9 @@
 
       const priceContainer = document.getElementById('price-container');
       priceContainer.innerHTML = `
-          <h2>Selected Course: ${course}</h2>
-          <h3>Course Price: $${priceDollars.toFixed(2)}</h3>
-        `;
+            <h2>Selected Course: ${course}</h2>
+            <h3>Course Price: $${priceDollars.toFixed(2)}</h3>
+          `;
 
       try {
         await ensureSquareReady();
@@ -243,66 +248,91 @@
         return;
       }
 
-      // --- Card flow ---
-      document.getElementById('card-pay-button').addEventListener('click', async () => {
-        console.log('Card payment button clicked');
-        document.getElementById('payment-options').style.display = 'none';
-        document.getElementById('card-info').style.display = 'flex';
+      const paymentOptions = document.getElementById('payment-options');
+      const cardInfo = document.getElementById('card-info');
+
+      //If course is online, only show card payment flow
+      if (isOnline) {
+        paymentOptions.style.display = 'none';
+        cardInfo.style.display = 'flex';
+
         try {
+          await ensureSquareReady();
           await initializeCard();
         } catch (e) {
-          console.error('Failed to initialize the card:', e);
-          alert('Card failed to initialize. Please refresh and try again.');
-        }
-      });
-
-      document.getElementById('card-button').addEventListener('click', async (event) => {
-        event.preventDefault();
-        const btn = event.currentTarget;
-        btn.disabled = true;
-        try {
-          const tokenResult = await card.tokenize(); // basic tokenize
-          if (tokenResult.status !== 'OK') {
-            throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
-          }
-          const paymentResults = await createPayment(tokenResult.token);
-          console.debug('Payment Success', paymentResults);
-          displayPaymentResults('SUCCESS');
-        } catch (e) {
-          console.error(e);
-          displayPaymentResults('FAILURE');
-        } finally {
-          btn.disabled = false;
-        }
-      });
-
-      // --- Cash / Check flow ---
-      let selectedPaymentMethod = null;
-      document.getElementById('cash-button').addEventListener('click', () => {
-        selectedPaymentMethod = 'cash';
-        document.getElementById('cash-check-container').style.display = 'block';
-        document.getElementById('payment-options').style.display = 'none';
-      });
-      document.getElementById('check-button').addEventListener('click', () => {
-        selectedPaymentMethod = 'check';
-        document.getElementById('cash-check-container').style.display = 'block';
-        document.getElementById('payment-options').style.display = 'none';
-      });
-
-      document.getElementById('confirm').addEventListener('click', async () => {
-        if (!selectedPaymentMethod) {
-          alert('Payment method not selected. Please choose Cash or Check.');
+          console.error('square/card init failed', e);
+          const statusContainer = document.getElementById('payment-status-container');
+          statusContainer.style.visibility = 'visible';
+          document.getElementById('failure-message').style.display = 'block';
           return;
         }
-        try {
-          await sendCashCheck(selectedPaymentMethod);
-          document.getElementById('confirmation-message').style.display = 'block';
-          document.getElementById('cash-check-container').style.display = 'none';
-        } catch (e) {
-          alert(e.message);
-        }
-      });
+      } else {
+        paymentOptions.style.display = 'flex';
+      }
+
+
+
+
+    // --- Card flow ---
+    document.getElementById('card-pay-button').addEventListener('click', async () => {
+      console.log('Card payment button clicked');
+      document.getElementById('payment-options').style.display = 'none';
+      document.getElementById('card-info').style.display = 'flex';
+      try {
+        await initializeCard();
+      } catch (e) {
+        console.error('Failed to initialize the card:', e);
+        alert('Card failed to initialize. Please refresh and try again.');
+      }
     });
+
+    document.getElementById('card-button').addEventListener('click', async (event) => {
+      event.preventDefault();
+      const btn = event.currentTarget;
+      btn.disabled = true;
+      try {
+        const tokenResult = await card.tokenize(); // basic tokenize
+        if (tokenResult.status !== 'OK') {
+          throw new Error(`Tokenization failed: ${JSON.stringify(tokenResult.errors)}`);
+        }
+        const paymentResults = await createPayment(tokenResult.token);
+        console.debug('Payment Success', paymentResults);
+        displayPaymentResults('SUCCESS');
+      } catch (e) {
+        console.error(e);
+        displayPaymentResults('FAILURE');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // --- Cash / Check flow ---
+    let selectedPaymentMethod = null;
+    document.getElementById('cash-button').addEventListener('click', () => {
+      selectedPaymentMethod = 'cash';
+      document.getElementById('cash-check-container').style.display = 'block';
+      document.getElementById('payment-options').style.display = 'none';
+    });
+    document.getElementById('check-button').addEventListener('click', () => {
+      selectedPaymentMethod = 'check';
+      document.getElementById('cash-check-container').style.display = 'block';
+      document.getElementById('payment-options').style.display = 'none';
+    });
+
+    document.getElementById('confirm').addEventListener('click', async () => {
+      if (!selectedPaymentMethod) {
+        alert('Payment method not selected. Please choose Cash or Check.');
+        return;
+      }
+      try {
+        await sendCashCheck(selectedPaymentMethod);
+        document.getElementById('confirmation-message').style.display = 'block';
+        document.getElementById('cash-check-container').style.display = 'none';
+      } catch (e) {
+        alert(e.message);
+      }
+    });
+  });
 
   </script>
 

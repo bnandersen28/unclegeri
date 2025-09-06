@@ -174,8 +174,10 @@
             // Populate the dropdown with fetched courses
             courses.forEach(course => {
                 const option = document.createElement('option');
-                option.value = course.title;  // Set the course ID as the value
+                option.value = course.id;  // Set the course ID as the value
                 option.textContent = `${course.title}`;  // Display course title and price
+                option.dataset.delivery = course.delivery;  // Store delivery method
+                option.dataset.price = course.price;  // Store course price
                 courseDropdown.appendChild(option);  // Add to the dropdown
             });
         } catch (error) {
@@ -189,16 +191,20 @@
 
     // Event listener for course selection
     courseDropdown.addEventListener('change', (e) => {
-        const courseId = e.target.value;
-        const courseText = e.target.options[e.target.selectedIndex].text;
-        const price = parseFloat(courseText.split('- $')[1]);
+        const opt= e.target.options[e.target.selectedIndex];
 
-        // Store the selected course ID, title, and price in localStorage
-        localStorage.setItem('course_id', courseId);          // Store course ID
-        localStorage.setItem('course_title', courseText);     // Store course title
-        localStorage.setItem('course_price', price);          // Store course price
+        //Store course id, title, price, and delivery for use on payment page
+        localStorage.setItem('course_id', opt.value);
+        localStorage.setItem('course_title', opt.textContent);
+        localStorage.setItem('course_price', opt.dataset.price);
+        localStorage.setItem('course_delivery', opt.dataset.delivery);
 
-        console.log('Course selected:', { courseId, courseText, price });
+        console.log('Course selected:', {
+            id: opt.value,
+            title: opt.textContent,
+            price: opt.dataset.price,
+            delivery: opt.dataset.delivery
+        });
     });
 
     let card, payments;
@@ -307,7 +313,7 @@
             locationId,
             sourceId: token,
             idempotencyKey: window.crypto.randomUUID(),
-            amount: Math.round(parseFloat(price*100)), // ✅ $25.00 → 2500 cents
+            amount: Math.round(parseFloat(price)), // ✅ $25.00 → 2500 cents
 
         });
 
